@@ -81,6 +81,7 @@
 | [LondonBreakout](strategies/experimental/LondonBreakout) | `breakout` | **Medium** | GBPUSD, EURUSD, EURGBP | M15 | $1,000 | 伦敦开盘区间突破：亚洲盘震荡区间流动性爆发，日内单笔清仓，零隔夜利息风险. |
 | [SMC_FVG](strategies/experimental/SMC_FVG) | `breakout` | **Medium** | EURUSD, GBPUSD, XAUUSD | H1 | $1,000 | Smart Money Concepts (SMC) 机构订单流：合理价值缺口 (FVG) 动态回踩入场与硬止损. |
 | [StatArbPairs](strategies/experimental/StatArbPairs) | `arbitrage` | **Medium** | EURUSD, GBPUSD, AUDUSD | H1 | $1,000 | 协整配对统计套利：滚动 OLS 动态 Beta 对冲比率，残差 Z-Score 偏离均值回归与结构性背离止损. |
+| [KalmanFilterEA](strategies/experimental/KalmanFilterEA) | `trend_following` | **Medium** | EURUSD, USDJPY, XAUUSD | H1 | $1,000 | 卡尔曼滤波状态空间自适应跟踪：2D 连续运动学价格漂移估计，动态波动率头寸与硬止损. |
 | [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy (严格单笔止损，无网格). |
 | [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy (严格单笔止损，无网格). |
 | [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | 官方标准化模板（单笔止损、模块化、标准资金管理）. |
@@ -105,7 +106,8 @@
 2. **`LondonBreakout`**（伦敦开盘区间突破：亚洲盘震荡区间流动性爆发，日内单笔清仓）&mdash; **[已完成入库]**
 3. **`SMC_FVG`**（Smart Money Concepts / ICT 机构订单流：合理价值缺口与流动性掠夺）&mdash; **[已完成入库]**
 4. **`StatArbPairs`**（多品种统计套利：基于协整残差 Z-Score 偏离的均值回归配对对冲）&mdash; **[已完成入库]**
-5. **`KalmanFilterEA`**（卡尔曼滤波自适应状态估计：消除均线滞后的动态漂移估计系统）&mdash; **[<== 当前推进中]**
+5. **`KalmanFilterEA`**（卡尔曼滤波自适应状态估计：消除均线滞后的动态漂移估计系统）&mdash; **[已完成入库]**
+6. **`HMMRegimeEA`**（隐马尔可夫模型 HMM 市场体制切换与自适应波动率滤网）&mdash; **[<== 当前推进中]**
 
 ---
 

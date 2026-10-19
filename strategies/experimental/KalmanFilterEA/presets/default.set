@@ -1,0 +1,12 @@
+InpProcessNoiseQ=0.0001
+InpMeasurementNoiseR=0.01
+InpVelocityThreshold=0.25
+InpATRPeriod=14
+InpRiskPercent=1.0
+InpStopLossATRMult=2.0
+InpTakeProfitATRMult=3.5
+InpMagicNumber=105001
+InpSlippagePoints=20
+InpCloseOnOppositeDrift=true
+InpCloseFriday=true
+InpFridayCloseHour=21
