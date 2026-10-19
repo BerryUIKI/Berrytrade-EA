@@ -1,0 +1,10 @@
+InpSymbolA=EURUSD
+InpSymbolB=GBPUSD
+InpLookbackBars=150
+InpZEntryThreshold=2.0
+InpZExitThreshold=0.2
+InpZStopThreshold=3.5
+InpRiskPercent=1.0
+InpStopLossPoints=250
+InpSlippagePoints=30
+InpMagicNumber=107741

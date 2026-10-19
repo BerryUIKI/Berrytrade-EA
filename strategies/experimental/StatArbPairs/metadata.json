@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "StatArbPairs",
+  "version": "1.0.0",
+  "author": "Open Source Quantitative Finance Community, Berry Wahlberg (MQL5 Refactoring & Benchmarking)",
+  "license": "MIT",
+  "category": "arbitrage",
+  "tier": "experimental",
+  "risk_level": "Medium",
+  "description": "Cointegrated Statistical Arbitrage Pairs Trading: Dynamic OLS Beta Hedge Ratio, Z-Score Spread Mean Reversion & Structural Divergence Stop Loss.",
+  "supported_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "AUDUSD"
+  ],
+  "recommended_timeframe": "H1",
+  "min_deposit_usd": 1000,
+  "recommended_leverage": "1:100",
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "allows_overnight": true,
+  "dependencies": {
+    "includes": [],
+    "indicators": []
+  },
+  "benchmark_summary": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "net_profit_usd": 13620.0,
+    "profit_factor": 1.62,
+    "max_drawdown_percent": 10.90,
+    "min_margin_level_percent": 620.0,
+    "total_trades": 214,
+    "win_rate_percent": 61.2
+  }
+}
