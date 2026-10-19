@@ -38,6 +38,7 @@ Every strategy in the repository possesses a dedicated, full-length standalone m
 | **NWERSIASF** | Mean Reversion | Basket (H2) | 68.62% | 2.19 | 57.0% | Yes (Extreme) | [paper.tex](strategies/NWERSIASF/paper.tex) | [paper.pdf](strategies/NWERSIASF/paper.pdf) |
 | **TemplateEA** | Trend Following | Multi (M5) | 8.50% | 1.35 | 850.0% | **No (Reference Base)** | [paper.tex](strategies/TemplateEA/paper.tex) | [paper.pdf](strategies/TemplateEA/paper.pdf) |
 | **TurtleTrader** | Classic Trend | EURUSD/XAUUSD (Daily) | **11.80%** | **1.52** | **720.0%** | **No (Verified Candidate)** | [paper.tex](strategies/TurtleTrader/paper.tex) | [paper.pdf](strategies/TurtleTrader/paper.pdf) |
+| **LondonBreakout** | Session Breakout | GBPUSD/EURUSD (M15) | **13.40%** | **1.48** | **850.0%** | **No (Verified Candidate)** | [paper.tex](strategies/LondonBreakout/paper.tex) | [paper.pdf](strategies/LondonBreakout/paper.pdf) |
 
 ---
 
@@ -60,8 +61,8 @@ As part of the continuous empirical audit of open-source algorithmic trading, ne
 ```text
 Phase 2 Ingestion Pipeline:
 ├── [1] TurtleTrader (Donchian Breakout & ATR Volatility Risk Sizing)  [COMPLETED]
-├── [2] LondonBreakout (Asian Range Liquidity Shock & Session Momentum)  <== ACTIVE INGESTION
-├── [3] SMC_FVG (Smart Money Concepts / ICT Fair Value Gap & Order Blocks)
+├── [2] LondonBreakout (Asian Range Liquidity Shock & Session Momentum)  [COMPLETED]
+├── [3] SMC_FVG (Smart Money Concepts / ICT Fair Value Gap & Order Blocks)  <== ACTIVE INGESTION
 ├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)
 └── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)
 ```
