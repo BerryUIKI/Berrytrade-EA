@@ -144,8 +144,8 @@ Before submitting a Pull Request or merging a feature branch into `develop`, the
 ## 6. Open-Source Ingestion Order of Precedence
 
 The current active research campaign follows this priority order:
-1. **`TurtleTrader`** (Richard Dennis & William Eckhardt Donchian Breakout, N-volatility lot sizing, 2N trailing stop) &mdash; **[CURRENT TASK]**
-2. **`LondonBreakout`** (Asian session range definition, Frankfurt/London open liquidity breakout, zero overnight carry)
-3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Sweep & Order Blocks)
-4. **`StatArbPairs`** (Cointegrated statistical arbitrage pairs trading, EURUSD vs GBPUSD)
-5. **`KalmanFilterEA`** (State-space adaptive filtering, real-time drift estimation)
+1. **`TurtleTrader`** (Richard Dennis & William Eckhardt Donchian Breakout, N-volatility lot sizing, 2N trailing stop) &mdash; **[COMPLETED]**
+2. **`LondonBreakout`** (Asian session range definition, Frankfurt/London open liquidity breakout, zero overnight carry) &mdash; **[COMPLETED]**
+3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Sweep & Order Blocks) &mdash; **[COMPLETED]**
+4. **`StatArbPairs`** (Cointegrated statistical arbitrage pairs trading, EURUSD vs GBPUSD) &mdash; **[COMPLETED]**
+5. **`KalmanFilterEA`** (State-space adaptive filtering, real-time drift estimation) &mdash; **[CURRENT TASK]**
