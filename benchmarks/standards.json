@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Berrytrade Standard Benchmark v1.0",
+  "description": "Standardized execution constraints and evaluation parameters for MT5 strategy backtesting.",
+  "mandate": {
+    "default_deposit_usd": 1000,
+    "default_leverage": "1:100",
+    "risk_per_trade_cap_percent": 1.0,
+    "max_drawdown_limit_percent": 20.0,
+    "minimum_trade_sample": 200,
+    "minimum_years": 3
+  },
+  "instruments": {
+    "XAUUSD": {
+      "digits": 2,
+      "typical_spread_points": 25,
+      "slippage_model_points": 5,
+      "commission_per_lot_usd": 7.0,
+      "tick_size": 0.01,
+      "tick_value_base": 1.0
+    },
+    "EURUSD": {
+      "digits": 5,
+      "typical_spread_points": 12,
+      "slippage_model_points": 2,
+      "commission_per_lot_usd": 7.0,
+      "tick_size": 0.00001,
+      "tick_value_base": 1.0
+    }
+  },
+  "execution_model": "Every tick based on real ticks",
+  "timezone": "UTC+2 / UTC+3 (EET/EEST standard broker time)"
+}

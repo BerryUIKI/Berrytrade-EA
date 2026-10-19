@@ -1,0 +1,14 @@
+{
+  "strategy": "TemplateEA",
+  "symbol": "XAUUSD",
+  "timeframe": "M5",
+  "period": "2023.01.01 - 2025.12.31",
+  "deposit_usd": 1000.0,
+  "net_profit_usd": 384.50,
+  "profit_factor": 1.35,
+  "max_equity_drawdown_percent": 8.5,
+  "total_trades": 210,
+  "win_rate_percent": 52.4,
+  "sharpe_ratio": 1.18,
+  "recovery_factor": 3.82
+}

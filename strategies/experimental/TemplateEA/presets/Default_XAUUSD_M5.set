@@ -1,0 +1,8 @@
+InpMagicNumber=100101
+InpFastPeriod=10
+InpSlowPeriod=30
+InpRiskPercent=0.5
+InpStopLossPoints=150.0
+InpTakeProfitPoints=300.0
+InpMaxSpreadPoints=30.0
+InpCloseBeforeWeekend=true

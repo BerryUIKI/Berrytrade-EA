@@ -1,0 +1,49 @@
+# MetaTrader 5 compiled binaries and logs
+*.ex5
+*.ex4
+*.log
+*.crv
+*.mtd
+*.tst
+*.opt
+
+# MetaTrader tester and cache folders
+/Tester/
+/logs/
+/Crash/
+
+# Backtesting output data & heavy logs (unless explicitly committed in reports)
+*.fxt
+*.hst
+*.csv
+*.tsv
+!/benchmarks/**/*.csv
+
+# Python environment & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Node / JS
+node_modules/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+*.bak
+
+# Local secrets & personal configs
+.env
+*.local.json
+*.local.set
