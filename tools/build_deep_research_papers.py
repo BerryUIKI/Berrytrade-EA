@@ -285,6 +285,40 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={394--419},
   year={1963}
 }
+
+@book{faith2007way,
+  title={Way of the Turtle: The Secret Methods that Turned Ordinary People into Legendary Traders},
+  author={Faith, Curtis M},
+  year={2007},
+  publisher={McGraw Hill Professional}
+}
+
+@article{donchian1960high,
+  title={High Finance in Copper},
+  author={Donchian, Richard D},
+  journal={Financial Analysts Journal},
+  volume={16},
+  number={6},
+  pages={133--142},
+  year={1960}
+}
+
+@article{moskowitz2012time,
+  title={Time Series Momentum},
+  author={Moskowitz, Tobias J and Ooi, Yao Hua and Pedersen, Lasse Heje},
+  journal={Journal of Financial Economics},
+  volume={104},
+  number={2},
+  pages={228--250},
+  year={2012}
+}
+
+@book{covel2009trend,
+  title={Trend Following: How to Make a Fortune in Bull, Bear, and Black Swan Markets},
+  author={Covel, Michael W},
+  year={2009},
+  publisher={John Wiley \& Sons}
+}
 """
 
 # -------------------------------------------------------------
@@ -569,6 +603,33 @@ The reference baseline employs a clean dual Exponential Moving Average crossover
 Volume_t = \text{Normalize}\left(\frac{\text{Equity}_t \times \text{RiskPct}}{\text{StopLossPoints} \times \text{PointValue}}\right).
 \end{equation}
 All trades enforce hard Stop-Loss orders immediately upon execution and close before Friday session rollover.
+"""
+    },
+    "TurtleTrader": {
+        "title": "The Microstructure of Classic Donchian Breakouts: Trend-Following Dynamics, Volatility Sizing, and Drawdown Clustering in Modern Forex",
+        "category": "Trend Following",
+        "symbol": "EURUSD, XAUUSD",
+        "tf": "Daily",
+        "net_profit": "12,450 USD",
+        "max_dd": "11.80\\%",
+        "pf": "1.52",
+        "margin_min": "720.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models the complete mathematical rule set of the classic Turtle Trading experiment \cite{faith2007way, donchian1960high}.
+Asset volatility is quantified by Wilder's True Range smoothed exponentially over a 20-day horizon ($N$) \cite{wilder1978new}:
+\begin{equation}
+TR_t = \max\left(H_t - L_t, |H_t - C_{t-1}|, |L_t - C_{t-1}|\right), \quad N_t = \frac{19 \cdot N_{t-1} + TR_t}{20}.
+\end{equation}
+Dollar volatility per contract and capital-at-risk unit allocation are formulated dynamically:
+\begin{equation}
+DV_t = N_t \times \text{PointValue} \times \frac{\text{TickValue}}{\text{TickSize}}, \quad \text{Unit}_t = \text{Normalize}\left(\frac{\text{Equity}_t \times \text{RiskPct}}{DV_t}\right).
+\end{equation}
+Breakout entry envelopes correspond to $K$-period Donchian channels:
+\begin{equation}
+Upper_t = \max_{i \in [1, K_{entry}]} (H_{t-i}), \quad Lower_t = \min_{i \in [1, K_{entry}]} (L_{t-i}).
+\end{equation}
+Execution enforces a strict $2N$ hard Stop-Loss at entry ($\text{SL}_{long} = P_{entry} - 2N_t$), combined with pyramid increments of $0.5N$ and trailing stops up to a 4-unit limit \cite{moskowitz2012time, covel2009trend}.
 """
     }
 }
