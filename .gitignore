@@ -18,6 +18,7 @@
 *.csv
 *.tsv
 !/benchmarks/**/*.csv
+!/strategies/**/reports/*.csv
 
 # Python environment & cache
 __pycache__/
