@@ -56,7 +56,7 @@ We maintain a strict separation between technical, agentic, and user-facing docu
 
 All strategies undergo continuous 3-year execution-constrained backtesting (`2023.01.01 -- 2025.12.31`) with 120ms simulated latency, floating spreads, and $7/lot commissions. Publications are signed by **Berry Wahlberg** (`Berrytrade Quantitative Research`):
 
-- 🏛️ **Master Synthesis Paper**: [*The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*](papers/synthesis/main.pdf) ([LaTeX Source](papers/synthesis/main.tex))
+- 🏛️ **Master Synthesis Paper**: [*The Anatomy of Grid Overlays and the Illusion of Alpha: An Empirical Case Study of Retail Expert Advisors on MetaTrader 5*](papers/synthesis/main.pdf) ([LaTeX Source](papers/synthesis/main.tex))
 - 📊 **Individual Strategy Research Monograph Index**: Complete set of 14 standalone papers with 6 diagnostic figures and verified BibTeX references are indexed in [**`papers/README.md`**](papers/README.md).
 
 ---
