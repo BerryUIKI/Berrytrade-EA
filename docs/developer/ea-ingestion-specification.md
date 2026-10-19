@@ -1,6 +1,7 @@
 # EA Ingestion & Contribution Specification
 
-This document defines the official standard for submitting, reviewing, and categorizing Expert Advisors (EAs) within the **Berrytrade-EA** repository.
+> **Audience**: Quant developers, MQL5 engineers, and algorithmic traders submitting EAs to Berrytrade-EA.  
+> **Language**: English (Developer documentation is exclusively maintained in English).
 
 ---
 
@@ -29,7 +30,7 @@ All strategies in the repository are segregated into two distinct tiers:
 
 ---
 
-## 2. Risk Classification & Disclosure
+## 2. Risk Classification & Mandatory Disclosure
 
 Every EA must declare its risk profile in its `metadata.json` and documentation.
 
@@ -63,7 +64,7 @@ strategies/experimental/<StrategyName>/
 │   ├── summary.json                # Summary metrics (JSON)
 │   └── report.html                 # MT5 Strategy Tester report (optional but recommended)
 ├── metadata.json                   # Machine-readable specification
-└── README.md                       # Comprehensive strategy guide (English)
+└── README.md                       # Comprehensive strategy guide
 ```
 
 ---

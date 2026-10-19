@@ -1,22 +1,16 @@
-# Contribution Guidelines
+# Developer Contribution Guidelines
 
-Thank you for contributing to **Berrytrade-EA**! We welcome open-source contributions from quantitative traders, MQL5 developers, and researchers worldwide.
+> **Audience**: Quant developers, MQL5 engineers, and contributors.  
+> **Language**: English (Developer technical discussions, code comments, and PRs are strictly in English).
 
 ---
 
-## 1. Primary & Secondary Languages
+## 1. Language Policy
 
-- **Primary Language (English)**:
-  - All Pull Request titles, descriptions, and discussion threads.
-  - All GitHub Issues and bug reports.
-  - MQL5 code comments, function docstrings, input parameter descriptions, and log outputs.
-  - Root `README.md` and primary files under `docs/en/`.
-- **Secondary Language (Chinese / 中文)**:
-  - Chinese documentation is located under `docs/zh-CN/` and root `README.zh-CN.md`.
-  - Strategy packages may include bilingual explanations in their strategy `README.md`.
-- **Future I18N Architecture**:
-  - Documentation files follow parallel mirror paths: `docs/<lang>/<topic>.md`.
-  - When submitting a new documentation feature or major update, English is mandatory; translated versions in Chinese or other languages are highly encouraged.
+- **Developer & Technical Documentation**: Exclusively maintained in **English**.
+- **MQL5 Source Code**: All variable names, function names, docstrings, input parameter labels, and runtime logs must be in **English**.
+- **Pull Requests & Code Reviews**: PR titles, descriptions, commit messages, and review conversations must be in **English**.
+- **User-Facing Documentation & Wiki**: Supported in multiple languages (English, Chinese, and community translations) located under the `wiki/` directory.
 
 ---
 
@@ -40,9 +34,10 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 Common types:
-- `feat`: A new strategy or shared utility.
+- `feat`: A new strategy, tool, or shared library module.
 - `fix`: A bug fix or logic correction.
-- `docs`: Documentation updates or translations.
+- `docs`: Developer documentation updates.
+- `wiki`: User-facing Wiki updates or translations.
 - `test`: Adding backtests, presets, or validation scripts.
 - `refactor`: Code refactoring without changing trade logic.
 - `ci`: CI/CD workflows and automated tool changes.
@@ -71,7 +66,7 @@ To ensure code clarity and long-term maintainability:
      input double InpStopLossPoints   = 100.0; // Hard Stop Loss (in Points)
      ```
 2. **Naming Conventions**:
-   - Class names: `PascalCase` (e.g., `CTradeManager`).
+   - Class names: `PascalCase` (e.g., `CTradeRiskManager`).
    - Methods & Functions: `PascalCase` (e.g., `CheckEntrySignal()`).
    - Member variables: `m_camelCase` (e.g., `m_magicNumber`).
    - Enums & Constants: `UPPER_SNAKE_CASE` or `ENUM_...`.
@@ -89,7 +84,7 @@ Follow these steps when proposing a new EA:
 
 1. Fork the repository and clone your fork locally.
 2. Create a new branch: `git checkout -b feat/ea-my-strategy`.
-3. Construct your strategy package in `strategies/experimental/<MyStrategy>/` following the [EA Ingestion Specification](file:///f:/dev/Berrytrade-EA/docs/en/ea-ingestion-specification.md):
+3. Construct your strategy package in `strategies/experimental/<MyStrategy>/` following the [EA Ingestion Specification](ea-ingestion-specification.md):
    - `src/<MyStrategy>.mq5`
    - `presets/Default_<Symbol>_<TF>.set`
    - `reports/summary.json`
@@ -101,4 +96,4 @@ Follow these steps when proposing a new EA:
    ```
 5. Commit and push your branch to GitHub.
 6. Open a Pull Request targeting the `main` branch, selecting the **EA Submission Template**.
-7. Engage with maintainers during code review and address any feedback.
+7. Address any feedback during peer review.

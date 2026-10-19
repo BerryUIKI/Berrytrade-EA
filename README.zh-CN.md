@@ -6,7 +6,8 @@
 
 <p align="center">
   <a href="README.md"><strong>English</strong></a> | 
-  <a href="README.zh-CN.md"><strong>简体中文</strong></a>
+  <a href="README.zh-CN.md"><strong>简体中文</strong></a> | 
+  <a href="wiki/Home-zh.md"><strong>用户知识库 (Wiki)</strong></a>
 </p>
 
 <p align="center">
@@ -31,6 +32,20 @@
 
 ---
 
+## 📚 文档分层体系 (Documentation Policy)
+
+本项目严格区分**面向开发者技术文档**与**面向用户知识库**：
+
+| 文档类型 | 目标受众 | 语言策略 | 存放位置 |
+| :--- | :--- | :---: | :--- |
+| **开发者技术文档** | 量化研究员、MQL5 开发者、代码贡献者 | **仅限英文 (English Only)** | [`docs/developer/`](docs/developer/) |
+| **用户知识库与使用指南** | 实盘/模拟盘交易者、普通终端用户 | **多语言支持 (中 / 英)** | [`wiki/`](wiki/) 与 GitHub Wiki |
+
+- 🛠️ **开发者技术文档 (英文)**：[项目架构](docs/developer/architecture.md) &bull; [EA 入库与审核规范](docs/developer/ea-ingestion-specification.md) &bull; [贡献者指南](docs/developer/contribution-guidelines.md) &bull; [基准回测标准](docs/developer/benchmarking-standards.md)
+- 📖 **用户知识库 (支持中文)**：[新手上手指南](wiki/Getting-Started-zh.md) &bull; [资金风控守则](wiki/Risk-Management-zh.md) &bull; [策略选型手册](wiki/Strategy-Catalog-zh.md) &bull; [常见问题排错](wiki/Troubleshooting-and-FAQ-zh.md)
+
+---
+
 ## 📊 策略索引总表
 
 以下索引表由策略目录下的 `metadata.json` 自动解析渲染：
@@ -52,9 +67,8 @@
 ```text
 Berrytrade-EA/
 ├── .github/                       # GitHub 工作流、Issue 与 PR 模板
-├── docs/                          # 多语言文档体系 (支持未来 I18N 扩展)
-│   ├── en/                        # 英文主文档
-│   └── zh-CN/                     # 中文参考文档
+├── docs/developer/                # 开发者技术文档 (纯英文)
+├── wiki/                          # 用户多语言文档与知识库 (同步发布至 GitHub Wiki)
 ├── strategies/                    # 模块化独立策略包
 │   ├── verified/                  # 官方验证/高信度策略区
 │   └── experimental/              # 社区贡献/前沿实验孵化区
@@ -73,13 +87,12 @@ Berrytrade-EA/
 ├── tools/                         # 开发运维与自动化工具链
 │   ├── validate_ea.py             # 策略元数据与安全合规校验工具
 │   ├── generate_catalog.py        # 自动抓取元数据生成 README 策略矩阵表
-│   └── sync_to_mt5.ps1            # 同步/软链接至本地 MT5 终端的自动化脚本
+│   ├── sync_to_mt5.ps1            # 同步/软链接至本地 MT5 终端的自动化脚本
+│   └── publish_wiki.ps1           # 本地 wiki/ 自动化同步至 GitHub Wiki
 ├── CONTRIBUTING.md                # 贡献者指南入口
 ├── LICENSE                        # MIT 开源许可证
 └── README.zh-CN.md                # 中文主页
 ```
-
-详细架构设计请参阅 [项目架构设计文档 (中文)](docs/zh-CN/architecture.md)。
 
 ---
 
@@ -119,9 +132,9 @@ flowchart LR
    python tools/validate_ea.py --path strategies/experimental/<策略英文名>
    ```
 3. **发起 Pull Request**：使用仓库预置的 [PR 模板](.github/PULL_REQUEST_TEMPLATE/pull_request_template.md) 提交合并请求，并完成自检勾选。
-4. **深入阅读入库标准**：
-   - [EA 入库与贡献规范标准 (中文)](docs/zh-CN/ea-ingestion-specification.md)
-   - [贡献者指南 (中文)](docs/zh-CN/contribution-guidelines.md)
+4. **深入阅读入库标准（开发者技术文档为英文）**：
+   - [EA Ingestion Specification](docs/developer/ea-ingestion-specification.md)
+   - [Developer Contribution Guidelines](docs/developer/contribution-guidelines.md)
 
 ---
 

@@ -1,12 +1,13 @@
-# Berrytrade-EA Architecture
+# Berrytrade-EA Technical Architecture
 
-This document outlines the architectural design, directory hierarchy, and engineering principles behind the **Berrytrade-EA** repository.
+> **Audience**: Quant developers, MQL5 engineers, and algorithmic traders contributing to Berrytrade-EA.  
+> **Language**: English (Developer documentation is exclusively maintained in English).
 
 ---
 
-## 1. Design Philosophy
+## 1. Core Engineering Principles
 
-Traditional MQL5 repositories often suffer from three major issues:
+Traditional MQL5 repositories often suffer from three critical anti-patterns:
 1. **Monolithic Dumping**: Dozens of `.mq5` files placed in a single `Experts/` folder without explicit parameter presets or backtesting data.
 2. **Scattered Dependencies**: Strategy code in `Experts/`, required indicators in `Indicators/`, test results in `Test/`, and compiled binaries in `Build/`. Removing or updating one strategy risks breaking others.
 3. **Lack of Automated Governance**: No machine-readable metadata, no risk tiering, and no automated validation of safety or reproducibility.
@@ -19,23 +20,26 @@ Traditional MQL5 repositories often suffer from three major issues:
 
 ---
 
-## 2. Directory Hierarchy
+## 2. Directory Layout
 
 ```text
 Berrytrade-EA/
 ├── .github/                       # GitHub workflows, Issue & PR templates
 │   ├── ISSUE_TEMPLATE/            # Standardized submission & bug templates
 │   ├── PULL_REQUEST_TEMPLATE/     # Comprehensive PR checklist for EA submissions
-│   └── workflows/                 # CI/CD pipelines (validation, linting)
-├── docs/                          # Multi-language documentation (I18N ready)
-│   ├── en/                        # English documentation (Primary)
-│   │   ├── architecture.md
-│   │   ├── contribution-guidelines.md
-│   │   └── ea-ingestion-specification.md
-│   └── zh-CN/                     # Chinese documentation (Secondary)
+│   └── workflows/                 # CI/CD pipelines (validation, wiki sync)
+├── docs/                          # Developer Technical Documentation (English only)
+│   └── developer/
 │       ├── architecture.md
 │       ├── contribution-guidelines.md
-│       └── ea-ingestion-specification.md
+│       ├── ea-ingestion-specification.md
+│       └── benchmarking-standards.md
+├── wiki/                          # User-Facing Documentation (Multi-Language, Wiki-Ready)
+│   ├── Home.md / Home.zh-CN.md
+│   ├── Getting-Started.md / Getting-Started.zh-CN.md
+│   ├── Risk-Management.md / Risk-Management.zh-CN.md
+│   ├── Strategy-Catalog.md / Strategy-Catalog.zh-CN.md
+│   └── Troubleshooting-and-FAQ.md / Troubleshooting-and-FAQ.zh-CN.md
 ├── strategies/                    # Self-contained EA packages
 │   ├── verified/                  # Production-grade, benchmarked strategies
 │   └── experimental/              # Community contributions & research incubators
@@ -44,10 +48,9 @@ Berrytrade-EA/
 │           ├── presets/           # MT5 .set parameter presets
 │           ├── reports/           # HTML / JSON / equity curve reports
 │           ├── metadata.json      # Machine-readable specification
-│           └── README.md          # Strategy documentation (logic, params, risks)
+│           └── README.md          # Strategy documentation
 ├── shared/                        # Shared libraries and reusable components
-│   ├── Include/                   # Common header files (.mqh)
-│   │   └── Berrytrade/            # Namespaced core utilities
+│   ├── Include/Berrytrade/        # Namespaced core utilities
 │   ├── Indicators/                # Shared custom technical indicators
 │   └── Scripts/                   # Helper scripts
 ├── benchmarks/                    # Standardized testing environments & datasets
@@ -56,7 +59,8 @@ Berrytrade-EA/
 ├── tools/                         # Operational & CI toolchain
 │   ├── validate_ea.py             # Linter & metadata validator
 │   ├── generate_catalog.py        # Automated README catalog generator
-│   └── sync_to_mt5.ps1            # Sync / symlink repo into MT5 terminal
+│   ├── sync_to_mt5.ps1            # Sync / symlink repo into MT5 terminal
+│   └── publish_wiki.ps1           # Publish wiki/ to GitHub Wiki repository
 ├── .gitignore                     # Ignoring binaries, logs, and sensitive data
 ├── CONTRIBUTING.md                # Entry point for contributors
 ├── LICENSE                        # MIT License

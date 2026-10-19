@@ -6,7 +6,8 @@
 
 <p align="center">
   <a href="README.md"><strong>English</strong></a> | 
-  <a href="README.zh-CN.md"><strong>简体中文</strong></a>
+  <a href="README.zh-CN.md"><strong>简体中文</strong></a> | 
+  <a href="wiki/Home.md"><strong>User Wiki</strong></a>
 </p>
 
 <p align="center">
@@ -31,6 +32,20 @@ Unlike traditional repositories that accumulate uncurated `.mq5` files without p
 
 ---
 
+## 📚 Documentation System
+
+We maintain a strict separation between technical and user-facing documentation:
+
+| Category | Target Audience | Language | Location |
+| :--- | :--- | :---: | :--- |
+| **Developer Technical Docs** | Quant researchers, MQL5 developers, contributors | **English Only** | [`docs/developer/`](docs/developer/) |
+| **User Wiki & Trader Guides** | Traders, end-users, operators | **Multi-Language (EN / 中文)** | [`wiki/`](wiki/) & GitHub Wiki |
+
+- 🛠️ **Developer Docs**: [Architecture](docs/developer/architecture.md) &bull; [EA Ingestion Spec](docs/developer/ea-ingestion-specification.md) &bull; [Contribution Guidelines](docs/developer/contribution-guidelines.md) &bull; [Benchmarking Standards](docs/developer/benchmarking-standards.md)
+- 📖 **User Wiki**: [Getting Started](wiki/Getting-Started.md) ([中文](wiki/Getting-Started-zh.md)) &bull; [Risk Management](wiki/Risk-Management.md) ([中文](wiki/Risk-Management-zh.md)) &bull; [Strategy Catalog](wiki/Strategy-Catalog.md) ([中文](wiki/Strategy-Catalog-zh.md)) &bull; [FAQ](wiki/Troubleshooting-and-FAQ.md) ([中文](wiki/Troubleshooting-and-FAQ-zh.md))
+
+---
+
 ## 📊 Strategy Catalog
 
 The catalog below is dynamically generated from strategy `metadata.json` files:
@@ -47,14 +62,13 @@ The catalog below is dynamically generated from strategy `metadata.json` files:
 
 ---
 
-## 🏗️ Repository Architecture
+## 🏗️ Repository Layout
 
 ```text
 Berrytrade-EA/
 ├── .github/                       # GitHub workflows, Issue & PR templates
-├── docs/                          # Multi-language documentation (I18N ready)
-│   ├── en/                        # English documentation (Primary)
-│   └── zh-CN/                     # Chinese documentation (Secondary)
+├── docs/developer/                # Developer Technical Documentation (English only)
+├── wiki/                          # User-Facing Documentation (Multi-Language, Wiki-ready)
 ├── strategies/                    # Self-contained EA packages
 │   ├── verified/                  # Audited & benchmarked strategies
 │   └── experimental/              # Community submissions & research models
@@ -70,16 +84,15 @@ Berrytrade-EA/
 │   └── Scripts/                   # Helper scripts
 ├── benchmarks/                    # Standardized testing environments & datasets
 │   └── standards.json             # Baseline broker constraints (spreads, slippage)
-├── tools/                         # Dev tools, CI linters, MT5 sync scripts
+├── tools/                         # Dev tools, CI linters, MT5 sync, Wiki publisher
 │   ├── validate_ea.py             # Linter & metadata validator
 │   ├── generate_catalog.py        # Automated README catalog generator
-│   └── sync_to_mt5.ps1            # Sync / symlink repo into MT5 terminal
+│   ├── sync_to_mt5.ps1            # Sync / symlink repo into MT5 terminal
+│   └── publish_wiki.ps1           # Sync local wiki/ to GitHub Wiki
 ├── CONTRIBUTING.md                # Contributor guide entry point
 ├── LICENSE                        # MIT License
 └── README.md                      # Primary project homepage
 ```
-
-For more architectural details, see [Architecture Documentation](docs/en/architecture.md).
 
 ---
 
@@ -120,8 +133,8 @@ flowchart LR
    ```
 3. **Submit a Pull Request**: Use the repository's [PR Template](.github/PULL_REQUEST_TEMPLATE/pull_request_template.md) and ensure all checklist items are completed.
 4. **Detailed Specifications**:
-   - [EA Ingestion & Review Specification](docs/en/ea-ingestion-specification.md)
-   - [Contribution Guidelines](docs/en/contribution-guidelines.md)
+   - [EA Ingestion & Review Specification](docs/developer/ea-ingestion-specification.md)
+   - [Developer Contribution Guidelines](docs/developer/contribution-guidelines.md)
 
 ---
 

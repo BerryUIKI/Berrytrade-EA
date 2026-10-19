@@ -4,25 +4,33 @@ Welcome! We are excited to build a transparent, institutional-grade, open-source
 
 ---
 
-### Language Guidelines (语言指引)
-- **Primary Language**: English is used for all Pull Requests, Code Reviews, Issues, and MQL5 code comments.
-- **Secondary Language**: Chinese (中文) is fully supported in documentation under `docs/zh-CN/` and `README.zh-CN.md`.
+### Documentation & Language Policy
+- **Developer Technical Documentation**: Exclusively maintained in **English** under [`docs/developer/`](docs/developer/).
+  - All Pull Request titles, code reviews, discussions, and MQL5 code comments must be in English.
+- **User-Facing Documentation & Wiki**: Fully **multi-language** under [`wiki/`](wiki/) (English and Chinese `zh-CN`, with community translations welcomed).
 
 ---
 
 ### Quick Links
-- **[Contribution Guidelines (English)](docs/en/contribution-guidelines.md)**
-- **[贡献者指南 (中文)](docs/zh-CN/contribution-guidelines.md)**
-- **[EA Ingestion & Review Specification (English)](docs/en/ea-ingestion-specification.md)**
-- **[EA 入库与审核标准规范 (中文)](docs/zh-CN/ea-ingestion-specification.md)**
-- **[Architecture & Layout (English)](docs/en/architecture.md)**
-- **[架构与工程规范 (中文)](docs/zh-CN/architecture.md)**
+
+#### 🛠️ For Developers & Quant Engineers (English Only)
+- **[Contribution Guidelines](docs/developer/contribution-guidelines.md)**: PR workflow, MQL5 standards, commit conventions.
+- **[EA Ingestion & Review Specification](docs/developer/ea-ingestion-specification.md)**: Quality tiers, metadata schema, banned APIs.
+- **[Architecture & Layout](docs/developer/architecture.md)**: Repository layout, modular packages, MT5 integration.
+- **[Benchmarking Standards](docs/developer/benchmarking-standards.md)**: Tester execution models, broker constraints.
+
+#### 📖 For End-Users & Traders (Multi-Language Wiki)
+- **[User Wiki (English)](wiki/Home.md)** | **[用户知识库 (中文)](wiki/Home-zh.md)**
+- **[Getting Started (EN)](wiki/Getting-Started.md)** | **[新手上手指南 (中文)](wiki/Getting-Started-zh.md)**
+- **[Risk Management (EN)](wiki/Risk-Management.md)** | **[资金风控守则 (中文)](wiki/Risk-Management-zh.md)**
+- **[Strategy Catalog (EN)](wiki/Strategy-Catalog.md)** | **[策略选型手册 (中文)](wiki/Strategy-Catalog-zh.md)**
+- **[Troubleshooting & FAQ (EN)](wiki/Troubleshooting-and-FAQ.md)** | **[常见问题排错 (中文)](wiki/Troubleshooting-and-FAQ-zh.md)**
 
 ---
 
 ### In a Nutshell: How to Submit an EA
 1. Check out a branch `feat/ea-<strategy-name>`.
-2. Place your EA in `strategies/experimental/<strategy-name>/` with:
+2. Place your EA package in `strategies/experimental/<strategy-name>/` with:
    - `src/<strategy-name>.mq5`
    - `presets/*.set`
    - `reports/summary.json`
