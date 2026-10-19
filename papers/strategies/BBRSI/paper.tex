@@ -1,0 +1,118 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{float}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{\textbf{Empirical Microstructure Analysis of Bollinger Bands and RSI Mean Reversion: The Perils of Grid Overlays on Intraday Gold (XAUUSD)}}
+
+\author{
+    \textbf{Berry Wahlberg} \\
+    \textit{Berrytrade Quantitative Research} \\
+    \texttt{research@berrytrade.org}
+}
+
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This research paper provides an institutional-grade empirical evaluation of the \textbf{BBRSI} trading strategy under the standardized Berrytrade MetaTrader 5 backtesting benchmark. Evaluated across a 3-year horizon (2023.01.01--2025.12.31) with tick-level granularity, modeled broker commissions (\$7.00/lot), dynamic spreads, and 120\,ms execution latency, we scrutinize both the theoretical formulation and empirical microstructure performance of the strategy. Our findings demonstrate that while marketing backtests report a net profit of 36,877.30 USD with a nominal profit factor of 2.31, the underlying risk structure exposes capital to extreme left-tail fragility. We document maximum equity drawdowns reaching 70.23\% and critical margin depletion. This paper details the mathematical formulation, algorithmic failure modes, and requisite risk governance required before deploying this strategy in live trading environments.
+\end{abstract}
+
+\section{Introduction}
+Algorithmic trading in retail foreign exchange and precious metals markets has experienced widespread proliferation, propelled by platforms such as MetaTrader 5 (MT5) and accessible MQL5 scripting. However, the academic literature consistently identifies a severe disconnect between backtest claims and out-of-sample survival rates among retail Expert Advisors (EAs). 
+
+In this paper, we conduct a rigorous, execution-constrained evaluation of the \textbf{BBRSI} Expert Advisor, developed originally by Rabist and archived in the open-source repository \texttt{MeaTraderEA}. The primary objective is to separate true predictive alpha from risk-concealing execution overlays.
+
+\section{Strategy Architecture and Signal Formulation}
+The \textbf{BBRSI} strategy is classified under the \textbf{Mean Reversion} taxonomy. It is configured to execute primarily on \textbf{XAUUSD} on the \textbf{M5} timeframe.
+
+\subsection{Mathematical Signal Representation}
+Let $P_t$ denote the mid-price of the asset at discrete time $t$, with Bid and Ask prices defined by $P_t^b = P_t - \frac{S_t}{2}$ and $P_t^a = P_t + \frac{S_t}{2}$, where $S_t$ denotes the instantaneous market spread. The signal generation process evaluates indicator thresholds $\Phi(P_{[t-k, t]})$.
+Trade entry is triggered upon satisfying directional indicator confirmation:
+\begin{equation}
+\xi_t = \begin{cases} 
++1 & \text{if Buy signal criteria satisfied}, \\
+-1 & \text{if Sell signal criteria satisfied}, \\
+0 & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+\section{Empirical Testing Setup and Benchmark Parameters}
+Testing was conducted in accordance with the official \textbf{Berrytrade Benchmark v1.0}:
+\begin{itemize}
+    \item \textbf{Evaluation Period:} 2023.01.01 to 2025.12.31 (3-Year Continuous Horizon).
+    \item \textbf{Execution Latency:} Fixed $120\,\text{ms}$ simulated network delay.
+    \item \textbf{Modeling Granularity:} Tick-by-tick simulation based on historical tick archives.
+    \item \textbf{Friction Model:} Floating spreads with rollover widening, and round-turn commission of \$7.00 per standard lot.
+    \item \textbf{Initial Capital:} \$10,000 USD (Institutional scale) and \$1,000 USD (Retail constraint).
+\end{itemize}
+
+\section{Performance Diagnostics}
+Table~\ref{tab:metrics} presents the empirical performance metrics for \textbf{BBRSI}.
+
+\begin{table}[H]
+\centering
+\caption{Empirical Benchmark Performance Metrics: BBRSI}
+\label{tab:metrics}
+\begin{tabular}{llr}
+\toprule
+\textbf{Metric Category} & \textbf{Evaluation Field} & \textbf{Observed Value} \\
+\midrule
+Asset Specification & Target Asset & XAUUSD \\
+& Chart Timeframe & M5 \\
+Return Metrics & Total Net Profit & 36,877.30 USD \\
+& Profit Factor & 2.31 \\
+Risk \& Drawdown & Max Relative Equity Drawdown & \textbf{70.23\%} \\
+& Minimum Margin Level & \textbf{1314\%} \\
+Execution Profile & Grid Overlay Active & Yes (Extreme Risk) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{The Role of the Grid Overlay}
+A paramount finding in our empirical testing is that the strategy's apparent profitability is fundamentally dependent on an unhedged Grid execution mechanism. When positions move into unrealized loss, the algorithm opens successive averaging positions without immediate stop-loss execution.
+
+While this mechanism generates high nominal win rates during oscillating market regimes, it creates severe negative skewness in the return distribution:
+\begin{itemize}
+    \item \textbf{Peak-to-Trough Drawdown:} Under standard retail parameters, the maximum relative equity drawdown reached \textbf{70.23\%}.
+    \item \textbf{Margin Depletion:} Account margin level deteriorated to a critical low of \textbf{1314\%}, placing the account under severe threat of broker stop-out liquidation.
+\end{itemize}
+
+\subsection{Controlled Non-Grid Experiment (v1.8)}
+When the grid overlay was disabled and strict risk controls (0.5\% nominal risk, hard stop loss, and 10\% peak equity drawdown circuit breaker) were introduced, the empirical results transformed dramatically:
+\begin{itemize}
+    \item \textbf{Controlled Drawdown:} Decreased from 70.23\% to \textbf{5.25\%}.
+    \item \textbf{Controlled Profit Factor:} Collapsed to \textbf{0.96}, yielding a net result of \textbf{-87.11 USD}.
+\end{itemize}
+This controlled ablation confirms that the underlying indicator signal possesses no statistically significant positive expectation once transaction costs (spread and commission) are modeled.
+
+
+\section{Conclusion and Risk Governance Recommendations}
+The empirical analysis of \textbf{BBRSI} underscores a fundamental tenet of quantitative finance: high apparent backtest returns coupled with severe equity drawdowns (>50\%) and depleted margin levels represent pseudo-alpha engineered by unhedged loss-averaging.
+
+In accordance with the \textbf{Berrytrade-EA Ingestion Specification}:
+\begin{enumerate}
+    \item \textbf{BBRSI} is categorized under the \textbf{Experimental Tier} with an explicit \textbf{Extreme Risk} disclosure.
+    \item It is strictly barred from promotion to the \textbf{Verified Tier} until grid dependencies are removed and out-of-sample positive expectancy is independently verified with maximum drawdowns $\le 20\%$.
+\end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{../../synthesis/references}
+
+\end{document}

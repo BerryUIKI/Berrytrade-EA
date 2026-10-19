@@ -46,18 +46,40 @@
 
 ---
 
+## 📑 量化学术研究论文（arXiv 格式）
+
+本项目所有策略均经过由 **Berry Wahlberg** (`Berrytrade Quantitative Research`) 主持的 3 年期真实微观执行回测（2023--2025）及学术级评测：
+
+- 🏛️ **横向全景汇总论文**：[*The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*](papers/synthesis/main.pdf)（[LaTeX 源码](papers/synthesis/main.tex)）
+- 📊 **策略独立测试报告论文**：全套 14 篇针对单个策略数学模型与尾部风险解构的独立论文汇总于 [**`papers/README.md`**](papers/README.md)。
+
+---
+
 ## 📊 策略索引总表
 
 以下索引表由策略目录下的 `metadata.json` 自动解析渲染：
 
 ### 已验证策略（生产基准层）
 
-*当前该层级暂无入库策略。*
+*当前该层级暂无入库策略（严格准入要求：最大净值回撤 $\le 20\%$、强制硬止损、严禁无对冲网格/马丁）。*
 
 ### 实验孵化策略（社区前沿层）
 
 | 策略名称 | 分类 | 风险等级 | 支持品种 | 周期 | 初始资金 | 策略简述 |
 | :--- | :--- | :---: | :--- | :---: | :---: | :--- |
+| [2MAAOS](strategies/experimental/2MAAOS) | `trend_following` | **Extreme** | EURUSD, EURCAD, USDCAD | H4 | $10,000 | Dual Moving Averages and Andean Oscillator with Grid overlay. |
+| [2MACDSTO](strategies/experimental/2MACDSTO) | `mean_reversion` | **Extreme** | NZDUSD | H3 | $10,000 | Dual MACDs and Stochastic Oscillator with Grid overlay. |
+| [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy. |
+| [3MACD](strategies/experimental/3MACD) | `scalping` | **Extreme** | AUDUSD | M5 | $10,000 | Triple MACD scalping strategy with Grid overlay. |
+| [3MAF](strategies/experimental/3MAF) | `trend_following` | **Extreme** | USDCAD | M15 | $10,000 | Three Moving Averages and Williams Fractals with Grid overlay. |
+| [AFAOSMD](strategies/experimental/AFAOSMD) | `trend_following` | **Extreme** | NZDCAD | M30 | $10,000 | Average Force, Andean Oscillator, and MACD with Grid overlay. |
+| [BBRSI](strategies/experimental/BBRSI) | `mean_reversion` | **High** | XAUUSD | M5 | $1,000 | Bollinger Bands and RSI mean reversion strategy (supports controlled non-grid mode). |
+| [CEZLSMA](strategies/experimental/CEZLSMA) | `trend_following` | **Extreme** | AUDUSD | M15 | $10,000 | Chandelier Exit and Zero Lag SMA (ZLSMA) with Grid overlay. |
+| [COT1](strategies/experimental/COT1) | `trend_following` | **Medium** | EURUSD | Daily | $1,000 | Commitments of Traders (COT) report sentiment with SuperTrend indicator. |
+| [DHLAOS](strategies/experimental/DHLAOS) | `scalping` | **Extreme** | AUDUSD | M5 | $10,000 | Daily High/Low and Andean Oscillator scalping with Grid overlay. |
+| [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy. |
+| [LRCUTB](strategies/experimental/LRCUTB) | `trend_following` | **Extreme** | AUDCAD | M15 | $10,000 | Linear Regression Candles and UT Bot alerts with Grid overlay. |
+| [NWERSIASF](strategies/experimental/NWERSIASF) | `mean_reversion` | **Extreme** | USDCAD, AUDUSD, EURCHF | H2 | $10,000 | Nadaraya-Watson Envelope, RSI, and ATR Stop Loss Finder with Grid overlay. |
 | [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | Standardized MQL5 EA template showcasing risk management, hard stop-loss, and modular structure. |
 
 ---

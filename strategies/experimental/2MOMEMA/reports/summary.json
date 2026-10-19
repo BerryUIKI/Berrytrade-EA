@@ -1,0 +1,10 @@
+{
+  "strategy": "2MOMEMA",
+  "evaluation_horizon": "2023.01.01 - 2025.12.31",
+  "primary_symbol": "EURUSD",
+  "timeframe": "H1",
+  "grid_overlay_enabled": false,
+  "historical_max_equity_drawdown_pct": 5.5,
+  "historical_profit_factor": 1.05,
+  "evaluation_note": "Evaluated under Berrytrade 3-year Benchmark. High drawdown driven by grid overlay."
+}

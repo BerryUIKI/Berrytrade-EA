@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "BBRSI",
+  "version": "1.0.0",
+  "author": "Rabist / Berrytrade",
+  "license": "MIT",
+  "category": "mean_reversion",
+  "tier": "experimental",
+  "risk_level": "High",
+  "description": "Bollinger Bands and RSI mean reversion strategy (supports controlled non-grid mode).",
+  "supported_symbols": [
+    "XAUUSD"
+  ],
+  "recommended_timeframe": "M5",
+  "min_deposit_usd": 1000,
+  "recommended_leverage": "1:100",
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "allows_overnight": true,
+  "dependencies": {
+    "includes": [
+      "EAUtils.mqh"
+    ],
+    "indicators": []
+  },
+  "benchmark_summary": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "profit_factor": 1.05,
+    "max_drawdown_percent": 5.5,
+    "total_trades": 250,
+    "win_rate_percent": 51.0
+  }
+}

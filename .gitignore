@@ -47,3 +47,13 @@ desktop.ini
 .env
 *.local.json
 *.local.set
+
+# LaTeX auxiliary files (keep .tex and .pdf)
+*.aux
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz

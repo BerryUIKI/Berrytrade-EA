@@ -1,0 +1,3 @@
+; Default preset for LRCMACD
+InpMagicNumber=202610
+InpRisk=0.5
