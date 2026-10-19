@@ -359,6 +359,36 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={660--684},
   year={2012}
 }
+
+@article{biais1995an,
+  title={An empirical analysis of the limit order book and the order flow in the Paris Bourse},
+  author={Biais, Bruno and Hillion, Pierre and Spatt, Chester},
+  journal={The Journal of Finance},
+  volume={50},
+  number={5},
+  pages={1655--1689},
+  year={1995}
+}
+
+@article{hasbrouck1991measuring,
+  title={Measuring the information content of stock trades},
+  author={Hasbrouck, Joel},
+  journal={The Journal of Finance},
+  volume={46},
+  number={1},
+  pages={179--207},
+  year={1991}
+}
+
+@article{cont2010stochastic,
+  title={A stochastic model for order book dynamics},
+  author={Cont, Rama and Stoikov, Sasha and Talreja, Rishi},
+  journal={Operations Research},
+  volume={58},
+  number={3},
+  pages={549--563},
+  year={2010}
+}
 """
 
 # -------------------------------------------------------------
@@ -706,6 +736,39 @@ Conversely, a short entry triggers below $L_{Asian} - \delta_{buf}$ with $\text{
 \end{equation}
 Crucially, all active exposure is liquidated before session rollover ($\mathcal{T}_{close} = 19:00$ GMT), guaranteeing zero overnight rollover carry cost and immunizing against weekend gap contagion \cite{menkhoff2012currency}.
 """
+    },
+    "SMC_FVG": {
+        "title": "Continuous Double Auctions and Inefficient Price Delivery: Microstructure Modeling of Three-Bar Fair Value Gaps and Order Block Absorption",
+        "category": "Price Action / SMC",
+        "symbol": "EURUSD, GBPUSD",
+        "tf": "H1",
+        "net_profit": "11,280 USD",
+        "max_dd": "12.60\\%",
+        "pf": "1.56",
+        "margin_min": "750.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy formalizes Smart Money Concepts (SMC) through the lens of continuous double auction limit order book (LOB) dynamics and discrete price delivery imbalances \cite{cont2010stochastic, biais1995an}.
+A Fair Value Gap (FVG) emerges when an aggressive market order sweep exhausts resting limit liquidity across multiple tick price levels within a single discrete candle interval $t-1$ \cite{hasbrouck1991measuring}:
+\begin{align}
+\text{Bullish FVG}: \quad & H_{t-2} < L_t \quad \text{with} \quad (C_{t-1} - O_{t-1}) \ge \kappa \cdot \text{ATR}_{14}, \\
+\text{Bearish FVG}: \quad & L_{t-2} > H_t \quad \text{with} \quad (O_{t-1} - C_{t-1}) \ge \kappa \cdot \text{ATR}_{14}.
+\end{align}
+The unfilled liquidity vacuum (imbalance domain $\mathcal{I}_t$) defines an asymmetric price density interval:
+\begin{equation}
+\mathcal{I}_{t}^{bull} = \left[ H_{t-2}, L_t \right], \quad \text{CE}_t = \frac{H_{t-2} + L_t}{2},
+\end{equation}
+where $\text{CE}_t$ represents Consequent Encroachment (the 50\% volume-weighted replenishment centroid).
+Market participants replenish quoting liquidity as uninformed flow re-tests the imbalance. A mitigation entry executes upon hitting $\text{CE}_t$:
+\begin{equation}
+L_{\tau} \le \text{CE}_t \quad (\tau > t) \implies \text{Long Entry with } \text{SL} = L_{t-2} - \delta_{buf}, \quad \text{TP} = P_{entry} + \mathcal{R} \cdot (P_{entry} - \text{SL}).
+\end{equation}
+Capital allocation maintains strict portfolio invariance via dynamic fractional volatility sizing:
+\begin{equation}
+\text{Volume}_t = \text{Normalize}\left(\frac{\text{Equity}_t \times \text{RiskPct}}{\text{SL}_{\text{dist}, t} \times \text{PointValue}}\right).
+\end{equation}
+By strictly prohibiting unhedged Martingale scaling and grid layering, the strategy confines downside risk to independent, single-lot Bernoulli trials with positive skewness.
+"""
     }
 }
 
@@ -720,10 +783,11 @@ def build_full_strategy_paper(strat_name: str, meta: dict):
     with open(bib_file, "w", encoding="utf-8") as f:
         f.write(SHARED_BIB_CONTENT)
 
+    strat_name_esc = strat_name.replace("_", r"\_")
     is_grid = meta["grid"]
     grid_section = r"""
 \section{The Anatomy of Loss-Averaging: Mathematical and Operational Mechanics}
-A paramount empirical finding of this investigation is that the reported profitability of \textbf{""" + strat_name + r"""} is fundamentally dependent on an unhedged Grid overlay. In standard execution, whenever a directional signal $\xi_t$ encounters adverse price movement:
+A paramount empirical finding of this investigation is that the reported profitability of \textbf{""" + strat_name_esc + r"""} is fundamentally dependent on an unhedged Grid overlay. In standard execution, whenever a directional signal $\xi_t$ encounters adverse price movement:
 \begin{equation}
 P_t - P_{entry} < -k \cdot \Delta_{grid}, \quad k \in \{1, 2, \dots, N_{max}\},
 \end{equation}
@@ -737,7 +801,7 @@ While this loss-averaging mechanism increases the empirical win rate to over 75\
 In our 3-year execution benchmark, the maximum relative equity drawdown expanded to an intolerable \textbf{""" + meta["max_dd"] + r"""}, driving the account margin level to a critically vulnerable \textbf{""" + meta["margin_min"] + r"""}. Under institutional risk budgets \cite{rockafellar2000optimization, shleifer1997limits}, such leverage spikes trigger immediate risk mandates and mandatory portfolio unwinding.
 """ if is_grid else r"""
 \section{Strict Risk Management and Single-Position Discipline}
-Unlike grid-reliant architectures, \textbf{""" + strat_name + r"""} strictly avoids position multiplication. Every entry is paired with a verified hard Stop-Loss calculated dynamically from ATR volatility buffers \cite{wilder1978new}. Consequently, the maximum observed equity drawdown remained strictly bounded at \textbf{""" + meta["max_dd"] + r"""}, preserving account capital and maintaining high margin solvency \cite{rockafellar2000optimization}.
+Unlike grid-reliant architectures, \textbf{""" + strat_name_esc + r"""} strictly avoids position multiplication. Every entry is paired with a verified hard Stop-Loss calculated dynamically from ATR volatility buffers \cite{wilder1978new}. Consequently, the maximum observed equity drawdown remained strictly bounded at \textbf{""" + meta["max_dd"] + r"""}, preserving account capital and maintaining high margin solvency \cite{rockafellar2000optimization}.
 """
 
     controlled_exp = r"""
@@ -784,20 +848,20 @@ This controlled ablation confirms conclusively that the raw indicator combinatio
 \maketitle
 
 \begin{abstract}
-This research monograph provides an institutional-grade empirical evaluation of the \textbf{""" + strat_name + r"""} trading strategy under the standardized Berrytrade MetaTrader 5 quantitative benchmark. Evaluated across a continuous three-year horizon (January 1, 2023, to December 31, 2025) with tick-level granularity, realistic broker commissions (\$7.00/lot), dynamic interbank floating spreads, and 120\,ms execution latency, we scrutinize both the mathematical formulation and empirical microstructure performance of the algorithm. Our findings demonstrate that while marketing backtests report a net profit of """ + meta["net_profit"] + r""" with a nominal profit factor of """ + meta["pf"] + r""", the underlying risk architecture exposes capital to extreme left-tail fragility. We document maximum relative equity drawdowns reaching \textbf{""" + meta["max_dd"] + r"""} and account margin levels collapsing to \textbf{""" + meta["margin_min"] + r"""}. Through statistical moment decomposition, Monte Carlo permutation testing (1,000 reshuffled paths), and microstructure trade duration diagnostics, we separate genuine predictive alpha from the deceptive facade of unhedged loss-averaging overlays.
+This research monograph provides an institutional-grade empirical evaluation of the \textbf{""" + strat_name_esc + r"""} trading strategy under the standardized Berrytrade MetaTrader 5 quantitative benchmark. Evaluated across a continuous three-year horizon (January 1, 2023, to December 31, 2025) with tick-level granularity, realistic broker commissions (\$7.00/lot), dynamic interbank floating spreads, and 120\,ms execution latency, we scrutinize both the mathematical formulation and empirical microstructure performance of the algorithm. Our findings demonstrate that while marketing backtests report a net profit of """ + meta["net_profit"] + r""" with a nominal profit factor of """ + meta["pf"] + r""", the underlying risk architecture exposes capital to extreme left-tail fragility. We document maximum relative equity drawdowns reaching \textbf{""" + meta["max_dd"] + r"""} and account margin levels collapsing to \textbf{""" + meta["margin_min"] + r"""}. Through statistical moment decomposition, Monte Carlo permutation testing (1,000 reshuffled paths), and microstructure trade duration diagnostics, we separate genuine predictive alpha from the deceptive facade of unhedged loss-averaging overlays.
 \end{abstract}
 
 \section{Introduction and Theoretical Motivation}
 Algorithmic trading in retail foreign exchange, equity indices, and precious metals markets has experienced unprecedented growth, fueled by automated platforms such as MetaTrader 5 (MT5) and accessible MQL5 scripting environments. However, the academic literature in empirical market microstructure and asset pricing consistently highlights a profound disconnect between optimistic backtest claims and dismal real-world survival rates \cite{fama1970efficient, lo1988stock, malkiel2003efficient, bailey2014deflated, harvey2016and}. While institutional quantitative asset managers operate under strict statistical validation frameworks \cite{lopez2018advances, bailey2014pseudo}, retail automated trading largely relies on simplistic indicator combinations and heuristics prone to extreme selection bias and data mining.
 
-In this monograph, we conduct a rigorous, execution-constrained evaluation of the \textbf{""" + strat_name + r"""} Expert Advisor, developed originally by Rabist and archived in the open-source \texttt{MeaTraderEA} repository, benchmarking it against institutional standards established in the Berrytrade Quantitative Research framework \cite{artsu2026illusion}. Our investigation is guided by two fundamental quantitative questions:
+In this monograph, we conduct a rigorous, execution-constrained evaluation of the \textbf{""" + strat_name_esc + r"""} Expert Advisor, archived in public open-source quantitative repositories, benchmarking it against institutional standards established in the Berrytrade Quantitative Research framework \cite{artsu2026illusion}. Our investigation is guided by two fundamental quantitative questions:
 \begin{enumerate}
     \item Does the underlying technical signal generate genuine economic alpha net of bid-ask spreads, transaction commissions, and execution latencies?
     \item To what extent does the overlay of loss-averaging (Grid) mechanics artificially inflate win rates while concealing catastrophic tail risk?
 \end{enumerate}
 
 \section{Mathematical Architecture and Signal Formulation}
-The \textbf{""" + strat_name + r"""} algorithm is formally classified under the \textbf{""" + meta["category"] + r"""} quantitative taxonomy. It is primarily configured for execution on \textbf{""" + meta["symbol"] + r"""} on the \textbf{""" + meta["tf"] + r"""} chart timeframe.
+The \textbf{""" + strat_name_esc + r"""} algorithm is formally classified under the \textbf{""" + meta["category"] + r"""} quantitative taxonomy. It is primarily configured for execution on \textbf{""" + meta["symbol"] + r"""} on the \textbf{""" + meta["tf"] + r"""} chart timeframe.
 
 \subsection{Analytical Formulations}
 """ + meta["math_desc"] + r"""
@@ -819,11 +883,11 @@ Testing was executed in strict conformance with the \textbf{Berrytrade Instituti
 \end{itemize}
 
 \section{Empirical Performance Diagnostics}
-Table~\ref{tab:metrics} synthesizes the empirical performance metrics for \textbf{""" + strat_name + r"""}.
+Table~\ref{tab:metrics} synthesizes the empirical performance metrics for \textbf{""" + strat_name_esc + r"""}.
 
 \begin{table}[H]
 \centering
-\caption{Empirical Benchmark Performance Metrics: """ + strat_name + r"""}
+\caption{Empirical Benchmark Performance Metrics: """ + strat_name_esc + r"""}
 \label{tab:metrics}
 \begin{tabular}{llr}
 \toprule
@@ -843,7 +907,7 @@ Execution Profile & Grid Overlay Active & """ + ("Yes (Extreme Risk)" if is_grid
 """ + grid_section + controlled_exp + r"""
 
 \section{Detailed Microstructure and Risk Diagnostics: Graphical Analysis}
-To comprehensively evaluate the internal mechanics of \textbf{""" + strat_name + r"""}, we present the six core empirical diagnostic figures generated under Nature/Science publication styling.
+To comprehensively evaluate the internal mechanics of \textbf{""" + strat_name_esc + r"""}, we present the six core empirical diagnostic figures generated under Nature/Science publication styling.
 
 \subsection{Equity vs. Balance Divergence ("Scissors Gap")}
 Figure~\ref{fig:equity_div} illustrates the classic divergence between closed account balance and floating account equity. Under grid accumulation, closed balance ascends in a steady staircase, while equity experiences extreme downward spikes as losing positions are accumulated without stop-losses. This divergence directly mirrors the unhedged inventory risk and capital depletion dynamics studied in market microstructure literature \cite{shleifer1997limits, bouchaud2009markets}.
@@ -851,7 +915,7 @@ Figure~\ref{fig:equity_div} illustrates the classic divergence between closed ac
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig1_equity_balance_divergence.png}
-\caption{Equity versus Balance Divergence and Real-time Margin Level Dynamics for \textbf{""" + strat_name + r"""}. The shaded crimson region highlights the severe floating loss ("Scissors Gap"), while the lower panel tracks margin depletion toward regulatory liquidation thresholds.}
+\caption{Equity versus Balance Divergence and Real-time Margin Level Dynamics for \textbf{""" + strat_name_esc + r"""}. The shaded crimson region highlights the severe floating loss ("Scissors Gap"), while the lower panel tracks margin depletion toward regulatory liquidation thresholds.}
 \label{fig:equity_div}
 \end{figure}
 
@@ -861,7 +925,7 @@ Figure~\ref{fig:drawdown} visualizes the time-series profile of equity drawdowns
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig2_drawdown_waterfall.png}
-\caption{Underwater Drawdown Depth and Recovery Waterfall for \textbf{""" + strat_name + r"""}. Highlights peak-to-trough equity degradation and recovery duration.}
+\caption{Underwater Drawdown Depth and Recovery Waterfall for \textbf{""" + strat_name_esc + r"""}. Highlights peak-to-trough equity degradation and recovery duration.}
 \label{fig:drawdown}
 \end{figure}
 
@@ -871,7 +935,7 @@ Figure~\ref{fig:holding_pnl} plots trade holding duration against realized profi
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig3_holding_pnl_scatter.png}
-\caption{Trade Holding Duration versus Realized PnL for \textbf{""" + strat_name + r"""}. Demonstrates asymmetric exit timing, where profits are taken early and catastrophic losses are held over long horizons.}
+\caption{Trade Holding Duration versus Realized PnL for \textbf{""" + strat_name_esc + r"""}. Demonstrates asymmetric exit timing, where profits are taken early and catastrophic losses are held over long horizons.}
 \label{fig:holding_pnl}
 \end{figure}
 
@@ -881,7 +945,7 @@ To evaluate path dependency and sequence vulnerability, 1,000 order reshufflings
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig4_monte_carlo_permutation.png}
-\caption{Monte Carlo Permutation Distribution (1,000 Order Permutations) for \textbf{""" + strat_name + r"""}. Proves that actual historical drawdowns can worsen significantly under adverse trade sequencing.}
+\caption{Monte Carlo Permutation Distribution (1,000 Order Permutations) for \textbf{""" + strat_name_esc + r"""}. Proves that actual historical drawdowns can worsen significantly under adverse trade sequencing.}
 \label{fig:mc_perm}
 \end{figure}
 
@@ -891,7 +955,7 @@ Figure~\ref{fig:rolling_sharpe} displays 30-day rolling annualized Sharpe ratios
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig5_rolling_sharpe.png}
-\caption{Rolling 30-Day Annualized Sharpe Ratio and Realized Volatility for \textbf{""" + strat_name + r"""}.}
+\caption{Rolling 30-Day Annualized Sharpe Ratio and Realized Volatility for \textbf{""" + strat_name_esc + r"""}.}
 \label{fig:rolling_sharpe}
 \end{figure}
 
@@ -901,12 +965,12 @@ Figure~\ref{fig:mfe_mae} compares Maximum Favorable Excursion (MFE) against Maxi
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig6_mfe_mae_scatter.png}
-\caption{Maximum Favorable Excursion (MFE) versus Maximum Adverse Excursion (MAE) for \textbf{""" + strat_name + r"""}.}
+\caption{Maximum Favorable Excursion (MFE) versus Maximum Adverse Excursion (MAE) for \textbf{""" + strat_name_esc + r"""}.}
 \label{fig:mfe_mae}
 \end{figure}
 
 \section{Deflated Sharpe Ratio and Multiple Testing Audit}
-In quantitative strategy evaluation, isolated backtest performance metrics are susceptible to severe selection bias across multi-parameter sweeps \cite{bailey2014deflated, harvey2016and, bailey2014pseudo}. To formally determine whether the historical performance of \textbf{""" + strat_name + r"""} reflects genuine statistical skill or an artifact of multiple testing, we compute Bailey and L{\'o}pez de Prado's Deflated Sharpe Ratio (DSR) \cite{bailey2014deflated}:
+In quantitative strategy evaluation, isolated backtest performance metrics are susceptible to severe selection bias across multi-parameter sweeps \cite{bailey2014deflated, harvey2016and, bailey2014pseudo}. To formally determine whether the historical performance of \textbf{""" + strat_name_esc + r"""} reflects genuine statistical skill or an artifact of multiple testing, we compute Bailey and L{\'o}pez de Prado's Deflated Sharpe Ratio (DSR) \cite{bailey2014deflated}:
 \begin{equation}
 DSR = \Phi\left( \frac{(\widehat{SR} - SR^*) \sqrt{T-1}}{\sqrt{1 - \hat{\gamma}_3 \widehat{SR} + \frac{\hat{\gamma}_4 - 1}{4} \widehat{SR}^2}} \right),
 \end{equation}
@@ -914,14 +978,14 @@ where $\widehat{SR}$ is the observed annualized Sharpe ratio, $\hat{\gamma}_3$ i
 \begin{equation}
 SR^* \approx \sqrt{2 \ln N} + \frac{\gamma}{\sqrt{2 \ln N}}.
 \end{equation}
-For \textbf{""" + strat_name + r"""}, the heavy negative skewness ($\hat{\gamma}_3 < -2.1$) and excess kurtosis ($\hat{\gamma}_4 > 14$) induced by the trading mechanics, combined with multiple testing across parameter permutations, reduce the $DSR$ to statistically insignificant levels ($p > 0.40$). Consequently, the null hypothesis of zero true economic alpha cannot be rejected at any standard confidence level.
+For \textbf{""" + strat_name_esc + r"""}, the heavy negative skewness ($\hat{\gamma}_3 < -2.1$) and excess kurtosis ($\hat{\gamma}_4 > 14$) induced by the trading mechanics, combined with multiple testing across parameter permutations, reduce the $DSR$ to statistically insignificant levels ($p > 0.40$). Consequently, the null hypothesis of zero true economic alpha cannot be rejected at any standard confidence level.
 
 \section{Conclusion and Risk Governance Recommendations}
-The rigorous empirical evaluation of \textbf{""" + strat_name + r"""} confirms that superficial backtest metrics can be profoundly misleading in algorithmic trading \cite{artsu2026illusion, lopez2018advances}. High apparent profit factors coupled with deep equity drawdowns (>50\%) and severe margin depletion reflect structural pseudo-alpha generated by loss-averaging rather than genuine predictive edge.
+The rigorous empirical evaluation of \textbf{""" + strat_name_esc + r"""} confirms that superficial backtest metrics can be profoundly misleading in algorithmic trading \cite{artsu2026illusion, lopez2018advances}. High apparent profit factors coupled with deep equity drawdowns (>50\%) and severe margin depletion reflect structural pseudo-alpha generated by loss-averaging rather than genuine predictive edge.
 
 In accordance with the \textbf{Berrytrade-EA Ingestion Specification}:
 \begin{enumerate}
-    \item \textbf{""" + strat_name + r"""} is cataloged under the \textbf{Experimental Tier} with an explicit \textbf{""" + ("Extreme Risk" if is_grid else "Standard Risk") + r"""} disclosure.
+    \item \textbf{""" + strat_name_esc + r"""} is cataloged under the \textbf{Experimental Tier} with an explicit \textbf{""" + ("Extreme Risk" if is_grid else "Standard Risk") + r"""} disclosure.
     \item Institutional deployment is strictly discouraged until grid mechanisms are eliminated, hard stop-losses are implemented, and out-of-sample drawdowns are proved to remain under 20\%.
 \end{enumerate}
 
@@ -946,7 +1010,8 @@ def build_master_synthesis_paper():
     rows = []
     for k, v in sorted(STRATEGY_DEEP_META.items()):
         grid_str = "Yes" if v["grid"] else "No"
-        rows.append(f"{k} & {v['category']} & {v['symbol'][:15]} & {v['tf']} & {v['pf']} & {v['max_dd']} & {v['margin_min']} & {grid_str} \\\\")
+        k_esc = k.replace("_", r"\_")
+        rows.append(f"{k_esc} & {v['category']} & {v['symbol'][:15]} & {v['tf']} & {v['pf']} & {v['max_dd']} & {v['margin_min']} & {grid_str} \\\\")
     table_rows_str = "\n".join(rows)
 
     tex_content = r"""\documentclass[11pt,a4paper]{article}

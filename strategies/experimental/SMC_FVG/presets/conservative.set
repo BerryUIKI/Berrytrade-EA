@@ -1,0 +1,11 @@
+InpMinGapPoints=150
+InpMaxLookbackBars=20
+InpMinDisplacementATR=1.5
+InpATRPeriod=14
+InpRiskRewardRatio=2.5
+InpUseMidpointEntry=true
+InpRiskPercent=0.5
+InpStopLossPoints=250
+InpBufferPoints=30
+InpSlippagePoints=20
+InpMagicNumber=109932
