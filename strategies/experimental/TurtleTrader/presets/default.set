@@ -1,0 +1,13 @@
+; TurtleTrader - Default System 1 Preset
+; Richard Dennis & William Eckhardt 20-Day Breakout Model
+InpSystemMode=1
+InpCustomEntryPeriod=20
+InpCustomExitPeriod=10
+InpATRPeriod=20
+InpRiskPercent=1.0
+InpMaxUnits=4
+InpPyramidStepN=0.5
+InpStopLossN=2.0
+InpMagicNumber=101984
+InpSlippagePoints=30
+InpTradeComment=Berrytrade_Turtle_S1

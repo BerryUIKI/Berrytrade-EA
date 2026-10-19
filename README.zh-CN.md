@@ -77,6 +77,7 @@
 | 策略名称 | 分类 | 风险等级 | 支持品种 | 周期 | 初始资金 | 策略简述 |
 | :--- | :--- | :---: | :--- | :---: | :---: | :--- |
 | [COT1](strategies/experimental/COT1) | `trend_following` | **Medium** | EURUSD | Daily | $1,000 | Commitments of Traders (COT) report sentiment with SuperTrend (实测基准冠军). |
+| [TurtleTrader](strategies/experimental/TurtleTrader) | `trend_following` | **Medium** | EURUSD, XAUUSD, GBPUSD | Daily | $1,000 | 经典海龟交易法则：唐奇安通道突破 + N-波动率头寸分配 + 2N 移动止损. |
 | [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy (严格单笔止损，无网格). |
 | [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy (严格单笔止损，无网格). |
 | [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | 官方标准化模板（单笔止损、模块化、标准资金管理）. |
@@ -97,8 +98,8 @@
 
 我们正在全面检索互联网（GitHub、MQL5 CodeBase 及经典量化开源库）中的知名开源策略，并按以下顺序逐一完成代码审计、3 年基准测试与学术论文发表：
 
-1. **`TurtleTrader`**（经典海龟交易法则：唐奇安通道 20/10 突破 + N-波动率头寸分配 + 2N 移动止损）&mdash; **[当前推进中]**
-2. **`LondonBreakout`**（伦敦开盘区间突破：亚洲盘震荡区间流动性爆发，日内单笔清仓）
+1. **`TurtleTrader`**（经典海龟交易法则：唐奇安通道 20/10 突破 + N-波动率头寸分配 + 2N 移动止损）&mdash; **[已完成入库]**
+2. **`LondonBreakout`**（伦敦开盘区间突破：亚洲盘震荡区间流动性爆发，日内单笔清仓）&mdash; **[当前推进中]**
 3. **`SMC_FVG`**（Smart Money Concepts / ICT 机构订单流：合理价值缺口与流动性掠夺）
 4. **`StatArbPairs`**（多品种统计套利：基于协整残差 Z-Score 偏离的均值回归配对对冲）
 5. **`KalmanFilterEA`**（卡尔曼滤波自适应状态估计：消除均线滞后的动态漂移估计系统）
