@@ -56,7 +56,7 @@
 
 本项目所有策略均经过由 **Berry Wahlberg** (`Berrytrade Quantitative Research`) 主持的 3 年期真实微观执行回测（2023--2025，120ms 网络延迟，实盘浮动点差与 $7/手佣金）及学术级评测：
 
-- 🏛️ **横向全景汇总论文**：[*The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*](papers/synthesis/main.pdf)（[LaTeX 源码](papers/synthesis/main.tex)）
+- 🏛️ **横向全景汇总论文**：[*The Anatomy of Grid Overlays and the Illusion of Alpha: An Empirical Case Study of Retail Expert Advisors on MetaTrader 5*](papers/synthesis/main.pdf)（[LaTeX 源码](papers/synthesis/main.tex)）
 - 📊 **策略独立测试报告论文**：全套 14 篇针对单个策略数学模型、微观结构诊断与尾部风险解构的独立论文汇总于 [**`papers/README.md`**](papers/README.md)。
 
 ---

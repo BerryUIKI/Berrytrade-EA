@@ -9,7 +9,7 @@
 
 ## 🏛️ Master Synthesis Paper
 
-- 📄 **Title**: *The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*
+- 📄 **Title**: *The Anatomy of Grid Overlays and the Illusion of Alpha: An Empirical Case Study of Retail Expert Advisors on MetaTrader 5*
 - 📝 **LaTeX Source**: [`papers/synthesis/main.tex`](synthesis/main.tex)
 - 📑 **Compiled PDF**: [`papers/synthesis/main.pdf`](synthesis/main.pdf)
 - 📚 **Bibliography**: [`papers/synthesis/references.bib`](synthesis/references.bib) (28 comprehensive academic citations)
