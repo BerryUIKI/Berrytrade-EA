@@ -148,4 +148,5 @@ The current active research campaign follows this priority order:
 2. **`LondonBreakout`** (Asian session range definition, Frankfurt/London open liquidity breakout, zero overnight carry) &mdash; **[COMPLETED]**
 3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Sweep & Order Blocks) &mdash; **[COMPLETED]**
 4. **`StatArbPairs`** (Cointegrated statistical arbitrage pairs trading, EURUSD vs GBPUSD) &mdash; **[COMPLETED]**
-5. **`KalmanFilterEA`** (State-space adaptive filtering, real-time drift estimation) &mdash; **[CURRENT TASK]**
+5. **`KalmanFilterEA`** (State-space adaptive filtering, real-time drift estimation) &mdash; **[COMPLETED]**
+6. **`HMMRegimeEA`** (Hidden Markov Model Gaussian Mixture Volatility Regime Switching Filter) &mdash; **[CURRENT TASK]**
