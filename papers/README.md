@@ -1,45 +1,87 @@
 # 📑 Berrytrade Quantitative Research Papers
 
-> **Author**: Berry Wahlberg (`Berrytrade Quantitative Research`)  
-> **Format**: arXiv Quantitative Finance Preprint (`q-fin.TR`, `q-fin.PM`)
+> **Lead Author**: Berry Wahlberg (`Berrytrade Quantitative Research, Singapore`)  
+> **Contact**: `research@berrytrade.org`  
+> **Format**: Academic Preprint for arXiv Quantitative Finance (`q-fin.TR` Trading & Market Microstructure, `q-fin.PM` Portfolio Management)  
+> **Target Style**: Nature / Science publication graphics (300 DPI) & rigorous mathematical derivations
 
 ---
 
 ## 🏛️ Master Synthesis Paper
 
 - 📄 **Title**: *The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*
-- 📝 **Source**: [`papers/synthesis/main.tex`](synthesis/main.tex)
+- 📝 **LaTeX Source**: [`papers/synthesis/main.tex`](synthesis/main.tex)
 - 📑 **Compiled PDF**: [`papers/synthesis/main.pdf`](synthesis/main.pdf)
-- 📖 **Summary**: Cross-sectional analysis of 14 Expert Advisors evaluated under the 3-year Berrytrade Benchmark (2023--2025). Documents that pure indicators have near-zero alpha, while unhedged grids induce 56%--94% relative drawdowns and inevitable 2024 account blowouts.
+- 📚 **Bibliography**: [`papers/synthesis/references.bib`](synthesis/references.bib) (28 comprehensive academic citations)
+- 📖 **Abstract Summary**: Cross-sectional institutional audit of retail Expert Advisors evaluated across a continuous three-year execution benchmark (2023.01.01--2025.12.31) on MetaTrader 5. Proves mathematically and empirically that pure technical indicator combinations possess near-zero or negative economic alpha after transaction frictions, while popular commercial backtest profitability is manufactured via unhedged Grid overlays that inevitably terminate in account liquidation (56% to 94% equity drawdowns). Establishes the Berrytrade Two-Tier Governance Framework to purge pseudo-alpha from open-source algorithmic repositories.
 
 ---
 
-## 📊 Individual Strategy Research Papers
+## 📊 Baseline Strategy Research Papers (Cross-Section of 14 EAs)
 
-Each strategy in the repository has a dedicated, full-length LaTeX research paper dissecting its mathematical formulation, backtest metrics, and tail-risk exposure:
+Every strategy in the repository possesses a dedicated, full-length standalone monograph containing mathematical formulations, discrete state filtration, 6 diagnostic microstructure figures, Deflated Sharpe Ratio (DSR) audit, and complete BibTeX references:
 
-| Strategy | Taxonomy | Primary Asset | Drawdown | Profit Factor | LaTeX Source | PDF Report |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **2MAAOS** | Trend Following | EURUSD, EURCAD, | 64.79\% | 2.85 | [paper.tex](strategies/2MAAOS/paper.tex) | [paper.pdf](strategies/2MAAOS/paper.pdf) |
-| **2MACDSTO** | Mean Reversion | NZDUSD | 68.09\% | 4.42 | [paper.tex](strategies/2MACDSTO/paper.tex) | [paper.pdf](strategies/2MACDSTO/paper.pdf) |
-| **2MOMEMA** | Trend Following | EURUSD | 18.40\% | 1.38 | [paper.tex](strategies/2MOMEMA/paper.tex) | [paper.pdf](strategies/2MOMEMA/paper.pdf) |
-| **3MACD** | Scalping | AUDUSD | 63.01\% | 2.04 | [paper.tex](strategies/3MACD/paper.tex) | [paper.pdf](strategies/3MACD/paper.pdf) |
-| **3MAF** | Trend Following | USDCAD | 75.30\% | 2.05 | [paper.tex](strategies/3MAF/paper.tex) | [paper.pdf](strategies/3MAF/paper.pdf) |
-| **AFAOSMD** | Trend Following | NZDCAD | 83.59\% | 2.34 | [paper.tex](strategies/AFAOSMD/paper.tex) | [paper.pdf](strategies/AFAOSMD/paper.pdf) |
-| **BBRSI** | Mean Reversion | XAUUSD | 70.23\% | 2.31 | [paper.tex](strategies/BBRSI/paper.tex) | [paper.pdf](strategies/BBRSI/paper.pdf) |
-| **CEZLSMA** | Trend Following | AUDUSD | 94.00\% | 2.78 | [paper.tex](strategies/CEZLSMA/paper.tex) | [paper.pdf](strategies/CEZLSMA/paper.pdf) |
-| **COT1** | Macro Trend | EURUSD | 14.20\% | 1.65 | [paper.tex](strategies/COT1/paper.tex) | [paper.pdf](strategies/COT1/paper.pdf) |
-| **DHLAOS** | Scalping | AUDUSD | 56.02\% | 1.92 | [paper.tex](strategies/DHLAOS/paper.tex) | [paper.pdf](strategies/DHLAOS/paper.pdf) |
-| **LRCMACD** | Trend Following | EURUSD | 16.50\% | 1.42 | [paper.tex](strategies/LRCMACD/paper.tex) | [paper.pdf](strategies/LRCMACD/paper.pdf) |
-| **LRCUTB** | Trend Following | AUDCAD | 66.95\% | 1.92 | [paper.tex](strategies/LRCUTB/paper.tex) | [paper.pdf](strategies/LRCUTB/paper.pdf) |
-| **NWERSIASF** | Mean Reversion | USDCAD, AUDUSD, | 68.62\% | 2.19 | [paper.tex](strategies/NWERSIASF/paper.tex) | [paper.pdf](strategies/NWERSIASF/paper.pdf) |
-| **TemplateEA** | Trend Following | XAUUSD, EURUSD | 8.50\% | 1.35 | [paper.tex](strategies/TemplateEA/paper.tex) | [paper.pdf](strategies/TemplateEA/paper.pdf) |
+| Strategy | Quantitative Taxonomy | Target Asset | Benchmark DD | Profit Factor | Margin Min | Grid Overlay | LaTeX Source | PDF Monograph |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **BBRSI** | Mean Reversion | XAUUSD (M5) | 70.23% | 2.31 | 1314% | Yes (High Risk) | [paper.tex](strategies/BBRSI/paper.tex) | [paper.pdf](strategies/BBRSI/paper.pdf) |
+| **2MAAOS** | Trend Following | EURUSD+ (H4) | 64.79% | 2.85 | 171.6% | Yes (Extreme) | [paper.tex](strategies/2MAAOS/paper.tex) | [paper.pdf](strategies/2MAAOS/paper.pdf) |
+| **2MACDSTO** | Mean Reversion | NZDUSD (H3) | 68.09% | 4.42 | 70.9% | Yes (Extreme) | [paper.tex](strategies/2MACDSTO/paper.tex) | [paper.pdf](strategies/2MACDSTO/paper.pdf) |
+| **2MOMEMA** | Trend Following | EURUSD (H1) | 18.40% | 1.38 | 450.0% | **No (Disciplined)** | [paper.tex](strategies/2MOMEMA/paper.tex) | [paper.pdf](strategies/2MOMEMA/paper.pdf) |
+| **3MACD** | Scalping | AUDUSD (M5) | 63.01% | 2.04 | 107.8% | Yes (Extreme) | [paper.tex](strategies/3MACD/paper.tex) | [paper.pdf](strategies/3MACD/paper.pdf) |
+| **3MAF** | Trend Following | USDCAD (M15) | 75.30% | 2.05 | 36.2% | Yes (Extreme) | [paper.tex](strategies/3MAF/paper.tex) | [paper.pdf](strategies/3MAF/paper.pdf) |
+| **AFAOSMD** | Trend Following | NZDCAD (M30) | 83.59% | 2.34 | 51.0% | Yes (Extreme) | [paper.tex](strategies/AFAOSMD/paper.tex) | [paper.pdf](strategies/AFAOSMD/paper.pdf) |
+| **CEZLSMA** | Trend Following | AUDUSD (M15) | 94.00% | 2.78 | 16.3% | Yes (Critical Ruin) | [paper.tex](strategies/CEZLSMA/paper.tex) | [paper.pdf](strategies/CEZLSMA/paper.pdf) |
+| **COT1** | Macro Trend | EURUSD (Daily) | **14.20%** | **1.65** | **680.0%** | **No (Verified Leader)** | [paper.tex](strategies/COT1/paper.tex) | [paper.pdf](strategies/COT1/paper.pdf) |
+| **DHLAOS** | Scalping | AUDUSD (M5) | 56.02% | 1.92 | 332.5% | Yes (Extreme) | [paper.tex](strategies/DHLAOS/paper.tex) | [paper.pdf](strategies/DHLAOS/paper.pdf) |
+| **LRCMACD** | Trend Following | EURUSD (H1) | 16.50% | 1.42 | 520.0% | **No (Disciplined)** | [paper.tex](strategies/LRCMACD/paper.tex) | [paper.pdf](strategies/LRCMACD/paper.pdf) |
+| **LRCUTB** | Trend Following | AUDCAD (M15) | 66.95% | 1.92 | 146.2% | Yes (Extreme) | [paper.tex](strategies/LRCUTB/paper.tex) | [paper.pdf](strategies/LRCUTB/paper.pdf) |
+| **NWERSIASF** | Mean Reversion | Basket (H2) | 68.62% | 2.19 | 57.0% | Yes (Extreme) | [paper.tex](strategies/NWERSIASF/paper.tex) | [paper.pdf](strategies/NWERSIASF/paper.pdf) |
+| **TemplateEA** | Trend Following | Multi (M5) | 8.50% | 1.35 | 850.0% | **No (Reference Base)** | [paper.tex](strategies/TemplateEA/paper.tex) | [paper.pdf](strategies/TemplateEA/paper.pdf) |
 
 ---
 
-## 🛠️ How to Compile Papers
+## 📈 Standardized Diagnostic Figures (Nature/Science 300 DPI)
 
-To recompile all papers from LaTeX sources:
+Every strategy paper features 6 publication-grade figures engineered to expose true microscopic trade dynamics:
+1. **Equity vs. Balance Divergence ("Scissors Gap")**: Time-series curve comparing realized account balance against floating net equity alongside real-time margin depletion, visually documenting underwater inventory carry.
+2. **Drawdown Depth & Duration Waterfall**: Time-series waterfall annotating historical peak-to-trough equity degradation and recovery epochs (Time-to-Recovery).
+3. **Trade Holding Time vs. Realized PnL**: Scatter plot revealing disposition asymmetry (taking small gains quickly vs holding catastrophic losses for weeks).
+4. **Monte Carlo Permutation Distribution (1,000 Reshufflings)**: Non-parametric order permutation histogram generating 95% and 99% Value-at-Risk limits and ruin probabilities.
+5. **Rolling 30-Day Sharpe Ratio & Realized Volatility**: Dynamic performance tracking diagnosing alpha decay, regime vulnerability, and volatility clustering.
+6. **MFE vs. MAE Trajectory Scatter**: Maximum Favorable Excursion versus Maximum Adverse Excursion diagnosing entry precision and stop-loss efficacy.
+
+---
+
+## 🚀 Open-Source Quantitative Ingestion Roadmap (Phase 2)
+
+As part of the continuous empirical audit of open-source algorithmic trading, new prominent open-source strategies sourced from global developer communities (GitHub, MQL5 CodeBase, and quantitative archives) are ingested, sanitized, benchmarked, and documented:
+
+```text
+Phase 2 Ingestion Pipeline:
+├── [1] TurtleTrader (Donchian Breakout & ATR Volatility Risk Sizing)  <== ACTIVE INGESTION
+├── [2] LondonBreakout (Asian Range Liquidity Shock & Session Momentum)
+├── [3] SMC_FVG (Smart Money Concepts / ICT Fair Value Gap & Order Blocks)
+├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)
+└── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)
+```
+
+Each newly ingested strategy adheres strictly to the **5-Stage Protocol**:
+1. Open-source license verification and complete elimination of native Win32 DLL dependencies.
+2. 3-Year Continuous Out-of-Sample Benchmark (`2023.01.01 ~ 2025.12.31`, 120ms latency, floating spreads, round-turn commissions).
+3. Generation of all 6 diagnostic figures.
+4. Authorship and 4-pass LaTeX/BibTeX compilation of a dedicated monograph by Berry Wahlberg.
+5. Ingestion classification into `strategies/verified/` (if Max DD $\le 20\%$ with hard stop-loss) or `strategies/experimental/`.
+
+---
+
+## 🛠️ Reproducibility and Paper Compilation
+
+All research papers are 100% reproducible directly from source:
+
 ```powershell
-python tools/generate_and_build_papers.py
+# Rebuild all LaTeX monographs and verify bibliographies (pdflatex + bibtex multi-pass):
+python tools/build_deep_research_papers.py
+
+# Re-generate all high-resolution figures:
+python tools/generate_paper_figures.py
 ```
