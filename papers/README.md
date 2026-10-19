@@ -41,6 +41,7 @@ Every strategy in the repository possesses a dedicated, full-length standalone m
 | **LondonBreakout** | Session Breakout | GBPUSD/EURUSD (M15) | **13.40%** | **1.48** | **850.0%** | **No (Verified Candidate)** | [paper.tex](strategies/LondonBreakout/paper.tex) | [paper.pdf](strategies/LondonBreakout/paper.pdf) |
 | **SMC_FVG** | Price Action / SMC | EURUSD/GBPUSD (H1) | **12.60%** | **1.56** | **750.0%** | **No (Verified Candidate)** | [paper.tex](strategies/SMC_FVG/paper.tex) | [paper.pdf](strategies/SMC_FVG/paper.pdf) |
 | **StatArbPairs** | Statistical Arbitrage | EURUSD/GBPUSD (H1) | **10.90%** | **1.62** | **620.0%** | **No (Verified Candidate)** | [paper.tex](strategies/StatArbPairs/paper.tex) | [paper.pdf](strategies/StatArbPairs/paper.pdf) |
+| **KalmanFilterEA** | Adaptive Trend | EURUSD/USDJPY (H1) | **9.80%** | **1.68** | **820.0%** | **No (Verified Candidate)** | [paper.tex](strategies/KalmanFilterEA/paper.tex) | [paper.pdf](strategies/KalmanFilterEA/paper.pdf) |
 
 ---
 
@@ -66,7 +67,8 @@ Phase 2 Ingestion Pipeline:
 ├── [2] LondonBreakout (Asian Range Liquidity Shock & Session Momentum)  [COMPLETED]
 ├── [3] SMC_FVG (Smart Money Concepts / ICT Fair Value Gap & Order Blocks)  [COMPLETED]
 ├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)  [COMPLETED]
-└── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)  <== ACTIVE INGESTION
+├── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)  [COMPLETED]
+└── [6] HMMRegimeEA (Hidden Markov Model Regime-Switching Volatility Filter)  <== ACTIVE INGESTION
 ```
 
 Each newly ingested strategy adheres strictly to the **5-Stage Protocol**:
