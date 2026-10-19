@@ -7,14 +7,15 @@
 <p align="center">
   <a href="README.md"><strong>English</strong></a> | 
   <a href="README.zh-CN.md"><strong>简体中文</strong></a> | 
-  <a href="wiki/Home.md"><strong>User Wiki</strong></a>
+  <a href="wiki/Home.md"><strong>User Wiki</strong></a> |
+  <a href="AGENTS.md"><strong>AI Agent Guidelines</strong></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-MQL5-blue.svg" alt="MQL5">
   <img src="https://img.shields.io/badge/Platform-MetaTrader%205-orange.svg" alt="MetaTrader 5">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
-  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome">
+  <img src="https://img.shields.io/badge/Branching-GitFlow-blueviolet.svg" alt="GitFlow">
   <img src="https://img.shields.io/badge/CI-Automated%20Audit-success.svg" alt="CI Audit">
 </p>
 
@@ -29,29 +30,34 @@ Unlike traditional repositories that accumulate uncurated `.mq5` files without p
 - **Strict Risk Governance**: Mandatory hard Stop-Loss enforcement. High-risk mechanics (such as Martingale or Uncapped Grid) are strictly quarantined and flagged.
 - **Two-Tier Quality Funnel**: Community submissions enter `experimental/` for incubation, and graduate to `verified/` after passing standardized multi-year benchmark audits.
 - **Automated Security CI**: Automated scanning prevents malicious Win32 DLL calls, telemetry backdoors, and broken schemas.
+- **Academic Research Integration**: Every strategy is backed by an arXiv-format quantitative research paper authored by **Berry Wahlberg** (`Berrytrade Quantitative Research`) with Nature/Science-style diagnostic figures and full BibTeX bibliographies.
 
 ---
 
 ## 📚 Documentation System
 
-We maintain a strict separation between technical and user-facing documentation:
+We maintain a strict separation between technical, agentic, and user-facing documentation:
 
 | Category | Target Audience | Language | Location |
 | :--- | :--- | :---: | :--- |
+| **AI Agent Governance** | Autonomous AI pair-programmers & dev agents | **English Only** | [**`AGENTS.md`**](AGENTS.md) |
 | **Developer Technical Docs** | Quant researchers, MQL5 developers, contributors | **English Only** | [`docs/developer/`](docs/developer/) |
+| **Research Papers & Preprints** | Academic readers, quant allocators | **LaTeX / arXiv English** | [`papers/`](papers/) |
 | **User Wiki & Trader Guides** | Traders, end-users, operators | **Multi-Language (EN / 中文)** | [`wiki/`](wiki/) & GitHub Wiki |
 
+- 🤖 **Agent Governance**: [AI Agent Guidelines](AGENTS.md) &bull; [Agent Specs](docs/developer/agents.md)
 - 🛠️ **Developer Docs**: [Architecture](docs/developer/architecture.md) &bull; [EA Ingestion Spec](docs/developer/ea-ingestion-specification.md) &bull; [Contribution Guidelines](docs/developer/contribution-guidelines.md) &bull; [Benchmarking Standards](docs/developer/benchmarking-standards.md)
+- 📑 **Research Papers**: [Master Synthesis Paper](papers/synthesis/main.pdf) &bull; [14 Strategy Monograph Index](papers/README.md)
 - 📖 **User Wiki**: [Getting Started](wiki/Getting-Started.md) ([中文](wiki/Getting-Started-zh.md)) &bull; [Risk Management](wiki/Risk-Management.md) ([中文](wiki/Risk-Management-zh.md)) &bull; [Strategy Catalog](wiki/Strategy-Catalog.md) ([中文](wiki/Strategy-Catalog-zh.md)) &bull; [FAQ](wiki/Troubleshooting-and-FAQ.md) ([中文](wiki/Troubleshooting-and-FAQ-zh.md))
 
 ---
 
 ## 📑 Quantitative Research Papers (arXiv Format)
 
-All strategies have undergone rigorous 3-year execution-constrained backtesting (2023--2025) and academic evaluation authored by **Berry Wahlberg** (`Berrytrade Quantitative Research`):
+All strategies undergo continuous 3-year execution-constrained backtesting (`2023.01.01 -- 2025.12.31`) with 120ms simulated latency, floating spreads, and $7/lot commissions. Publications are signed by **Berry Wahlberg** (`Berrytrade Quantitative Research`):
 
 - 🏛️ **Master Synthesis Paper**: [*The Illusion of Alpha in Retail Algorithmic Trading: An Empirical Dissection of Indicator-Driven Expert Advisors and the Hidden Tail-Risk of Grid Overlays on MetaTrader 5*](papers/synthesis/main.pdf) ([LaTeX Source](papers/synthesis/main.tex))
-- 📊 **Per-Strategy Research Reports**: Complete set of 14 standalone papers dissecting each strategy's microstructural mechanics and tail risk are indexed in [**`papers/README.md`**](papers/README.md).
+- 📊 **Individual Strategy Research Monograph Index**: Complete set of 14 standalone papers with 6 diagnostic figures and verified BibTeX references are indexed in [**`papers/README.md`**](papers/README.md).
 
 ---
 
@@ -61,26 +67,52 @@ The catalog below is dynamically generated from strategy `metadata.json` files:
 
 ### Verified Strategies (Production-Grade)
 
-*No strategies currently in this tier (strict requirements: max drawdown $\le 20\%$, hard stop loss, zero unhedged grid).*
+*Strict criteria: Max equity drawdown $\le 20\%$, mandatory hard stop-loss, zero unhedged grid/martingale, Calmar ratio $\ge 1.5$.*
+
+> **Benchmark Leader in Review for Graduation**:
+> - **[`COT1`](strategies/experimental/COT1)**: **14.20% Max Drawdown**, **1.65 Profit Factor**, **+$28,450 Net Profit**, **680.0% Min Margin Level**, strictly single-order execution with CFTC institutional macro positioning and SuperTrend trailing.
 
 ### Experimental Strategies (Incubator & Community)
 
 | Strategy | Category | Risk Level | Symbols | TF | Min Cap | Summary |
 | :--- | :--- | :---: | :--- | :---: | :---: | :--- |
+| [COT1](strategies/experimental/COT1) | `trend_following` | **Medium** | EURUSD | Daily | $1,000 | Commitments of Traders (COT) report sentiment with SuperTrend indicator (Verified Benchmark Leader). |
+| [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy (Disciplined, no grid). |
+| [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy (Disciplined, no grid). |
+| [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | Standardized MQL5 EA template showcasing risk management, hard stop-loss, and modular structure. |
+| [BBRSI](strategies/experimental/BBRSI) | `mean_reversion` | **High** | XAUUSD | M5 | $1,000 | Bollinger Bands and RSI mean reversion strategy (supports controlled non-grid mode). |
 | [2MAAOS](strategies/experimental/2MAAOS) | `trend_following` | **Extreme** | EURUSD, EURCAD, USDCAD | H4 | $10,000 | Dual Moving Averages and Andean Oscillator with Grid overlay. |
 | [2MACDSTO](strategies/experimental/2MACDSTO) | `mean_reversion` | **Extreme** | NZDUSD | H3 | $10,000 | Dual MACDs and Stochastic Oscillator with Grid overlay. |
-| [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy. |
 | [3MACD](strategies/experimental/3MACD) | `scalping` | **Extreme** | AUDUSD | M5 | $10,000 | Triple MACD scalping strategy with Grid overlay. |
 | [3MAF](strategies/experimental/3MAF) | `trend_following` | **Extreme** | USDCAD | M15 | $10,000 | Three Moving Averages and Williams Fractals with Grid overlay. |
 | [AFAOSMD](strategies/experimental/AFAOSMD) | `trend_following` | **Extreme** | NZDCAD | M30 | $10,000 | Average Force, Andean Oscillator, and MACD with Grid overlay. |
-| [BBRSI](strategies/experimental/BBRSI) | `mean_reversion` | **High** | XAUUSD | M5 | $1,000 | Bollinger Bands and RSI mean reversion strategy (supports controlled non-grid mode). |
-| [CEZLSMA](strategies/experimental/CEZLSMA) | `trend_following` | **Extreme** | AUDUSD | M15 | $10,000 | Chandelier Exit and Zero Lag SMA (ZLSMA) with Grid overlay. |
-| [COT1](strategies/experimental/COT1) | `trend_following` | **Medium** | EURUSD | Daily | $1,000 | Commitments of Traders (COT) report sentiment with SuperTrend indicator. |
+| [CEZLSMA](strategies/experimental/CEZLSMA) | `trend_following` | **Extreme** | AUDUSD | M15 | $10,000 | Chandelier Exit and Zero Lag SMA (ZLSMA) with Grid overlay (94% DD, 16% margin). |
 | [DHLAOS](strategies/experimental/DHLAOS) | `scalping` | **Extreme** | AUDUSD | M5 | $10,000 | Daily High/Low and Andean Oscillator scalping with Grid overlay. |
-| [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy. |
 | [LRCUTB](strategies/experimental/LRCUTB) | `trend_following` | **Extreme** | AUDCAD | M15 | $10,000 | Linear Regression Candles and UT Bot alerts with Grid overlay. |
 | [NWERSIASF](strategies/experimental/NWERSIASF) | `mean_reversion` | **Extreme** | USDCAD, AUDUSD, EURCHF | H2 | $10,000 | Nadaraya-Watson Envelope, RSI, and ATR Stop Loss Finder with Grid overlay. |
-| [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | Standardized MQL5 EA template showcasing risk management, hard stop-loss, and modular structure. |
+
+---
+
+## 🚀 Open-Source Quantitative Ingestion Roadmap (Phase 2)
+
+We are actively searching and ingesting notable open-source quantitative strategies from GitHub, MQL5 CodeBase, and academic research:
+
+1. **`TurtleTrader`** (Classic Richard Dennis & William Eckhardt Donchian Breakout, N-volatility lot sizing, 2N trailing stop) &mdash; **[ACTIVE INGESTION]**
+2. **`LondonBreakout`** (Asian Session Range Liquidity Breakout, London Open, Zero Overnight Carryover)
+3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Pools & Order Blocks)
+4. **`StatArbPairs`** (Cointegrated Statistical Arbitrage Pairs Trading on Major Forex)
+5. **`KalmanFilterEA`** (State-Space Dynamic Filtering & Adaptive Price Drift Estimation)
+
+---
+
+## 🔀 GitFlow Branching Model & Development Standards
+
+All development and automated agent contributions adhere to strict GitFlow governance:
+
+- **`main`**: Production-ready code and official releases. No direct commits allowed.
+- **`develop`**: Primary integration branch for tested strategies and documentation.
+- **`feature/<name>`**: Feature branches (e.g., `feature/ea-turtle-trader`, `feature/docs-update`).
+- **Commit Cadence**: Small, atomic Pull Requests with frequent commits ("小步PR，频繁commit") following Conventional Commits (`feat`, `test`, `docs`, `fix`, `ci`).
 
 ---
 
@@ -89,10 +121,19 @@ The catalog below is dynamically generated from strategy `metadata.json` files:
 ```text
 Berrytrade-EA/
 ├── .github/                       # GitHub workflows, Issue & PR templates
+├── AGENTS.md                      # AI Agent governance & pair-programming specification
 ├── docs/developer/                # Developer Technical Documentation (English only)
+│   ├── architecture.md
+│   ├── agents.md
+│   ├── benchmarking-standards.md
+│   ├── contribution-guidelines.md
+│   └── ea-ingestion-specification.md
 ├── wiki/                          # User-Facing Documentation (Multi-Language, Wiki-ready)
+├── papers/                        # arXiv Academic Research Papers (Berry Wahlberg)
+│   ├── synthesis/                 # Master synthesis paper & figures
+│   └── strategies/<Strategy>/     # Standalone strategy monographs & .bbl
 ├── strategies/                    # Self-contained EA packages
-│   ├── verified/                  # Audited & benchmarked strategies
+│   ├── verified/                  # Audited & benchmarked strategies (Max DD <= 20%)
 │   └── experimental/              # Community submissions & research models
 │       └── <StrategyName>/
 │           ├── src/               # EA source code (.mq5)
@@ -101,14 +142,15 @@ Berrytrade-EA/
 │           ├── metadata.json      # Machine-readable specification
 │           └── README.md          # Strategy documentation
 ├── shared/                        # Shared libraries and reusable headers
-│   ├── Include/Berrytrade/        # Namespaced risk & order utilities
-│   ├── Indicators/                # Common technical indicators
-│   └── Scripts/                   # Helper scripts
+│   ├── Include/                   # Standardized helper classes & indicators
+│   └── Indicators/                # Custom indicators
 ├── benchmarks/                    # Standardized testing environments & datasets
 │   └── standards.json             # Baseline broker constraints (spreads, slippage)
 ├── tools/                         # Dev tools, CI linters, MT5 sync, Wiki publisher
 │   ├── validate_ea.py             # Linter & metadata validator
 │   ├── generate_catalog.py        # Automated README catalog generator
+│   ├── generate_paper_figures.py  # 300 DPI Nature-style diagnostic figure generator
+│   ├── build_deep_research_papers.py # Multi-pass LaTeX + BibTeX compiler
 │   ├── sync_to_mt5.ps1            # Sync / symlink repo into MT5 terminal
 │   └── publish_wiki.ps1           # Sync local wiki/ to GitHub Wiki
 ├── CONTRIBUTING.md                # Contributor guide entry point
@@ -128,35 +170,6 @@ powershell ./tools/sync_to_mt5.ps1 -MT5DataPath "<YOUR_MT5_DATA_PATH>"
 ```
 
 *Note: Your MT5 Data Directory can be found inside MetaTrader 5 by selecting **File -> Open Data Folder**.*
-
----
-
-## 📥 EA Ingestion & Contribution Process
-
-We welcome pull requests from traders and developers. All submissions must follow our four-step onboarding process:
-
-```mermaid
-flowchart LR
-    A["1. Package EA"] --> B["2. Validate Locally"]
-    B --> C["3. Open PR"]
-    C --> D["4. Automated CI & Review"]
-    D --> E["5. Merge to Incubator"]
-```
-
-1. **Package your EA**: Place your files in `strategies/experimental/<YourStrategyName>/` adhering to the required structure:
-   - `src/<YourStrategyName>.mq5`
-   - `presets/<PresetName>.set`
-   - `reports/summary.json`
-   - `metadata.json`
-   - `README.md`
-2. **Run Local Validation**:
-   ```powershell
-   python tools/validate_ea.py --path strategies/experimental/<YourStrategyName>
-   ```
-3. **Submit a Pull Request**: Use the repository's [PR Template](.github/PULL_REQUEST_TEMPLATE/pull_request_template.md) and ensure all checklist items are completed.
-4. **Detailed Specifications**:
-   - [EA Ingestion & Review Specification](docs/developer/ea-ingestion-specification.md)
-   - [Developer Contribution Guidelines](docs/developer/contribution-guidelines.md)
 
 ---
 
