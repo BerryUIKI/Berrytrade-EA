@@ -1,0 +1,13 @@
+; TurtleTrader - Conservative System 2 Preset
+; Richard Dennis & William Eckhardt 55-Day Breakout Model with Lower Risk
+InpSystemMode=2
+InpCustomEntryPeriod=55
+InpCustomExitPeriod=20
+InpATRPeriod=20
+InpRiskPercent=0.5
+InpMaxUnits=2
+InpPyramidStepN=0.5
+InpStopLossN=2.0
+InpMagicNumber=101985
+InpSlippagePoints=30
+InpTradeComment=Berrytrade_Turtle_S2

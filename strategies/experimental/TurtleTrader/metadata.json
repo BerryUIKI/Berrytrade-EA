@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "TurtleTrader",
+  "version": "1.0.0",
+  "author": "Richard Dennis, William Eckhardt, Berry Wahlberg (MQL5 Refactoring)",
+  "license": "MIT",
+  "category": "trend_following",
+  "tier": "experimental",
+  "risk_level": "Medium",
+  "description": "Classic Turtle Trading System: Donchian Breakout with N-ATR Volatility Sizing, 2N Hard Stop Loss, and Dynamic Pyramiding.",
+  "supported_symbols": [
+    "EURUSD",
+    "XAUUSD",
+    "GBPUSD"
+  ],
+  "recommended_timeframe": "Daily",
+  "min_deposit_usd": 1000,
+  "recommended_leverage": "1:100",
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "allows_overnight": true,
+  "dependencies": {
+    "includes": [],
+    "indicators": []
+  },
+  "benchmark_summary": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "net_profit_usd": 12450.0,
+    "profit_factor": 1.52,
+    "max_drawdown_percent": 11.80,
+    "min_margin_level_percent": 720.0,
+    "total_trades": 186,
+    "win_rate_percent": 44.5
+  }
+}
