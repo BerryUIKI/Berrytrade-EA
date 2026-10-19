@@ -67,7 +67,7 @@ COLOR_CYAN = "#4DBBD5"
 
 STRATEGIES = [
     "2MAAOS", "2MACDSTO", "2MOMEMA", "3MACD", "3MAF", "AFAOSMD",
-    "BBRSI", "CEZLSMA", "COT1", "DHLAOS", "LRCMACD", "LRCUTB",
+    "BBRSI", "CEZLSMA", "COT1", "DHLAOS", "LondonBreakout", "LRCMACD", "LRCUTB",
     "NWERSIASF", "TemplateEA", "TurtleTrader"
 ]
 
@@ -82,6 +82,7 @@ STRATEGY_SPECS = {
     "CEZLSMA": {"dd": 94.00, "pf": 2.78, "margin": 16.25, "grid": True, "cat": "Trend"},
     "COT1": {"dd": 14.20, "pf": 1.65, "margin": 680.0, "grid": False, "cat": "Macro"},
     "DHLAOS": {"dd": 56.02, "pf": 1.92, "margin": 332.47, "grid": True, "cat": "Scalp"},
+    "LondonBreakout": {"dd": 13.40, "pf": 1.48, "margin": 850.0, "grid": False, "cat": "Breakout"},
     "LRCMACD": {"dd": 16.50, "pf": 1.42, "margin": 520.0, "grid": False, "cat": "Trend"},
     "LRCUTB": {"dd": 66.95, "pf": 1.92, "margin": 146.23, "grid": True, "cat": "Trend"},
     "NWERSIASF": {"dd": 68.62, "pf": 2.19, "margin": 56.95, "grid": True, "cat": "Mean Rev"},
