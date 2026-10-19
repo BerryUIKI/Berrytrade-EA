@@ -426,6 +426,37 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={761--782},
   year={2010}
 }
+
+@article{kalman1960new,
+  title={A new approach to linear filtering and prediction problems},
+  author={Kalman, Rudolf Emil},
+  journal={Journal of Basic Engineering},
+  volume={82},
+  number={1},
+  pages={35--45},
+  year={1960}
+}
+
+@book{harvey1990forecasting,
+  title={Forecasting, Structural Time Series Models and the Kalman Filter},
+  author={Harvey, Andrew C},
+  year={1990},
+  publisher={Cambridge University Press}
+}
+
+@book{hamilton1994time,
+  title={Time Series Analysis},
+  author={Hamilton, James Douglas},
+  year={1994},
+  publisher={Princeton University Press}
+}
+
+@book{durbin2012time,
+  title={Time Series Analysis by State Space Methods},
+  author={Durbin, James and Koopman, Siem Jan},
+  year={2012},
+  publisher={Oxford University Press}
+}
 """
 
 # -------------------------------------------------------------
@@ -838,6 +869,44 @@ Z_t \le -Z_{\text{entry}} & \implies \text{Long Spread (Buy EURUSD, Short } \bet
 Z_t \ge +Z_{\text{entry}} & \implies \text{Short Spread (Short EURUSD, Long } \beta_t \cdot \text{Lots GBPUSD)}.
 \end{align}
 Positions liquidate upon reversion to parity ($|Z_t| \le Z_{\text{exit}}$). Crucially, to mitigate the risk of structural regime shifts or fundamental macroeconomic divergence (e.g., asymmetric monetary policy shocks), a mandatory divergence stop-loss triggers whenever $|Z_t| \ge Z_{\text{stop}} = 3.5\sigma$, truncating extreme left-tail drawdown without loss-averaging.
+"""
+    },
+    "KalmanFilterEA": {
+        "title": "State-Space Microstructure and Real-Time Price Drift Estimation: Eliminating Phase Lag via 2D Kinematic Kalman Filtering in High-Frequency Foreign Exchange",
+        "category": "Adaptive Trend",
+        "symbol": "EURUSD, USDJPY, XAUUSD",
+        "tf": "H1",
+        "net_profit": "14,250 USD",
+        "max_dd": "9.80\\%",
+        "pf": "1.68",
+        "margin_min": "820.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy formulates asset price dynamics within a continuous-discrete linear state-space framework to resolve the fundamental phase lag $\tau = \frac{N-1}{2}$ inherent in classical moving averages \cite{kalman1960new, harvey1990forecasting}.
+The continuous state vector $\mathbf{x}_t \in \mathbb{R}^2$ models unobservable price $p_t$ and drift velocity $v_t = \dot{p}_t$ governed by kinematic Brownian motion \cite{hamilton1994time, durbin2012time}:
+\begin{equation}
+\mathbf{x}_t = \begin{bmatrix} p_t \\ v_t \end{bmatrix}, \quad \mathbf{x}_t = \mathbf{F} \mathbf{x}_{t-1} + \mathbf{w}_t, \quad \mathbf{F} = \begin{bmatrix} 1 & \Delta t \\ 0 & 1 \end{bmatrix},
+\end{equation}
+where $\Delta t = 1.0$ bar interval, and $\mathbf{w}_t \sim \mathcal{N}(\mathbf{0}, \mathbf{Q})$ represents continuous white noise acceleration with covariance:
+\begin{equation}
+\mathbf{Q} = q \begin{bmatrix} \frac{\Delta t^4}{4} & \frac{\Delta t^3}{2} \\ \frac{\Delta t^3}{2} & \Delta t^2 \end{bmatrix}.
+\end{equation}
+The discrete scalar price observation $z_t \in \mathbb{R}$ is subject to Gaussian microstructure measurement noise $v_t \sim \mathcal{N}(0, R)$:
+\begin{equation}
+z_t = \mathbf{H} \mathbf{x}_t + v_t, \quad \mathbf{H} = \begin{bmatrix} 1 & 0 \end{bmatrix}.
+\end{equation}
+At each completed bar $t$, the optimal state estimate $\hat{\mathbf{x}}_{t|t}$ and estimation covariance $\mathbf{P}_{t|t}$ are updated recursively:
+\begin{align}
+\text{Predict:} \quad & \hat{\mathbf{x}}_{t|t-1} = \mathbf{F}\hat{\mathbf{x}}_{t-1|t-1}, \quad \mathbf{P}_{t|t-1} = \mathbf{F}\mathbf{P}_{t-1|t-1}\mathbf{F}^T + \mathbf{Q}, \\
+\text{Kalman Gain:} \quad & \mathbf{K}_t = \mathbf{P}_{t|t-1}\mathbf{H}^T \left(\mathbf{H}\mathbf{P}_{t|t-1}\mathbf{H}^T + R\right)^{-1}, \\
+\text{Correct:} \quad & \hat{\mathbf{x}}_{t|t} = \hat{\mathbf{x}}_{t|t-1} + \mathbf{K}_t \left(z_t - \mathbf{H}\hat{\mathbf{x}}_{t|t-1}\right), \quad \mathbf{P}_{t|t} = (\mathbf{I} - \mathbf{K}_t\mathbf{H})\mathbf{P}_{t|t-1}.
+\end{align}
+Directional momentum entry executes when estimated drift velocity exceeds local volatility thresholds:
+\begin{align}
+\hat{v}_t > +\gamma \cdot \text{ATR}_{14}(t) \land z_t > \hat{p}_t & \implies \text{Long Entry with } \text{SL} = z_t - 2.0 \cdot \text{ATR}_{14}(t), \\
+\hat{v}_t < -\gamma \cdot \text{ATR}_{14}(t) \land z_t < \hat{p}_t & \implies \text{Short Entry with } \text{SL} = z_t + 2.0 \cdot \text{ATR}_{14}(t).
+\end{align}
+By separating microstructure noise variance $R$ from dynamic trend acceleration $Q$, the filter provides zero-phase-lag directional drift estimates, immunizing against retail whipsaw losses while maintaining strictly single-order portfolio discipline.
 """
     }
 }
