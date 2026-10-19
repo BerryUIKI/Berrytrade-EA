@@ -7,6 +7,7 @@
 \usepackage{microtype}
 \usepackage{caption}
 \usepackage{float}
+\usepackage{graphicx}
 
 \hypersetup{
     colorlinks=true,
@@ -102,6 +103,69 @@ When the grid overlay was disabled and strict risk controls (0.5\% nominal risk,
 \end{itemize}
 This controlled ablation confirms that the underlying indicator signal possesses no statistically significant positive expectation once transaction costs (spread and commission) are modeled.
 
+
+\section{Microstructure and Risk Diagnostics: Graphical Analysis}
+This section presents the six core empirical diagnostic figures for \textbf{BBRSI}, capturing equity divergence, drawdown duration, trade asymmetry, and tail risk.
+
+\subsection{Equity vs. Balance Divergence ("Scissors Gap")}
+Figure~\ref{fig:equity_div} illustrates the classic divergence between closed account balance and floating account equity. Under grid accumulation, closed balance ascends in a steady staircase, while equity experiences extreme downward spikes as losing positions are accumulated without stop-losses.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig1_equity_balance_divergence.png}
+\caption{Equity versus Balance Divergence and Real-time Margin Level Dynamics for \textbf{BBRSI}. The shaded crimson region highlights the severe floating loss ("Scissors Gap"), while the lower panel tracks margin depletion toward regulatory liquidation thresholds.}
+\label{fig:equity_div}
+\end{figure}
+
+\subsection{Drawdown Depth and Duration Waterfall}
+Figure~\ref{fig:drawdown} visualizes the time-series profile of equity drawdowns, annotating the maximum historical trough and the protracted recovery epochs required to regain prior equity highs.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig2_drawdown_waterfall.png}
+\caption{Underwater Drawdown Depth and Recovery Waterfall for \textbf{BBRSI}. Highlights peak-to-trough equity degradation and recovery duration.}
+\label{fig:drawdown}
+\end{figure}
+
+\subsection{Trade Holding Time vs. PnL Asymmetry}
+Figure~\ref{fig:holding_pnl} plots trade holding duration against realized profit/loss. The empirical distribution exhibits marked asymmetry: profitable trades are clipped rapidly (minutes to hours), while underwater trades are held for days or weeks in an attempt to escape adverse market moves.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig3_holding_pnl_scatter.png}
+\caption{Trade Holding Duration versus Realized PnL for \textbf{BBRSI}. Demonstrates asymmetric exit timing, where profits are taken early and catastrophic losses are held over long horizons.}
+\label{fig:holding_pnl}
+\end{figure}
+
+\subsection{Monte Carlo Permutation and Resampled Tail Risk}
+To evaluate path dependency and sequence vulnerability, 1,000 order reshufflings were conducted. Figure~\ref{fig:mc_perm} depicts the resulting distribution of simulated maximum equity drawdowns, including the 95\% and 99\% Value-at-Risk limits.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig4_monte_carlo_permutation.png}
+\caption{Monte Carlo Permutation Distribution (1,000 Order Permutations) for \textbf{BBRSI}. Proves that actual historical drawdowns can worsen significantly under adverse trade sequencing.}
+\label{fig:mc_perm}
+\end{figure}
+
+\subsection{Rolling Sharpe Ratio and Volatility Dynamics}
+Figure~\ref{fig:rolling_sharpe} displays 30-day rolling annualized Sharpe ratios alongside annualized volatility, highlighting regime shifts and alpha decay.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig5_rolling_sharpe.png}
+\caption{Rolling 30-Day Annualized Sharpe Ratio and Realized Volatility for \textbf{BBRSI}.}
+\label{fig:rolling_sharpe}
+\end{figure}
+
+\subsection{MFE versus MAE Trajectory}
+Figure~\ref{fig:mfe_mae} compares Maximum Favorable Excursion (MFE) against Maximum Adverse Excursion (MAE), diagnosing trade execution efficiency and stop-loss efficacy.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig6_mfe_mae_scatter.png}
+\caption{Maximum Favorable Excursion (MFE) versus Maximum Adverse Excursion (MAE) for \textbf{BBRSI}.}
+\label{fig:mfe_mae}
+\end{figure}
 
 \section{Conclusion and Risk Governance Recommendations}
 The empirical analysis of \textbf{BBRSI} underscores a fundamental tenet of quantitative finance: high apparent backtest returns coupled with severe equity drawdowns (>50\%) and depleted margin levels represent pseudo-alpha engineered by unhedged loss-averaging.

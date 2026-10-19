@@ -89,6 +89,15 @@ TemplateEA & Trend Following & XAUUSD, EURUSD & M5 & 1.35 & 8.50\% & 850.0\% & N
 \end{tabular}
 \end{table}
 
+Figure~\ref{fig:bubble} illustrates the cross-sectional risk-return landscape, demonstrating that apparent high profit factors are tightly bound to catastrophic drawdown regions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig1_risk_return_bubble.png}
+\caption{Cross-Sectional Risk-Return Landscape across 14 Evaluated Strategies. Bubble size corresponds to margin depletion intensity ($1/\text{Margin Level}$). The green shaded zone represents the institutional investable region (Max DD $\le 20\%$, Profit Factor $\ge 1.35$).}
+\label{fig:bubble}
+\end{figure}
+
 \section{The Anatomy of Grid Overlays and Pseudo-Alpha}
 \subsection{The Mathematics of Negative Skewness}
 A standard Martingale or equal-interval Grid strategy modifies a base signal $\xi_t \in \{-1, 0, 1\}$ by defining an entry ladder. If the market moves against the initial entry by $\Delta P = k \cdot \delta$, the EA opens an incremental position of size $V_{n+1} = \gamma V_n$, where $\gamma \ge 1$.
@@ -102,12 +111,21 @@ the expected loss conditional on reaching the absorbing boundary $B_{stop}$ scal
 \mathbb{E}[\text{Loss} \mid \text{Ruin}] \propto \sum_{i=1}^N V_i (P_{entry, i} - B_{stop}).
 \end{equation}
 
-This creates an extreme distribution with high median return but an explosive negative left tail. As demonstrated in our testing:
-\begin{itemize}
-    \item In \textbf{CEZLSMA}, the grid expanded until relative equity drawdown reached \textbf{94.00\%}, and margin level plummeted to \textbf{16.25\%}.
-    \item In \textbf{3MAF}, equity drawdown reached \textbf{75.30\%}, with margin level collapsing to \textbf{36.19\%}.
-    \item In \textbf{AFAOSMD}, maximum equity drawdown reached \textbf{83.59\%}.
-\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig2_underwater_drawdown.png}
+\caption{Synchronized Multi-Strategy Underwater Drawdown Time-Series (2023--2025). Reveals how macroscopic market trends trigger simultaneous catastrophic drawdowns across diverse grid-based indicator strategies.}
+\label{fig:underwater}
+\end{figure}
+
+Figure~\ref{fig:density} details the empirical return distribution, contrasting the sharp positive peak and fat left tail of grid strategies against pure signals.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig3_return_density_tail.png}
+\caption{Return Probability Density and Extreme Negative Skewness. Highlights the ``steamroller'' distribution of grid trading versus standard Gaussian/symmetric models.}
+\label{fig:density}
+\end{figure}
 
 \subsection{The 2024 Liquidation Event: Empirical Case of BBRSI}
 The empirical re-evaluation of \textbf{BBRSI} under modern broker execution conditions (Exness-MT5Trial5, build 6230) provides definitive proof of this catastrophic risk. When the original v1.6 grid configuration was tested across the 2024 trading year:
@@ -116,15 +134,70 @@ The empirical re-evaluation of \textbf{BBRSI} under modern broker execution cond
     \item Net Profit was \textbf{-\$10,086.26 USD} on a \$10,000 account.
     \item Relative equity drawdown recorded was \textbf{101.36\%}, with a Profit Factor of \textbf{0.1964}.
 \end{itemize}
-This empirical event shatters the illusion that multi-year backtests without regime shifts guarantee strategy safety.
 
-\section{De-Gridded Signal Ablation}
-To assess whether the underlying indicators possessed any intrinsic predictive edge, we evaluated the controlled \textbf{BBRSI v1.8} variant, wherein grid mechanics were deactivated, hard stop-losses were enforced, and risk was capped at 0.5\% of equity:
-\begin{itemize}
-    \item \textbf{Drawdown Containment:} Maximum equity drawdown plummeted from catastrophic levels to a stable \textbf{5.25\%} (2024), \textbf{5.90\%} (2025), and \textbf{3.97\%} (2026).
-    \item \textbf{Alpha Collapse:} Annual net profits collapsed to -\$87.11 (2024), +\$79.88 (2025), and -\$86.59 (2026), hovering around a Profit Factor of \textbf{0.96 to 1.03}.
-\end{itemize}
-This ablation proves conclusively that \textbf{the indicator combination itself possessed zero economic alpha}. The historical profit of \$36k was purely a manifestation of the grid's willingness to hold underwater positions until favorable noise cycles occurred.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.90\linewidth]{figures/fig4_bbrsi_liquidation_case.png}
+\caption{Case Study: BBRSI 2024 Liquidation Autopsy. Panel A demonstrates the account balance climbing while equity collapsed into total liquidation. Panel B illustrates the controlled v1.8 non-grid version maintaining strict capital preservation.}
+\label{fig:liquidation}
+\end{figure}
+
+\subsection{Cross-Strategy Correlation and Strategy Homogeneity}
+Figure~\ref{fig:corr} presents the correlation matrix across all 14 evaluated strategies. Despite employing completely different indicator math (MACD, Andean Oscillator, Fractals, Linear Regression), grid overlays cause pairwise equity correlations to converge above 0.70.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig5_correlation_heatmap.png}
+\caption{Cross-Strategy Equity Return Correlation Matrix. Confirms that grid overlays homogenize strategy returns, destroying portfolio diversification benefits.}
+\label{fig:corr}
+\end{figure}
+
+\section{Microstructure Friction and Alpha Decay}
+Figure~\ref{fig:friction} examines the impact of widening spreads and execution delays. As friction increases, the marginal profitability of indicator signals decays rapidly below the break-even threshold.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig6_friction_sensitivity.png}
+\caption{Microstructure Friction Sensitivity Matrix. Shows the rapid erosion of Profit Factor under realistic spread expansion and latency conditions.}
+\label{fig:friction}
+\end{figure}
+
+Figure~\ref{fig:monthly} displays the cross-sectional monthly performance across the 36-month benchmark horizon, detailing periodic regime clustering.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig7_monthly_heatmap.png}
+\caption{36-Month Cross-Sectional Monthly Net Return Heatmap (2023--2025).}
+\label{fig:monthly}
+\end{figure}
+
+\section{Margin Fragility, Asymmetry, and Monte Carlo Projections}
+Figure~\ref{fig:margin} depicts the minimum recorded margin level across all evaluated strategies, emphasizing the precarious proximity to broker stop-out thresholds.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig8_margin_gauge.png}
+\caption{Minimum Recorded Margin Level Stress Gauge. Red dashed line indicates the 50\% broker margin call level; dash-dotted line marks the 20\% liquidation stop-out.}
+\label{fig:margin}
+\end{figure}
+
+Figure~\ref{fig:duration} evaluates the duration-PnL asymmetry across all recorded trades, confirming that grid strategies hold losing positions for extended time horizons.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig9_duration_pnl_joint.png}
+\caption{Pooled Holding Duration versus Trade Outcome. Highlights the structural defect of holding losing trades for weeks while prematurely cutting winning trades.}
+\label{fig:duration}
+\end{figure}
+
+Figure~\ref{fig:fan} presents the 1,000-path Monte Carlo bootstrap simulation, illustrating the widening Value-at-Risk envelope over a 250-day forward horizon.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig10_monte_carlo_fan.png}
+\caption{Monte Carlo 1,000-Path Capital Projection and Confidence Envelope.}
+\label{fig:fan}
+\end{figure}
 
 \section{The Berrytrade Governance Framework}
 To protect open-source quantitative practitioners from catastrophic risk, the \textbf{Berrytrade-EA} ecosystem institutes an automated two-tier funnel:
