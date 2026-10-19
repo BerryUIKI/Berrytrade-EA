@@ -79,6 +79,7 @@ The catalog below is dynamically generated from strategy `metadata.json` files:
 | [COT1](strategies/experimental/COT1) | `trend_following` | **Medium** | EURUSD | Daily | $1,000 | Commitments of Traders (COT) report sentiment with SuperTrend indicator (Verified Benchmark Leader). |
 | [TurtleTrader](strategies/experimental/TurtleTrader) | `trend_following` | **Medium** | EURUSD, XAUUSD, GBPUSD | Daily | $1,000 | Classic Turtle Trading System: Donchian Breakout with N-ATR Volatility Sizing, 2N Hard Stop Loss, and Dynamic Pyramiding. |
 | [LondonBreakout](strategies/experimental/LondonBreakout) | `breakout` | **Medium** | GBPUSD, EURUSD, EURGBP | M15 | $1,000 | Institutional London Opening Breakout: Asian Session Consolidation Range Liquidity Expansion with Zero Overnight Carryover. |
+| [SMC_FVG](strategies/experimental/SMC_FVG) | `breakout` | **Medium** | EURUSD, GBPUSD, XAUUSD | H1 | $1,000 | Smart Money Concepts (SMC) Fair Value Gap (FVG): Price Delivery Imbalance Mitigation with Consequent Encroachment & Hard Stop Loss. |
 | [LRCMACD](strategies/experimental/LRCMACD) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Linear Regression Channel and MACD trend strategy (Disciplined, no grid). |
 | [2MOMEMA](strategies/experimental/2MOMEMA) | `trend_following` | **High** | EURUSD | H1 | $1,000 | Dual Momentum and EMA trend filter strategy (Disciplined, no grid). |
 | [TemplateEA](strategies/experimental/TemplateEA) | `trend_following` | **Low** | XAUUSD, EURUSD | M5 | $1,000 | Standardized MQL5 EA template showcasing risk management, hard stop-loss, and modular structure. |
@@ -101,8 +102,8 @@ We are actively searching and ingesting notable open-source quantitative strateg
 
 1. **`TurtleTrader`** (Classic Richard Dennis & William Eckhardt Donchian Breakout, N-volatility lot sizing, 2N trailing stop) &mdash; **[COMPLETED]**
 2. **`LondonBreakout`** (Asian Session Range Liquidity Breakout, London Open, Zero Overnight Carryover) &mdash; **[COMPLETED]**
-3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Pools & Order Blocks) &mdash; **[ACTIVE INGESTION]**
-4. **`StatArbPairs`** (Cointegrated Statistical Arbitrage Pairs Trading on Major Forex)
+3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Pools & Order Blocks) &mdash; **[COMPLETED]**
+4. **`StatArbPairs`** (Cointegrated Statistical Arbitrage Pairs Trading on Major Forex) &mdash; **[ACTIVE INGESTION]**
 5. **`KalmanFilterEA`** (State-Space Dynamic Filtering & Adaptive Price Drift Estimation)
 
 ---
