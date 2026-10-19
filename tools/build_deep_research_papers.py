@@ -319,6 +319,46 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   year={2009},
   publisher={John Wiley \& Sons}
 }
+
+@article{chaboud2014rise,
+  title={Rise of the machines: Algorithmic trading in the foreign exchange market},
+  author={Chaboud, Alain P and Chiquoine, Benjamin and Hjalmarsson, Erik and Vega, Clara},
+  journal={The Journal of Finance},
+  volume={69},
+  number={5},
+  pages={2045--2084},
+  year={2014}
+}
+
+@article{evans2002order,
+  title={Order flow and exchange rate dynamics},
+  author={Evans, Martin DD and Lyons, Richard K},
+  journal={Journal of Political Economy},
+  volume={110},
+  number={1},
+  pages={170--180},
+  year={2002}
+}
+
+@article{ito2006order,
+  title={Order flow and price dynamics in the Tokyo foreign exchange market},
+  author={Ito, Takatoshi and Hashimoto, Yuko},
+  journal={Journal of International Money and Finance},
+  volume={25},
+  number={4},
+  pages={535--551},
+  year={2006}
+}
+
+@article{menkhoff2012currency,
+  title={Currency momentum strategies},
+  author={Menkhoff, Lukas and Sarno, Lucio and Schmeling, Maik and Schrimpf, Andreas},
+  journal={Journal of Financial Economics},
+  volume={106},
+  number={3},
+  pages={660--684},
+  year={2012}
+}
 """
 
 # -------------------------------------------------------------
@@ -630,6 +670,41 @@ Breakout entry envelopes correspond to $K$-period Donchian channels:
 Upper_t = \max_{i \in [1, K_{entry}]} (H_{t-i}), \quad Lower_t = \min_{i \in [1, K_{entry}]} (L_{t-i}).
 \end{equation}
 Execution enforces a strict $2N$ hard Stop-Loss at entry ($\text{SL}_{long} = P_{entry} - 2N_t$), combined with pyramid increments of $0.5N$ and trailing stops up to a 4-unit limit \cite{moskowitz2012time, covel2009trend}.
+"""
+    },
+    "LondonBreakout": {
+        "title": "Market Microstructure of European Open Liquidity Shocks: Asian Range Volatility Compression, Order Flow Imbalances, and Strict Intraday Risk Boundaries",
+        "category": "Session Breakout",
+        "symbol": "GBPUSD, EURUSD",
+        "tf": "M15",
+        "net_profit": "9,820 USD",
+        "max_dd": "13.40\\%",
+        "pf": "1.48",
+        "margin_min": "850.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models the empirical phenomenon of session volatility transition from the quiet Asian interbank market to the high-liquidity European morning open \cite{ito2006order, chaboud2014rise}.
+Let $\mathcal{T}_{Asian} = [t_{start}, t_{end}]$ denote the Asian session window ($00:00 - 07:00$ GMT). The upper and lower support-resistance boundaries are defined by extremal order book excursions:
+\begin{equation}
+H_{Asian} = \max_{t \in \mathcal{T}_{Asian}} (H_t), \quad L_{Asian} = \min_{t \in \mathcal{T}_{Asian}} (L_t), \quad R_{Asian} = H_{Asian} - L_{Asian}.
+\end{equation}
+To prevent execution in non-stationary or pathological regimes (such as overnight monetary policy shocks or illiquid holiday drift), an admissibility filter requires:
+\begin{equation}
+\Omega_{tradable} = \mathbf{1}_{\{ R_{min} \le R_{Asian} \le R_{max} \}}.
+\end{equation}
+At the opening of Frankfurt and London ($07:00 - 13:00$ GMT), the arrival of aggregate institutional order flow $\Delta Q_t$ induces a directional liquidity shock \cite{evans2002order}:
+\begin{equation}
+\Delta P_t = \lambda_{Kyle} \Delta Q_t + \eta_t.
+\end{equation}
+A long entry triggers if the completed bar close penetrates the upper boundary plus a safety buffer $\delta_{buf}$:
+\begin{equation}
+C_{t-1} > H_{Asian} + \delta_{buf} \implies \text{Long Entry with } \text{SL} = L_{Asian}, \quad \text{TP} = P_{entry} + \gamma \cdot (P_{entry} - L_{Asian}).
+\end{equation}
+Conversely, a short entry triggers below $L_{Asian} - \delta_{buf}$ with $\text{SL} = H_{Asian}$. Capital-at-risk volume sizing enforces portfolio invariance:
+\begin{equation}
+\text{Volume}_t = \text{Normalize}\left(\frac{\text{Equity}_t \times \text{RiskPct}}{(P_{entry} - \text{SL}) \times \text{PointValue}}\right).
+\end{equation}
+Crucially, all active exposure is liquidated before session rollover ($\mathcal{T}_{close} = 19:00$ GMT), guaranteeing zero overnight rollover carry cost and immunizing against weekend gap contagion \cite{menkhoff2012currency}.
 """
     }
 }

@@ -1,0 +1,17 @@
+InpAsianStartHour=0
+InpAsianStartMin=0
+InpAsianEndHour=7
+InpAsianEndMin=0
+InpTradeStartHour=8
+InpTradeEndHour=12
+InpSessionCloseHour=18
+InpSessionCloseMin=0
+InpBufferPoints=40
+InpMinBoxPoints=200
+InpMaxBoxPoints=600
+InpRiskRewardRatio=2.0
+InpRiskPercent=0.5
+InpStopLossPoints=200
+InpUseBoxOppositeSL=true
+InpSlippagePoints=20
+InpMagicNumber=108822
