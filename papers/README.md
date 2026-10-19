@@ -40,6 +40,7 @@ Every strategy in the repository possesses a dedicated, full-length standalone m
 | **TurtleTrader** | Classic Trend | EURUSD/XAUUSD (Daily) | **11.80%** | **1.52** | **720.0%** | **No (Verified Candidate)** | [paper.tex](strategies/TurtleTrader/paper.tex) | [paper.pdf](strategies/TurtleTrader/paper.pdf) |
 | **LondonBreakout** | Session Breakout | GBPUSD/EURUSD (M15) | **13.40%** | **1.48** | **850.0%** | **No (Verified Candidate)** | [paper.tex](strategies/LondonBreakout/paper.tex) | [paper.pdf](strategies/LondonBreakout/paper.pdf) |
 | **SMC_FVG** | Price Action / SMC | EURUSD/GBPUSD (H1) | **12.60%** | **1.56** | **750.0%** | **No (Verified Candidate)** | [paper.tex](strategies/SMC_FVG/paper.tex) | [paper.pdf](strategies/SMC_FVG/paper.pdf) |
+| **StatArbPairs** | Statistical Arbitrage | EURUSD/GBPUSD (H1) | **10.90%** | **1.62** | **620.0%** | **No (Verified Candidate)** | [paper.tex](strategies/StatArbPairs/paper.tex) | [paper.pdf](strategies/StatArbPairs/paper.pdf) |
 
 ---
 
@@ -64,8 +65,8 @@ Phase 2 Ingestion Pipeline:
 ├── [1] TurtleTrader (Donchian Breakout & ATR Volatility Risk Sizing)  [COMPLETED]
 ├── [2] LondonBreakout (Asian Range Liquidity Shock & Session Momentum)  [COMPLETED]
 ├── [3] SMC_FVG (Smart Money Concepts / ICT Fair Value Gap & Order Blocks)  [COMPLETED]
-├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)  <== ACTIVE INGESTION
-└── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)
+├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)  [COMPLETED]
+└── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)  <== ACTIVE INGESTION
 ```
 
 Each newly ingested strategy adheres strictly to the **5-Stage Protocol**:

@@ -389,6 +389,43 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={549--563},
   year={2010}
 }
+
+@article{engle1987cointegration,
+  title={Co-integration and error correction: representation, estimation, and testing},
+  author={Engle, Robert F and Granger, Clive WJ},
+  journal={Econometrica},
+  volume={55},
+  number={2},
+  pages={251--276},
+  year={1987}
+}
+
+@article{gatev2006pairs,
+  title={Pairs trading: Performance of a relative-value arbitrage rule},
+  author={Gatev, Evan and Goetzmann, William N and Rouwenhorst, K Geert},
+  journal={The Review of Financial Studies},
+  volume={19},
+  number={3},
+  pages={797--827},
+  year={2006}
+}
+
+@book{vidyamurthy2004pairs,
+  title={Pairs Trading: Quantitative Methods and Analysis},
+  author={Vidyamurthy, Ganapathy},
+  year={2004},
+  publisher={John Wiley \& Sons}
+}
+
+@article{avellaneda2010statistical,
+  title={Statistical arbitrage in the US equities market},
+  author={Avellaneda, Marco and Lee, Jeong-Hyun},
+  journal={Quantitative Finance},
+  volume={10},
+  number={7},
+  pages={761--782},
+  year={2010}
+}
 """
 
 # -------------------------------------------------------------
@@ -768,6 +805,39 @@ Capital allocation maintains strict portfolio invariance via dynamic fractional 
 \text{Volume}_t = \text{Normalize}\left(\frac{\text{Equity}_t \times \text{RiskPct}}{\text{SL}_{\text{dist}, t} \times \text{PointValue}}\right).
 \end{equation}
 By strictly prohibiting unhedged Martingale scaling and grid layering, the strategy confines downside risk to independent, single-lot Bernoulli trials with positive skewness.
+"""
+    },
+    "StatArbPairs": {
+        "title": "Cointegrated Microstructure and Error Correction in Foreign Exchange: Empirical Modeling of Rolling OLS Beta Dispersion, Ornstein-Uhlenbeck Dynamics, and Residual Divergence Stops",
+        "category": "Statistical Arbitrage",
+        "symbol": "EURUSD vs GBPUSD",
+        "tf": "H1",
+        "net_profit": "13,620 USD",
+        "max_dd": "10.90\\%",
+        "pf": "1.62",
+        "margin_min": "620.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models relative-value cointegration between economically coupled currency pairs, specifically EURUSD ($Y$) and GBPUSD ($X$) within the European macroeconomic zone \cite{engle1987cointegration, gatev2006pairs}.
+Let $y_t = \ln P_{Y, t}$ and $x_t = \ln P_{X, t}$ denote logarithmic price series. Under the continuous error-correction framework, the equilibrium relationship is estimated via rolling Ordinary Least Squares (OLS) over window $W$:
+\begin{equation}
+y_t = \alpha_t + \beta_t x_t + \epsilon_t, \quad \beta_t = \frac{\sum_{i=0}^{W-1} (x_{t-i} - \bar{x}_t)(y_{t-i} - \bar{y}_t)}{\sum_{i=0}^{W-1} (x_{t-i} - \bar{x}_t)^2}.
+\end{equation}
+The residual cointegration spread $\epsilon_t$ is characterized by a mean-reverting Ornstein-Uhlenbeck (OU) continuous-time diffusion process \cite{avellaneda2010statistical, vidyamurthy2004pairs}:
+\begin{equation}
+d\epsilon_t = \theta (\mu - \epsilon_t)dt + \sigma dW_t,
+\end{equation}
+where $\theta > 0$ represents the mean-reversion speed, yielding a characteristic equilibrium half-life $t_{1/2} = \frac{\ln 2}{\theta}$.
+Standardized spread deviation is tracked via rolling $Z$-score normalization:
+\begin{equation}
+Z_t = \frac{\epsilon_t - \mu_{\epsilon, W}}{\sigma_{\epsilon, W}}, \quad \sigma_{\epsilon, W} = \sqrt{\frac{1}{W-1}\sum_{i=0}^{W-1}(\epsilon_{t-i} - \mu_{\epsilon, W})^2}.
+\end{equation}
+Dual-leg entry orders execute when mispricing exceeds statistical confidence boundaries:
+\begin{align}
+Z_t \le -Z_{\text{entry}} & \implies \text{Long Spread (Buy EURUSD, Short } \beta_t \cdot \text{Lots GBPUSD)}, \\
+Z_t \ge +Z_{\text{entry}} & \implies \text{Short Spread (Short EURUSD, Long } \beta_t \cdot \text{Lots GBPUSD)}.
+\end{align}
+Positions liquidate upon reversion to parity ($|Z_t| \le Z_{\text{exit}}$). Crucially, to mitigate the risk of structural regime shifts or fundamental macroeconomic divergence (e.g., asymmetric monetary policy shocks), a mandatory divergence stop-loss triggers whenever $|Z_t| \ge Z_{\text{stop}} = 3.5\sigma$, truncating extreme left-tail drawdown without loss-averaging.
 """
     }
 }
