@@ -1138,13 +1138,17 @@ In accordance with the \textbf{Berrytrade-EA Ingestion Specification}:
     print(f"[+] Wrote deep paper: {tex_file}")
 
 
-def build_master_synthesis_paper():
+def build_master_synthesis_paper(force=False):
     synth_dir = PAPERS_DIR / "synthesis"
     synth_dir.mkdir(parents=True, exist_ok=True)
     tex_file = synth_dir / "main.tex"
     bib_file = synth_dir / "references.bib"
     with open(bib_file, "w", encoding="utf-8") as f:
         f.write(SHARED_BIB_CONTENT)
+
+    if tex_file.exists() and not force:
+        print(f"[+] Using existing overhauled master synthesis paper: {tex_file}")
+        return
 
     rows = []
     for k, v in sorted(STRATEGY_DEEP_META.items()):
@@ -1409,27 +1413,34 @@ Through open-source dissemination, standardized benchmarking, and transparent pe
     print(f"[+] Wrote deep master synthesis paper: {tex_file}")
 
 
-def compile_deep_papers():
+def compile_deep_papers(synthesis_only=False, strat_target=None):
     print("\n[*] Starting deep PDF compilation with pdflatex & bibtex...")
     
     # 1. Compile Master Synthesis Paper
-    synth_dir = PAPERS_DIR / "synthesis"
-    print(f"[*] Compiling Master Synthesis Paper at {synth_dir}...")
-    try:
-        subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
-        subprocess.run(["bibtex", "main"], cwd=synth_dir, capture_output=True, text=True)
-        subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
-        res = subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
-        if res.returncode == 0:
-            print("[+] Successfully compiled deep Master Synthesis paper: papers/synthesis/main.pdf")
-        else:
-            print(f"[-] Synthesis warning: return code {res.returncode}")
-    except Exception as e:
-        print(f"[-] Failed compiling synthesis: {e}")
+    if strat_target is None or strat_target == "synthesis":
+        synth_dir = PAPERS_DIR / "synthesis"
+        print(f"[*] Compiling Master Synthesis Paper at {synth_dir}...")
+        try:
+            subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
+            subprocess.run(["bibtex", "main"], cwd=synth_dir, capture_output=True, text=True)
+            subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
+            res = subprocess.run(["pdflatex", "-interaction=nonstopmode", "main.tex"], cwd=synth_dir, capture_output=True, text=True)
+            if res.returncode == 0:
+                print("[+] Successfully compiled deep Master Synthesis paper: papers/synthesis/main.pdf")
+            else:
+                print(f"[-] Synthesis warning: return code {res.returncode}")
+        except Exception as e:
+            print(f"[-] Failed compiling synthesis: {e}")
+
+    if synthesis_only:
+        return
 
     # 2. Compile each individual strategy paper with bibtex
     success_count = 0
-    for strat_name in STRATEGY_DEEP_META.keys():
+    targets = [strat_target] if strat_target and strat_target != "synthesis" else list(STRATEGY_DEEP_META.keys())
+    for strat_name in targets:
+        if strat_name not in STRATEGY_DEEP_META:
+            continue
         s_dir = PAPERS_DIR / "strategies" / strat_name
         print(f"[*] Compiling deep paper for {strat_name} (with bibtex)...")
         try:
@@ -1452,26 +1463,40 @@ def compile_deep_papers():
         except Exception as e:
             print(f"  [-] Error on {strat_name}: {e}")
 
-    print(f"\n[+] Total strategy papers compiled with verified bibliography: {success_count} / {len(STRATEGY_DEEP_META)}")
+    print(f"\n[+] Total strategy papers compiled with verified bibliography: {success_count} / {len(targets)}")
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Berrytrade Institutional Research Paper Generator")
+    parser.add_argument("--synthesis-only", action="store_true", help="Compile only the Master Synthesis paper")
+    parser.add_argument("--force-generate", action="store_true", help="Force regenerate main.tex")
+    parser.add_argument("--target", type=str, default="", help="Compile specific strategy or 'synthesis'")
+    args = parser.parse_args()
+
     print("==========================================================")
     print(" Generating Deep Academic Research Papers (arXiv Format)")
     print(" Author: Berry Wahlberg")
     print(" Affiliation: Berrytrade Quantitative Research")
     print("==========================================================")
 
+    target = args.target if args.target else None
+    synthesis_only = args.synthesis_only or (target == "synthesis")
+
     # 1. Master synthesis
-    build_master_synthesis_paper()
+    if target is None or target == "synthesis":
+        build_master_synthesis_paper(force=args.force_generate)
 
     # 2. Individual strategy papers
-    for strat_name, meta in STRATEGY_DEEP_META.items():
-        build_full_strategy_paper(strat_name, meta)
+    if not synthesis_only:
+        strats_to_build = [target] if target and target != "synthesis" else list(STRATEGY_DEEP_META.keys())
+        for strat_name in strats_to_build:
+            if strat_name in STRATEGY_DEEP_META:
+                build_full_strategy_paper(strat_name, STRATEGY_DEEP_META[strat_name])
 
-    # 3. Compile all
-    compile_deep_papers()
-    print("\n[+] All deep academic research papers compiled successfully!")
+    # 3. Compile
+    compile_deep_papers(synthesis_only=synthesis_only, strat_target=target)
+    print("\n[+] Deep academic research papers pipeline completed successfully!")
 
 
 if __name__ == "__main__":
