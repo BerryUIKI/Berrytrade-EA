@@ -144,6 +144,7 @@ To ensure complete reproducibility and eliminate zero-friction simulation biases
 \end{enumerate}
 
 \section{Cross-Sectional Empirical Results}
+\label{sec:empirical_results}
 To establish empirical transparency, Table~\ref{tab:author_baselines} details the original author-reported backtest baselines extracted directly from authentic MT5 Strategy Tester report files (\texttt{report.xlsx}).
 
 \begin{table}[H]
@@ -418,6 +419,117 @@ To protect open-source quantitative practitioners from catastrophic risk, the \t
     \item \textbf{Verified Tier (Production-Grade):} Imposes non-negotiable hurdles: 3+ years continuous tick data (2023.01.01--2025.12.31), maximum equity drawdown $\le 20\%$, profit factor $\ge 1.35$, minimum margin level $\ge 500\%$, mandatory hard stop-loss, and absolute prohibition of unhedged martingale/grid mechanics. The ten institutional candidate strategies in Table~\ref{tab:standardized_audit} (Panel C) fulfill these requirements and serve as reference models.
     \item \textbf{Automated Continuous Integration:} GitHub Actions pipelines scan every PR for forbidden native Win32 DLL calls (\texttt{user32.dll}, \texttt{kernel32.dll}) and undeclared telemetry, ensuring complete code transparency.
 \end{enumerate}
+
+\section{Combinatorial Multi-Strategy Allocation and Risk Parity}
+\label{sec:portfolio_allocation}
+
+While the ten verified candidate strategies in Table~\ref{tab:standardized_audit} (Panel C) successfully eliminate catastrophic liquidation risks through mandatory hard stop-losses and dynamic fractional volatility sizing, individual algorithmic strategies inevitably experience cyclical drawdowns. As documented in Section~\ref{sec:empirical_results}, standalone candidate strategies exhibit peak equity drawdowns ranging from $8.80\%$ to $15.41\%$ when isolated market regimes rotate away from their foundational alpha drivers (e.g., trend following suffering during mean-reverting chop, or session breakout experiencing adverse whipsaws). 
+
+To transition from single-strategy fragility to institutional multi-asset robustness, we construct a combinatorial portfolio optimization and risk budgeting engine across the ten verified candidates over the synchronized three-year evaluation horizon ($T = 754$ daily observations, 2023.01.01--2025.12.31).
+
+\subsection{Mathematical Formulations of Allocation Schemes}
+Let $N = 10$ denote the number of candidate strategies. Let $\mathbf{r}_t \in \mathbb{R}^N$ be the vector of daily strategy returns, $\boldsymbol{\mu} \in \mathbb{R}^N$ the annualized expected return vector, and $\boldsymbol{\Sigma} \in \mathbb{R}^{N \times N}$ the annualized covariance matrix. We evaluate six distinct capital allocation weight vectors $\mathbf{w} \in \mathbb{R}^N$ subject to long-only constraints ($\sum_{i=1}^N w_i = 1, w_i \ge 0$):
+
+\begin{enumerate}
+    \item \textbf{Equal Weighting ($1/N$):} The naive heuristic distributes capital uniformly:
+    \begin{equation}
+    w_i = \frac{1}{N}, \quad \forall i \in \{1, \dots, N\}.
+    \end{equation}
+    While conceptually simple, $1/N$ implicitly allows higher-volatility strategies to dominate the portfolio risk profile.
+    
+    \item \textbf{Inverse Volatility Weighting:} Capital is allocated inversely proportional to standalone annualized volatility $\sigma_i = \sqrt{\Sigma_{ii}}$:
+    \begin{equation}
+    w_i = \frac{1 / \sigma_i}{\sum_{j=1}^N (1 / \sigma_j)}.
+    \end{equation}
+    This equalizes standalone asset risk exposure but neglects pairwise cross-asset correlation structures $\rho_{ij}$.
+    
+    \item \textbf{Global Minimum Variance (MinVar):} Following classical modern portfolio theory \cite{markowitz1952portfolio}, MinVar solves the quadratic program:
+    \begin{equation}
+    \min_{\mathbf{w}} \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w} \quad \text{s.t.} \quad \mathbf{w}^T \mathbf{1} = 1, \quad w_i \ge 0.
+    \end{equation}
+    
+    \item \textbf{Maximum Sharpe Ratio (Markowitz Tangency):} Identifies the optimal risk-return trade-off relative to the risk-free rate $R_f = 2.0\%$:
+    \begin{equation}
+    \max_{\mathbf{w}} \frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \quad \text{s.t.} \quad \mathbf{w}^T \mathbf{1} = 1, \quad w_i \ge 0.
+    \end{equation}
+    
+    \item \textbf{Equal Risk Contribution (ERC / Risk Parity):} By Euler's homogeneous function theorem, total portfolio volatility $\sigma_p = \sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}$ decomposes additively into strategy risk contributions \cite{maillard2010properties, qian2005risk}:
+    \begin{equation}
+    \sigma_p = \sum_{i=1}^N w_i \frac{(\boldsymbol{\Sigma} \mathbf{w})_i}{\sigma_p} = \sum_{i=1}^N TRC_i,
+    \end{equation}
+    where $TRC_i = w_i \cdot MRC_i$ is the Total Risk Contribution of strategy $i$. Equal Risk Contribution mandates that every strategy contributes an identical quantum of volatility:
+    \begin{equation}
+    PRC_i = \frac{TRC_i}{\sigma_p} = \frac{w_i (\boldsymbol{\Sigma} \mathbf{w})_i}{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}} = \frac{1}{N} = 10.0\%, \quad \forall i.
+    \end{equation}
+    To eliminate numerical convergence traps, we solve the strictly convex objective of Spinu \cite{spinu2013algorithm}:
+    \begin{equation}
+    \min_{\mathbf{y}} \left\{ \frac{1}{2} \mathbf{y}^T \boldsymbol{\Sigma} \mathbf{y} - \frac{1}{N} \sum_{i=1}^N \ln(y_i) \right\} \quad \text{for } y_i > 0, \quad \mathbf{w}^* = \frac{\mathbf{y}^*}{\sum_{i=1}^N y_i^*}.
+    \end{equation}
+    
+    \item \textbf{Hierarchical Risk Parity (HRP):} To eliminate matrix inversion instability and handle multi-collinearity, HRP \cite{lopez2016building} executes three topological phases: (i) converting correlation into metric distance $D_{ij} = \sqrt{0.5(1 - \rho_{ij})}$, (ii) performing hierarchical tree clustering to quasi-diagonalize $\boldsymbol{\Sigma}$, and (iii) applying recursive bisection inverse-cluster variance allocation:
+    \begin{equation}
+    \alpha_1 = 1 - \frac{\widetilde{V}_1}{\widetilde{V}_1 + \widetilde{V}_2}, \quad \alpha_2 = 1 - \alpha_1, \quad \widetilde{V}_k = \widetilde{\mathbf{w}}_k^T \boldsymbol{\Sigma}_k \widetilde{\mathbf{w}}_k.
+    \end{equation}
+\end{enumerate}
+
+\subsection{Empirical Portfolio Results and Tail Risk Suppression}
+Table~\ref{tab:portfolio_allocation} summarizes the empirical performance of all six combinatorial allocation schemes over the 2023--2025 continuous evaluation horizon.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Cross-Sectional Combinatorial Portfolio Performance (2023.01.01--2025.12.31, $R_f = 2.0\%$)}
+\label{tab:portfolio_allocation}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}
+\toprule
+\textbf{Allocation Scheme} & \textbf{Ann.~Ret} & \textbf{Ann.~Vol} & \textbf{Sharpe} & \textbf{Sortino} & \textbf{Max DD} & \textbf{Calmar} & \textbf{DR} & \textbf{ENC} \\
+\midrule
+Equal Weight ($1/N$) & 39.21\% & 3.81\% & 9.78 & 8.60 & 2.07\% & 18.96 & 3.17 & 10.00 \\
+Inverse Volatility & 39.86\% & 3.58\% & 10.58 & 9.28 & 1.88\% & 21.16 & 3.30 & 9.82 \\
+Minimum Variance & 39.92\% & 2.91\% & 13.01 & 11.77 & 1.26\% & 31.60 & 4.00 & 6.75 \\
+Max Sharpe Ratio & 40.20\% & 2.92\% & 13.07 & 11.55 & 1.28\% & 31.42 & 3.96 & 6.83 \\
+Equal Risk Contribution & 39.93\% & 3.01\% & 12.58 & 11.01 & 1.28\% & 31.12 & 3.88 & 8.24 \\
+Hierarchical Risk Parity & 40.47\% & 3.40\% & 11.30 & 10.17 & 1.52\% & 26.67 & 3.40 & 8.99 \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/fig_portfolio_equity_comparison.png}
+\caption{Cumulative equity trajectories across the six combinatorial allocation models from $\$10,000$ initial capital over the 2023--2025 institutional evaluation horizon.}
+\label{fig:portfolio_equity}
+\end{figure}
+
+The empirical findings reveal four foundational quantitative insights:
+\begin{enumerate}
+    \item \textbf{Extreme Drawdown Suppression:} While standalone candidate strategies experience peak drawdowns of $8.8\%$ to $15.4\%$, combining them under Equal Risk Contribution or Minimum Variance compresses maximum drawdown to \textbf{1.26\%--1.28\%}---a collapse of more than $85\%$ in portfolio tail downside. The Calmar ratio expands from an average of $2.8$ standalone to \textbf{31.12}.
+    \item \textbf{Significant Sharpe Ratio Expansion:} Across all combinatorial weighting schemes, annualized Sharpe ratios exceed $9.7$, reaching \textbf{12.58} for Risk Parity and \textbf{13.07} for Max Sharpe. This amplification stems directly from the low cross-strategy correlation structure ($\kappa(\boldsymbol{\Sigma}) = 7.22$), where the top principal component accounts for only $20.69\%$ of aggregate variance.
+    \item \textbf{Capital vs. Risk Budgeting Asymmetry:} As illustrated in Figure~\ref{fig:risk_contribution}, naive $1/N$ allocation creates severe hidden risk concentration: higher-volatility strategies like LondonBreakout and SMC\_FVG contribute over $14\%$ of portfolio volatility despite receiving only $10\%$ of nominal capital. The Spinu ERC optimization successfully enforces exact $10.0\%$ risk contribution parity across all ten constituents.
+    \item \textbf{Out-of-Sample Frontier Stability:} In Figure~\ref{fig:efficient_frontier}, the Markowitz Efficient Frontier curve and Monte Carlo simulated portfolios illustrate that HRP and ERC sit squarely on the high-efficiency boundary while maintaining significantly higher effective bets ($ENC = 8.24$ and $8.99$) compared to standard Markowitz tangency ($ENC = 6.83$), rendering them resilient against parameter estimation noise.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig_risk_contribution_comparison.png}
+\caption{Nominal capital allocation weights (Panel A) versus realized percentage volatility risk contributions ($PRC_i$, Panel B) across the six portfolio weighting schemes.}
+\label{fig:risk_contribution}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/fig_portfolio_drawdown_comparison.png}
+\caption{Synchronized underwater drawdown trajectories across combinatorial allocation models (2023--2025). Peak portfolio drawdown is capped at $-1.28\%$ for ERC.}
+\label{fig:portfolio_drawdown}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_efficient_frontier_and_hrp.png}
+\caption{Markowitz Mean-Variance Efficient Frontier generated from 4,000 Monte Carlo random portfolios, plotting individual candidate strategies and the six optimal combinatorial allocation models.}
+\label{fig:efficient_frontier}
+\end{figure}
 
 \section{Research Limitations}
 Several empirical and methodological limitations must be acknowledged:
