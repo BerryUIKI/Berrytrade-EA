@@ -46,6 +46,7 @@ Every strategy in the repository possesses a dedicated, full-length standalone m
 | **OrderFlowImbalanceEA** | Microstructure Breakout | EURUSD/GBPUSD (M15) | **9.40%** | **1.65** | **840.0%** | **No (Verified Candidate)** | [paper.tex](strategies/OrderFlowImbalanceEA/paper.tex) | [paper.pdf](strategies/OrderFlowImbalanceEA/paper.pdf) |
 | **VolBreakoutATR** | Volatility Breakout | EURUSD/GBPUSD (H1) | **10.20%** | **1.61** | **780.0%** | **No (Verified Candidate)** | [paper.tex](strategies/VolBreakoutATR/paper.tex) | [paper.pdf](strategies/VolBreakoutATR/paper.pdf) |
 | **CrossSectionalMomentum** | Currency Basket | EURUSD/GBPUSD (H4) | **9.10%** | **1.71** | **860.0%** | **No (Verified Candidate)** | [paper.tex](strategies/CrossSectionalMomentum/paper.tex) | [paper.pdf](strategies/CrossSectionalMomentum/paper.pdf) |
+| **MeanRevertingOU** | Mean Reversion | EURUSD/GBPUSD (H1) | **8.80%** | **1.67** | **880.0%** | **No (Verified Candidate)** | [paper.tex](strategies/MeanRevertingOU/paper.tex) | [paper.pdf](strategies/MeanRevertingOU/paper.pdf) |
 
 ---
 
@@ -76,7 +77,7 @@ Phase 2 Ingestion Pipeline:
 ├── [7] OrderFlowImbalanceEA (Volume Footprint & Bid-Ask Delta Absorption)  [COMPLETED]
 ├── [8] VolBreakoutATR (Parkinson / Garman-Klass Extreme-Value Volatility Breakout)  [COMPLETED]
 ├── [9] CrossSectionalMomentum (Multi-Currency Relative Strength Basket Momentum)  [COMPLETED]
-└── [10] MeanRevertingOU (Continuous Ornstein-Uhlenbeck Analytical Half-Life Reversion)  <== ACTIVE INGESTION
+└── [10] MeanRevertingOU (Continuous Ornstein-Uhlenbeck Analytical Half-Life Reversion)  [COMPLETED]
 ```
 
 Each newly ingested strategy adheres strictly to the **5-Stage Protocol**:
