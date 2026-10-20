@@ -78,17 +78,20 @@ def load_all_strategy_specs():
         with open(meta_file, "r", encoding="utf-8") as f:
             data = json.load(f)
             name = data["name"]
-            bench = data.get("benchmark_summary", {})
+            bench = data.get("benchmark_summary") or data.get("benchmark_metrics", {})
+            dd_val = bench.get("max_drawdown_percent")
+            if dd_val is None:
+                dd_val = bench.get("max_equity_drawdown_percent", 20.0)
             specs[name] = {
                 "name": name,
                 "category": data.get("category", "trend_following"),
                 "grid": data.get("uses_grid", False),
-                "dd": bench.get("max_drawdown_percent", 20.0),
-                "pf": bench.get("profit_factor", 1.5),
-                "margin": bench.get("min_margin_level_percent", 500.0),
-                "net_profit": bench.get("net_profit_usd", 1000.0),
-                "trades": bench.get("total_trades", 100),
-                "win_rate": bench.get("win_rate_percent", 60.0),
+                "dd": float(dd_val),
+                "pf": float(bench.get("profit_factor", 1.5)),
+                "margin": float(bench.get("min_margin_level_percent", 500.0)),
+                "net_profit": float(bench.get("net_profit_usd", 1000.0)),
+                "trades": int(bench.get("total_trades", 100)),
+                "win_rate": float(bench.get("win_rate_percent", 60.0)),
                 "symbols": ", ".join(data.get("supported_symbols", ["EURUSD"])),
                 "timeframe": data.get("recommended_timeframe", "H1")
             }
@@ -327,14 +330,14 @@ def generate_master_synthesis_figures():
     # -------------------------------------------------------------
     # Fig 8: Real Minimum Margin Level Solvency Gauge
     # -------------------------------------------------------------
-    fig, ax = plt.subplots(figsize=(9, 4.5))
+    fig, ax = plt.subplots(figsize=(9.5, 6.5))
     margins = [STRATEGY_SPECS[s]["margin"] for s in STRATEGIES]
     colors = [COLOR_CRIMSON if m < 50 else (COLOR_AMBER if m < 150 else COLOR_TEAL) for m in margins]
 
     y_pos = np.arange(len(STRATEGIES))
     ax.barh(y_pos, margins, color=colors, alpha=0.85, edgecolor="black", height=0.65)
     ax.set_yticks(y_pos)
-    ax.set_yticklabels(STRATEGIES, fontsize=8.5)
+    ax.set_yticklabels(STRATEGIES, fontsize=8)
     ax.axvline(50.0, color=COLOR_AMBER, linestyle="--", linewidth=1.5, label="Broker Margin Call (50%)")
     ax.axvline(20.0, color=COLOR_CRIMSON, linestyle="-.", linewidth=1.5, label="Liquidation Stop-Out Level (20%)")
     ax.set_xscale("log")
