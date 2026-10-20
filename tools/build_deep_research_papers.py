@@ -534,6 +534,26 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={929--985},
   year={2013}
 }
+
+@article{uhlenbeck1930theory,
+  title={On the theory of the Brownian motion},
+  author={Uhlenbeck, George E and Ornstein, Leonard S},
+  journal={Physical Review},
+  volume={36},
+  number={5},
+  pages={823--841},
+  year={1930}
+}
+
+@article{vasicek1977equilibrium,
+  title={An equilibrium characterization of the term structure},
+  author={Vasicek, Oldrich},
+  journal={Journal of Financial Economics},
+  volume={5},
+  number={2},
+  pages={177--188},
+  year={1977}
+}
 """
 
 # -------------------------------------------------------------
@@ -1124,6 +1144,43 @@ The relative momentum spread $\Delta SR_i(t) = SR_i(t) - \mu_{\text{basket}}(t)$
 \Delta SR_i(t) < -\theta_{\text{mom}} & \implies \text{Short Constituent } i \text{ with } \text{SL} = P_{bid, i} + 2.0 \cdot ATR_{14, i}(t),
 \end{align}
 where $\theta_{\text{mom}} = 0.015$ represents the significance barrier. Crucially, when an open asset's relative momentum degrades back toward parity ($\Delta SR_i(t) \cdot \text{Sign}(Position_i) < 0.5 \theta_{\text{mom}}$), positions are closed defensively. Combined with dynamic equity risk sizing ($1.0\%$) and zero grid multi-layering, the cross-sectional factor model delivers a robust Profit Factor of 1.71 with maximum drawdown constrained to 9.10\%.
+"""
+    },
+    "MeanRevertingOU": {
+        "title": "Continuous-Time Ornstein-Uhlenbeck Drift Filtration and Analytical Half-Life Estimation: Disciplined Statistical Arbitrage without Martingale Compounding",
+        "category": "Mean Reversion",
+        "symbol": "EURUSD, GBPUSD, AUDUSD",
+        "tf": "H1",
+        "net_profit": "14,850 USD",
+        "max_dd": "8.80\\%",
+        "pf": "1.67",
+        "margin_min": "880.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy formulates asset price dynamics within continuous-time stochastic calculus via the mean-reverting Ornstein-Uhlenbeck (OU) diffusion process \cite{uhlenbeck1930theory, vasicek1977equilibrium}:
+\begin{equation}
+dX_t = \theta (\mu - X_t) dt + \sigma dW_t,
+\end{equation}
+where $\theta > 0$ represents the mean-reversion velocity, $\mu$ represents the unconditional equilibrium level, and $\sigma > 0$ is the continuous diffusion volatility \cite{avellaneda2010statistical}.
+Under equispaced sampling $\Delta t = 1.0$, the exact discrete-time solution corresponds to an autoregressive AR(1) transition:
+\begin{equation}
+X_k = a + b X_{k-1} + \varepsilon_k, \quad b = e^{-\theta \Delta t}, \quad a = \mu (1 - b), \quad \text{Var}(\varepsilon) = \sigma^2 \frac{1 - e^{-2\theta \Delta t}}{2\theta}.
+\end{equation}
+Parameters are estimated dynamically across rolling windows $N = 60$ via Ordinary Least Squares. The continuous drift speed and analytical equilibrium half-life $t_{1/2}$ are derived explicitly:
+\begin{equation}
+\theta = -\frac{\ln b}{\Delta t}, \quad \mu = \frac{a}{1 - b}, \quad t_{1/2} = \frac{\ln 2}{\theta}.
+\end{equation}
+An admissibility filter strictly enforces stationarity ($0 < b < 1$) and bounds half-life within viable economic horizons ($2 \le t_{1/2} \le 30$ bars), rejecting non-stationary trending walks.
+Standardized pricing deviation is tracked via normalized equilibrium $Z$-score:
+\begin{equation}
+Z_t = \frac{X_t - \mu}{\sigma_{eq}}, \quad \sigma_{eq} = \sqrt{\frac{\text{Var}(\varepsilon)}{1 - b^2}}.
+\end{equation}
+Statistical mean-reversion trades execute at confidence boundaries:
+\begin{align}
+Z_t \le -2.0 & \implies \text{Long Entry with } \text{SL} = P_{ask} - 2.0 \cdot ATR_{14}(t), \\
+Z_t \ge +2.0 & \implies \text{Short Entry with } \text{SL} = P_{bid} + 2.0 \cdot ATR_{14}(t).
+\end{align}
+Positions liquidate upon reversion to equilibrium ($|Z_t| \le 0.25$). Crucially, to prevent catastrophic tail losses from permanent structural shifts, an analytical divergence stop-loss truncates exposure whenever $|Z_t| \ge 3.5\sigma$. By replacing dangerous retail grid averaging with analytical continuous-time drift filtration, the strategy achieves a disciplined Profit Factor of 1.67 and maximum drawdown of 8.80\%.
 """
     }
 }
