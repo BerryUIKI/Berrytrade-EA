@@ -1,0 +1,14 @@
+; OrderFlowImbalanceEA Default Parameter Preset
+; 3-Year Institutional Benchmark Setup (2023.01.01 - 2025.12.31)
+InpRiskPercent=1.0
+InpFixedLotSize=0.0
+InpSlippagePoints=10
+InpMagicNumber=107001
+InpLookbackBars=20
+InpImbalanceThreshold=0.35
+InpAbsorptionWickRatio=0.40
+InpATRPeriod=14
+InpStopLossATRMult=2.0
+InpTakeProfitATRMult=3.5
+InpUseTrailingStop=true
+InpTrailingATRMult=1.5

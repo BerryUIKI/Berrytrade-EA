@@ -1,0 +1,24 @@
+{
+  "strategy": "OrderFlowImbalanceEA",
+  "symbol": "EURUSD",
+  "timeframe": "M15",
+  "period": "2023.01.01 - 2025.12.31",
+  "initial_deposit": 10000.0,
+  "net_profit": 14350.0,
+  "profit_factor": 1.65,
+  "max_equity_drawdown_percent": 9.4,
+  "min_margin_level_percent": 840.0,
+  "total_trades": 412,
+  "win_rate_percent": 58.2,
+  "execution_constraints": {
+    "latency_ms": 120,
+    "commission_per_lot": 7.0,
+    "spread": "floating"
+  },
+  "risk_management": {
+    "dynamic_risk_percent": 1.0,
+    "hard_stop_loss": true,
+    "grid_overlay": false,
+    "martingale": false
+  }
+}

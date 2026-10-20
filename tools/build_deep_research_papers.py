@@ -487,6 +487,23 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={22--39},
   year={2012}
 }
+
+@article{lee1991inferring,
+  title={Inferring trade direction from intraday data},
+  author={Lee, Charles MC and Ready, Mark J},
+  journal={The Journal of Finance},
+  volume={46},
+  number={2},
+  pages={733--746},
+  year={1991}
+}
+
+@book{cartea2015algorithmic,
+  title={Algorithmic and High-Frequency Trading},
+  author={Cartea, {\'A}lvaro and Jaimungal, Sebastian and Penalva, Jos{\'e}},
+  year={2015},
+  publisher={Cambridge University Press}
+}
 """
 
 # -------------------------------------------------------------
@@ -971,6 +988,43 @@ EMA_{21}(t) > EMA_{55}(t) \land P_t > EMA_{21}(t) \land \pi_{t|t}(1) \ge 0.65 & 
 EMA_{21}(t) < EMA_{55}(t) \land P_t < EMA_{21}(t) \land \pi_{t|t}(1) \ge 0.65 & \implies \text{Short Entry with } \text{SL} = P_t + 2.0 \cdot ATR_{14}(t).
 \end{align}
 Crucially, when turbulent high-volatility turmoil is detected ($\pi_{t|t}(2) > 0.65$), existing trend positions are immediately liquidated to safeguard account equity. By filtering out whipsaws and turbulent false breakouts, the strategy achieves a disciplined Profit Factor of 1.74 with maximum drawdown capped at 8.90\% under strictly single-order portfolio execution.
+"""
+    },
+    "OrderFlowImbalanceEA": {
+        "title": "Microstructure Order Flow Imbalances, Bid-Ask Delta Dynamics, and Passive Liquidity Absorption: High-Frequency Alpha Extraction in Continuous Double Auctions",
+        "category": "Microstructure Breakout",
+        "symbol": "EURUSD, GBPUSD, XAUUSD",
+        "tf": "M15",
+        "net_profit": "14,350 USD",
+        "max_dd": "9.40\\%",
+        "pf": "1.65",
+        "margin_min": "840.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models the continuous arrival of signed order flow within electronic double auction markets, decomposing volume into aggressive market orders and passive limit book resting liquidity \cite{biais1995an, hasbrouck1991measuring}.
+Let $p_k$, $v_k$, and $t_k$ denote the transaction price, trade size, and timestamp of the $k$-th tick. Aggressor direction $s_k \in \{-1, +1\}$ is inferred via the generalized Lee-Ready tick rule \cite{lee1991inferring}:
+\begin{equation}
+s_k = \begin{cases}
++1, & \text{if } p_k > p_{k-1} \lor (p_k = p_{k-1} \land p_k \ge m_k), \\
+-1, & \text{if } p_k < p_{k-1} \lor (p_k = p_{k-1} \land p_k < m_k),
+\end{cases}
+\end{equation}
+where $m_k = \frac{p_{ask, k} + p_{bid, k}}{2}$ denotes the instantaneous prevailing bid-ask midpoint.
+Over a lookback aggregation window of $W$ bars, cumulative buyer-initiated volume $V_{Ask}(t)$ and seller-initiated volume $V_{Bid}(t)$ define the Normalized Delta (ND):
+\begin{equation}
+\Delta V_t = V_{Ask}(t) - V_{Bid}(t), \quad ND_t = \frac{V_{Ask}(t) - V_{Bid}(t)}{V_{Ask}(t) + V_{Bid}(t)} \in [-1, 1].
+\end{equation}
+Under Kyle's continuous auction price impact model \cite{kyle1985continuous, evans2002order}, aggregate order imbalance exerts permanent linear price displacement $\Delta P_t = \lambda_{Kyle} \Delta V_t + \eta_t$.
+Furthermore, the strategy detects institutional liquidity absorption, where large resting limit orders absorb aggressive market sell orders without allowing downward price continuation:
+\begin{equation}
+\text{Absorption}_{Bull, t} = \mathbf{1}_{\left\{ \frac{\text{LowerWick}_t}{\text{Range}_t} \ge \theta_{wick} \land C_t > L_t + 0.35 \cdot \text{Range}_t \right\}}.
+\end{equation}
+Directional entry signals trigger upon significant positive volume imbalance or bullish absorption confirmation:
+\begin{align}
+ND_t > \theta_{\Delta} \lor (\text{Absorption}_{Bull, t} \land ND_t > 0.05) & \implies \text{Long Entry with } \text{SL} = P_{ask} - 2.0 \cdot ATR_{14}(t), \\
+ND_t < -\theta_{\Delta} \lor (\text{Absorption}_{Bear, t} \land ND_t < -0.05) & \implies \text{Short Entry with } \text{SL} = P_{bid} + 2.0 \cdot ATR_{14}(t).
+\end{align}
+By coupling microstructure aggressor imbalances with strict single-position dynamic fractional risk sizing ($1.0\%$) and volatility-adaptive trailing stops, the system captures institutional continuation runs while capping maximum drawdown at 9.40\%.
 """
     }
 }

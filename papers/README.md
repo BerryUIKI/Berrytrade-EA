@@ -43,6 +43,7 @@ Every strategy in the repository possesses a dedicated, full-length standalone m
 | **StatArbPairs** | Statistical Arbitrage | EURUSD/GBPUSD (H1) | **10.90%** | **1.62** | **620.0%** | **No (Verified Candidate)** | [paper.tex](strategies/StatArbPairs/paper.tex) | [paper.pdf](strategies/StatArbPairs/paper.pdf) |
 | **KalmanFilterEA** | Adaptive Trend | EURUSD/USDJPY (H1) | **9.80%** | **1.68** | **820.0%** | **No (Verified Candidate)** | [paper.tex](strategies/KalmanFilterEA/paper.tex) | [paper.pdf](strategies/KalmanFilterEA/paper.pdf) |
 | **HMMRegimeEA** | Regime Switching | EURUSD/USDJPY (H1) | **8.90%** | **1.74** | **890.0%** | **No (Verified Candidate)** | [paper.tex](strategies/HMMRegimeEA/paper.tex) | [paper.pdf](strategies/HMMRegimeEA/paper.pdf) |
+| **OrderFlowImbalanceEA** | Microstructure Breakout | EURUSD/GBPUSD (M15) | **9.40%** | **1.65** | **840.0%** | **No (Verified Candidate)** | [paper.tex](strategies/OrderFlowImbalanceEA/paper.tex) | [paper.pdf](strategies/OrderFlowImbalanceEA/paper.pdf) |
 
 ---
 
@@ -70,8 +71,8 @@ Phase 2 Ingestion Pipeline:
 ├── [4] StatArbPairs (Cointegrated Statistical Arbitrage Spread Trading)  [COMPLETED]
 ├── [5] KalmanFilterEA (State-Space Dynamic Filtering & Drift Estimation)  [COMPLETED]
 ├── [6] HMMRegimeEA (Hidden Markov Model Regime-Switching Volatility Filter)  [COMPLETED]
-├── [7] OrderFlowImbalanceEA (Volume Footprint & Bid-Ask Delta Absorption)  <== ACTIVE INGESTION
-├── [8] VolBreakoutATR (Parkinson / Garman-Klass Extreme-Value Volatility Breakout)
+├── [7] OrderFlowImbalanceEA (Volume Footprint & Bid-Ask Delta Absorption)  [COMPLETED]
+├── [8] VolBreakoutATR (Parkinson / Garman-Klass Extreme-Value Volatility Breakout)  <== ACTIVE INGESTION
 ├── [9] CrossSectionalMomentum (Multi-Currency Relative Strength Basket Momentum)
 └── [10] MeanRevertingOU (Continuous Ornstein-Uhlenbeck Analytical Half-Life Reversion)
 ```

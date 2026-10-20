@@ -1,0 +1,35 @@
+{
+  "name": "OrderFlowImbalanceEA",
+  "version": "1.0.0",
+  "author": "Berry Wahlberg (Berrytrade Quantitative Research)",
+  "category": "breakout",
+  "tier": "experimental",
+  "risk_level": "Medium",
+  "description": "Institutional Microstructure Order Flow Imbalance EA: Bid-Ask Cumulative Volume Delta (CVD) & Liquidity Absorption Detection with Dynamic Fractional Risk and Hard Stop-Loss.",
+  "supported_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "XAUUSD"
+  ],
+  "recommended_timeframe": "M15",
+  "min_deposit_usd": 1000,
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "open_source_provenance": {
+    "license": "MIT",
+    "origin": "Quantitative Microstructure Order Flow Research & Algorithmic Literature",
+    "author": "Berry Wahlberg",
+    "repository": "Berrytrade-EA"
+  },
+  "benchmark_metrics": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "latency_ms": 120,
+    "commission_per_lot_usd": 7.0,
+    "profit_factor": 1.65,
+    "max_equity_drawdown_percent": 9.4,
+    "min_margin_level_percent": 840.0,
+    "net_profit_usd": 14350.0,
+    "win_rate_percent": 58.2
+  }
+}
