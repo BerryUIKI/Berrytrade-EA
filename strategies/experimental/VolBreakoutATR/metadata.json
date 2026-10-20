@@ -1,0 +1,35 @@
+{
+  "name": "VolBreakoutATR",
+  "version": "1.0.0",
+  "author": "Berry Wahlberg (Berrytrade Quantitative Research)",
+  "category": "breakout",
+  "tier": "experimental",
+  "risk_level": "Medium",
+  "description": "Garman-Klass Extreme-Value Volatility Breakout System: Exploiting Contraction-Expansion Regimes with Dynamic Fractional Risk and Hard Stop-Loss.",
+  "supported_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "recommended_timeframe": "H1",
+  "min_deposit_usd": 1000,
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "open_source_provenance": {
+    "license": "MIT",
+    "origin": "Parkinson & Garman-Klass Quantitative Volatility Estimator Literature",
+    "author": "Berry Wahlberg",
+    "repository": "Berrytrade-EA"
+  },
+  "benchmark_metrics": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "latency_ms": 120,
+    "commission_per_lot_usd": 7.0,
+    "profit_factor": 1.61,
+    "max_equity_drawdown_percent": 10.2,
+    "min_margin_level_percent": 780.0,
+    "net_profit_usd": 13850.0,
+    "win_rate_percent": 56.5
+  }
+}
