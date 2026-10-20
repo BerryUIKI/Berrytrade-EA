@@ -1,0 +1,14 @@
+; CrossSectionalMomentum Conservative Parameter Preset
+; Lower risk exposure with higher relative strength threshold
+InpRiskPercent=0.5
+InpFixedLotSize=0.0
+InpSlippagePoints=10
+InpMagicNumber=109002
+InpLookbackBars=60
+InpBasketSymbols=EURUSD,GBPUSD,AUDUSD,USDJPY
+InpMomentumThreshold=0.025
+InpATRPeriod=14
+InpStopLossATRMult=2.0
+InpTakeProfitATRMult=4.0
+InpUseTrailingStop=true
+InpTrailingATRMult=1.8

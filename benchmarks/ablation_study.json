@@ -1,0 +1,154 @@
+{
+  "strategy": "BBRSI",
+  "symbol": "XAUUSD (Gold)",
+  "in_sample": {
+    "raw_signal": {
+      "arm": "raw_signal",
+      "trades_count": 32,
+      "win_rate_pct": 50.0,
+      "net_profit_usd": -565.62,
+      "profit_factor": 0.91,
+      "max_drawdown_pct": 18.22,
+      "min_margin_level": 4263.26,
+      "return_skewness": -1.12,
+      "return_kurtosis": 11.85,
+      "annualized_sharpe": -0.07
+    },
+    "grid_overlay": {
+      "arm": "grid_overlay",
+      "trades_count": 23,
+      "win_rate_pct": 100.0,
+      "net_profit_usd": 16351.71,
+      "profit_factor": 99.0,
+      "max_drawdown_pct": 42.73,
+      "min_margin_level": 602.01,
+      "return_skewness": 6.68,
+      "return_kurtosis": 101.25,
+      "annualized_sharpe": 1.01
+    },
+    "disciplined_risk": {
+      "arm": "disciplined_risk",
+      "trades_count": 27,
+      "win_rate_pct": 25.93,
+      "net_profit_usd": -700.77,
+      "profit_factor": 0.65,
+      "max_drawdown_pct": 10.86,
+      "min_margin_level": 10000.0,
+      "return_skewness": -0.42,
+      "return_kurtosis": 9.11,
+      "annualized_sharpe": -0.53
+    },
+    "random_grid": {
+      "arm": "random_grid",
+      "trades_count": 33,
+      "win_rate_pct": 100.0,
+      "net_profit_usd": 25684.54,
+      "profit_factor": 99.0,
+      "max_drawdown_pct": 64.15,
+      "min_margin_level": 429.56,
+      "return_skewness": 6.96,
+      "return_kurtosis": 107.39,
+      "annualized_sharpe": 0.89
+    }
+  },
+  "out_of_sample": {
+    "raw_signal": {
+      "arm": "raw_signal",
+      "trades_count": 24,
+      "win_rate_pct": 25.0,
+      "net_profit_usd": -6935.23,
+      "profit_factor": 0.42,
+      "max_drawdown_pct": 69.35,
+      "min_margin_level": 714.34,
+      "return_skewness": 6.12,
+      "return_kurtosis": 100.8,
+      "annualized_sharpe": -0.5
+    },
+    "grid_overlay": {
+      "arm": "grid_overlay",
+      "trades_count": 1,
+      "win_rate_pct": 0.0,
+      "net_profit_usd": -9758.88,
+      "profit_factor": 0.0,
+      "max_drawdown_pct": 93.44,
+      "min_margin_level": 13.86,
+      "return_skewness": -3.28,
+      "return_kurtosis": 12.55,
+      "annualized_sharpe": -4.86
+    },
+    "disciplined_risk": {
+      "arm": "disciplined_risk",
+      "trades_count": 24,
+      "win_rate_pct": 25.0,
+      "net_profit_usd": -596.8,
+      "profit_factor": 0.69,
+      "max_drawdown_pct": 6.67,
+      "min_margin_level": 10000.0,
+      "return_skewness": 0.98,
+      "return_kurtosis": 14.2,
+      "annualized_sharpe": -0.59
+    },
+    "random_grid": {
+      "arm": "random_grid",
+      "trades_count": 1,
+      "win_rate_pct": 0.0,
+      "net_profit_usd": -11155.78,
+      "profit_factor": 0.0,
+      "max_drawdown_pct": 87.12,
+      "min_margin_level": -67.47,
+      "return_skewness": -1.98,
+      "return_kurtosis": 5.5,
+      "annualized_sharpe": -5.4
+    }
+  },
+  "full_period": {
+    "raw_signal": {
+      "arm": "raw_signal",
+      "trades_count": 70,
+      "win_rate_pct": 42.86,
+      "net_profit_usd": -6086.93,
+      "profit_factor": 0.7,
+      "max_drawdown_pct": 67.42,
+      "min_margin_level": 900.67,
+      "return_skewness": 7.89,
+      "return_kurtosis": 220.58,
+      "annualized_sharpe": -0.25
+    },
+    "grid_overlay": {
+      "arm": "grid_overlay",
+      "trades_count": 32,
+      "win_rate_pct": 96.88,
+      "net_profit_usd": -11640.16,
+      "profit_factor": 0.68,
+      "max_drawdown_pct": 95.01,
+      "min_margin_level": -38.52,
+      "return_skewness": 12.62,
+      "return_kurtosis": 218.15,
+      "annualized_sharpe": 0.64
+    },
+    "disciplined_risk": {
+      "arm": "disciplined_risk",
+      "trades_count": 63,
+      "win_rate_pct": 30.16,
+      "net_profit_usd": -432.38,
+      "profit_factor": 0.91,
+      "max_drawdown_pct": 15.01,
+      "min_margin_level": 10000.0,
+      "return_skewness": 1.02,
+      "return_kurtosis": 15.82,
+      "annualized_sharpe": -0.11
+    },
+    "random_grid": {
+      "arm": "random_grid",
+      "trades_count": 4,
+      "win_rate_pct": 75.0,
+      "net_profit_usd": -9617.63,
+      "profit_factor": 0.19,
+      "max_drawdown_pct": 86.22,
+      "min_margin_level": 19.86,
+      "return_skewness": -5.37,
+      "return_kurtosis": 38.79,
+      "annualized_sharpe": -2.66
+    }
+  }
+}

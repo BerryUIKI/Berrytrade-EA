@@ -1,0 +1,424 @@
+{
+  "metadata": {
+    "title": "Berrytrade Multi-Strategy Combinatorial Portfolio & Risk Parity Benchmark",
+    "author": "Berry Wahlberg",
+    "institution": "Berrytrade Quantitative Research, Singapore",
+    "evaluation_horizon": "2023.01.01 - 2025.12.31",
+    "total_trading_days": 754,
+    "risk_free_rate_percent": 2.0,
+    "strategy_universe_size": 10
+  },
+  "candidate_strategies": {
+    "TurtleTrader": {
+      "annualized_return_percent": 31.03,
+      "annualized_volatility_percent": 13.57,
+      "sharpe_ratio": 2.14
+    },
+    "LondonBreakout": {
+      "annualized_return_percent": 25.69,
+      "annualized_volatility_percent": 15.41,
+      "sharpe_ratio": 1.537
+    },
+    "SMC_FVG": {
+      "annualized_return_percent": 28.71,
+      "annualized_volatility_percent": 14.49,
+      "sharpe_ratio": 1.843
+    },
+    "StatArbPairs": {
+      "annualized_return_percent": 33.28,
+      "annualized_volatility_percent": 12.53,
+      "sharpe_ratio": 2.495
+    },
+    "KalmanFilterEA": {
+      "annualized_return_percent": 34.46,
+      "annualized_volatility_percent": 11.27,
+      "sharpe_ratio": 2.88
+    },
+    "HMMRegimeEA": {
+      "annualized_return_percent": 36.7,
+      "annualized_volatility_percent": 10.23,
+      "sharpe_ratio": 3.39
+    },
+    "OrderFlowImbalanceEA": {
+      "annualized_return_percent": 34.64,
+      "annualized_volatility_percent": 10.81,
+      "sharpe_ratio": 3.019
+    },
+    "VolBreakoutATR": {
+      "annualized_return_percent": 33.71,
+      "annualized_volatility_percent": 11.73,
+      "sharpe_ratio": 2.703
+    },
+    "CrossSectionalMomentum": {
+      "annualized_return_percent": 37.98,
+      "annualized_volatility_percent": 10.46,
+      "sharpe_ratio": 3.438
+    },
+    "MeanRevertingOU": {
+      "annualized_return_percent": 35.56,
+      "annualized_volatility_percent": 10.12,
+      "sharpe_ratio": 3.316
+    }
+  },
+  "diagnostics": {
+    "covariance_condition_number": 7.22,
+    "pca_variance_explained": [
+      20.69,
+      16.43,
+      12.82,
+      10.81,
+      9.76,
+      7.89,
+      7.58,
+      6.5,
+      4.65,
+      2.87
+    ],
+    "correlation_matrix": {
+      "TurtleTrader": {
+        "TurtleTrader": 1.0,
+        "LondonBreakout": 0.0037,
+        "SMC_FVG": 0.1253,
+        "StatArbPairs": -0.0048,
+        "KalmanFilterEA": 0.0635,
+        "HMMRegimeEA": 0.4047,
+        "OrderFlowImbalanceEA": -0.0061,
+        "VolBreakoutATR": 0.007,
+        "CrossSectionalMomentum": 0.1206,
+        "MeanRevertingOU": -0.4905
+      },
+      "LondonBreakout": {
+        "TurtleTrader": 0.0037,
+        "LondonBreakout": 1.0,
+        "SMC_FVG": 0.074,
+        "StatArbPairs": 0.0438,
+        "KalmanFilterEA": 0.0263,
+        "HMMRegimeEA": -0.0924,
+        "OrderFlowImbalanceEA": 0.0633,
+        "VolBreakoutATR": 0.0993,
+        "CrossSectionalMomentum": -0.0286,
+        "MeanRevertingOU": -0.2547
+      },
+      "SMC_FVG": {
+        "TurtleTrader": 0.1253,
+        "LondonBreakout": 0.074,
+        "SMC_FVG": 1.0,
+        "StatArbPairs": 0.0857,
+        "KalmanFilterEA": 0.1472,
+        "HMMRegimeEA": 0.0023,
+        "OrderFlowImbalanceEA": -0.0431,
+        "VolBreakoutATR": 0.0187,
+        "CrossSectionalMomentum": 0.0447,
+        "MeanRevertingOU": -0.4793
+      },
+      "StatArbPairs": {
+        "TurtleTrader": -0.0048,
+        "LondonBreakout": 0.0438,
+        "SMC_FVG": 0.0857,
+        "StatArbPairs": 1.0,
+        "KalmanFilterEA": -0.0092,
+        "HMMRegimeEA": 0.0267,
+        "OrderFlowImbalanceEA": 0.0118,
+        "VolBreakoutATR": 0.1137,
+        "CrossSectionalMomentum": -0.0084,
+        "MeanRevertingOU": 0.0095
+      },
+      "KalmanFilterEA": {
+        "TurtleTrader": 0.0635,
+        "LondonBreakout": 0.0263,
+        "SMC_FVG": 0.1472,
+        "StatArbPairs": -0.0092,
+        "KalmanFilterEA": 1.0,
+        "HMMRegimeEA": -0.0267,
+        "OrderFlowImbalanceEA": -0.0168,
+        "VolBreakoutATR": 0.1589,
+        "CrossSectionalMomentum": 0.0622,
+        "MeanRevertingOU": -0.1282
+      },
+      "HMMRegimeEA": {
+        "TurtleTrader": 0.4047,
+        "LondonBreakout": -0.0924,
+        "SMC_FVG": 0.0023,
+        "StatArbPairs": 0.0267,
+        "KalmanFilterEA": -0.0267,
+        "HMMRegimeEA": 1.0,
+        "OrderFlowImbalanceEA": -0.0743,
+        "VolBreakoutATR": -0.1347,
+        "CrossSectionalMomentum": 0.0639,
+        "MeanRevertingOU": -0.2302
+      },
+      "OrderFlowImbalanceEA": {
+        "TurtleTrader": -0.0061,
+        "LondonBreakout": 0.0633,
+        "SMC_FVG": -0.0431,
+        "StatArbPairs": 0.0118,
+        "KalmanFilterEA": -0.0168,
+        "HMMRegimeEA": -0.0743,
+        "OrderFlowImbalanceEA": 1.0,
+        "VolBreakoutATR": 0.0088,
+        "CrossSectionalMomentum": 0.011,
+        "MeanRevertingOU": 0.01
+      },
+      "VolBreakoutATR": {
+        "TurtleTrader": 0.007,
+        "LondonBreakout": 0.0993,
+        "SMC_FVG": 0.0187,
+        "StatArbPairs": 0.1137,
+        "KalmanFilterEA": 0.1589,
+        "HMMRegimeEA": -0.1347,
+        "OrderFlowImbalanceEA": 0.0088,
+        "VolBreakoutATR": 1.0,
+        "CrossSectionalMomentum": -0.0805,
+        "MeanRevertingOU": -0.0185
+      },
+      "CrossSectionalMomentum": {
+        "TurtleTrader": 0.1206,
+        "LondonBreakout": -0.0286,
+        "SMC_FVG": 0.0447,
+        "StatArbPairs": -0.0084,
+        "KalmanFilterEA": 0.0622,
+        "HMMRegimeEA": 0.0639,
+        "OrderFlowImbalanceEA": 0.011,
+        "VolBreakoutATR": -0.0805,
+        "CrossSectionalMomentum": 1.0,
+        "MeanRevertingOU": -0.0999
+      },
+      "MeanRevertingOU": {
+        "TurtleTrader": -0.4905,
+        "LondonBreakout": -0.2547,
+        "SMC_FVG": -0.4793,
+        "StatArbPairs": 0.0095,
+        "KalmanFilterEA": -0.1282,
+        "HMMRegimeEA": -0.2302,
+        "OrderFlowImbalanceEA": 0.01,
+        "VolBreakoutATR": -0.0185,
+        "CrossSectionalMomentum": -0.0999,
+        "MeanRevertingOU": 1.0
+      }
+    }
+  },
+  "allocation_models": {
+    "Equal Weight (1/N)": {
+      "weights": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ],
+      "annualized_return_percent": 39.21,
+      "annualized_volatility_percent": 3.81,
+      "sharpe_ratio": 9.775,
+      "sortino_ratio": 8.602,
+      "max_drawdown_percent": 2.07,
+      "calmar_ratio": 18.96,
+      "diversification_ratio": 3.169,
+      "herfindahl_index": 0.1,
+      "effective_bets_enc": 10.0,
+      "effective_risk_bets_enrb": 9.52,
+      "percentage_risk_contributions": [
+        15.5,
+        16.38,
+        15.46,
+        13.86,
+        11.91,
+        7.29,
+        7.91,
+        11.76,
+        8.47,
+        -8.55
+      ],
+      "final_equity_usd": 26906.75
+    },
+    "Inverse Volatility": {
+      "weights": [
+        0.08711262475718397,
+        0.07671111731841973,
+        0.08158166445361743,
+        0.09430541029882418,
+        0.10489071142863769,
+        0.11549763731214874,
+        0.10935414595004293,
+        0.10077735029659549,
+        0.11295922771263232,
+        0.11681011047189754
+      ],
+      "annualized_return_percent": 39.86,
+      "annualized_volatility_percent": 3.58,
+      "sharpe_ratio": 10.583,
+      "sortino_ratio": 9.284,
+      "max_drawdown_percent": 1.88,
+      "calmar_ratio": 21.16,
+      "diversification_ratio": 3.304,
+      "herfindahl_index": 0.1019,
+      "effective_bets_enc": 9.82,
+      "effective_risk_bets_enrb": 9.73,
+      "percentage_risk_contributions": [
+        13.36,
+        10.2,
+        10.65,
+        13.85,
+        13.94,
+        10.26,
+        10.53,
+        12.8,
+        11.85,
+        -7.44
+      ],
+      "final_equity_usd": 27286.7
+    },
+    "Minimum Variance": {
+      "weights": [
+        0.09117982824253926,
+        0.07564824495636013,
+        0.1120088948798457,
+        0.02819184535949,
+        0.05975342887703298,
+        0.1201119468582262,
+        0.0779885312400161,
+        0.06002820823425797,
+        0.08105883497806655,
+        0.2940302363741652
+      ],
+      "annualized_return_percent": 39.92,
+      "annualized_volatility_percent": 2.91,
+      "sharpe_ratio": 13.014,
+      "sortino_ratio": 11.774,
+      "max_drawdown_percent": 1.26,
+      "calmar_ratio": 31.6,
+      "diversification_ratio": 4.0,
+      "herfindahl_index": 0.1481,
+      "effective_bets_enc": 6.75,
+      "effective_risk_bets_enrb": 8.28,
+      "percentage_risk_contributions": [
+        9.13,
+        7.57,
+        11.18,
+        2.81,
+        5.99,
+        12.01,
+        7.81,
+        6.01,
+        8.09,
+        29.4
+      ],
+      "final_equity_usd": 27317.75
+    },
+    "Max Sharpe Ratio": {
+      "weights": [
+        0.08204217894844362,
+        0.06669375666229144,
+        0.10515964686854151,
+        0.02838250314895668,
+        0.06222675380861587,
+        0.13042141054668185,
+        0.08118205762595979,
+        0.062953495244802,
+        0.09215903906131584,
+        0.2887791580843914
+      ],
+      "annualized_return_percent": 40.2,
+      "annualized_volatility_percent": 2.92,
+      "sharpe_ratio": 13.07,
+      "sortino_ratio": 11.545,
+      "max_drawdown_percent": 1.28,
+      "calmar_ratio": 31.42,
+      "diversification_ratio": 3.955,
+      "herfindahl_index": 0.1464,
+      "effective_bets_enc": 6.83,
+      "effective_risk_bets_enrb": 8.06,
+      "percentage_risk_contributions": [
+        7.48,
+        4.96,
+        8.82,
+        2.79,
+        6.34,
+        14.21,
+        8.32,
+        6.27,
+        10.41,
+        30.42
+      ],
+      "final_equity_usd": 27484.31
+    },
+    "Equal Risk Contribution": {
+      "weights": [
+        0.08489493250167755,
+        0.0770002829827267,
+        0.0934457133288645,
+        0.06460672788923214,
+        0.07825633214755646,
+        0.10998187245052092,
+        0.08990648184468847,
+        0.07633053357205345,
+        0.09166271255520296,
+        0.23391441072747698
+      ],
+      "annualized_return_percent": 39.93,
+      "annualized_volatility_percent": 3.01,
+      "sharpe_ratio": 12.583,
+      "sortino_ratio": 11.01,
+      "max_drawdown_percent": 1.28,
+      "calmar_ratio": 31.12,
+      "diversification_ratio": 3.883,
+      "herfindahl_index": 0.1213,
+      "effective_bets_enc": 8.24,
+      "effective_risk_bets_enrb": 10.0,
+      "percentage_risk_contributions": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "final_equity_usd": 27324.93
+    },
+    "Hierarchical Risk Parity": {
+      "weights": [
+        0.05671215991823768,
+        0.06718905027800896,
+        0.06309950420962099,
+        0.10238944463742777,
+        0.09001919991225864,
+        0.09969197255628089,
+        0.1358703675532853,
+        0.08309730850444645,
+        0.1469012186414878,
+        0.1550297737889455
+      ],
+      "annualized_return_percent": 40.47,
+      "annualized_volatility_percent": 3.4,
+      "sharpe_ratio": 11.304,
+      "sortino_ratio": 10.173,
+      "max_drawdown_percent": 1.52,
+      "calmar_ratio": 26.67,
+      "diversification_ratio": 3.405,
+      "herfindahl_index": 0.1112,
+      "effective_bets_enc": 8.99,
+      "effective_risk_bets_enrb": 7.95,
+      "percentage_risk_contributions": [
+        5.14,
+        7.51,
+        4.9,
+        17.19,
+        10.61,
+        6.54,
+        18.44,
+        9.51,
+        20.44,
+        -0.27
+      ],
+      "final_equity_usd": 27643.31
+    }
+  }
+}

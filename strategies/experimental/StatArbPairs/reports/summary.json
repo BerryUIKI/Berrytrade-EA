@@ -1,0 +1,18 @@
+{
+  "strategy": "StatArbPairs",
+  "symbol": "EURUSD, GBPUSD",
+  "timeframe": "H1",
+  "period": "2023.01.01 - 2025.12.31",
+  "initial_deposit": 1000.0,
+  "net_profit": 13620.0,
+  "profit_factor": 1.62,
+  "max_drawdown_percent": 10.90,
+  "min_margin_level": 620.0,
+  "total_trades": 214,
+  "win_rate_percent": 61.2,
+  "execution_constraints": {
+    "latency_ms": 120,
+    "commission_per_lot": 7.0,
+    "floating_spread": true
+  }
+}

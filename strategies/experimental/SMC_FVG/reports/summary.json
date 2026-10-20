@@ -1,0 +1,18 @@
+{
+  "strategy": "SMC_FVG",
+  "symbol": "EURUSD",
+  "timeframe": "H1",
+  "period": "2023.01.01 - 2025.12.31",
+  "initial_deposit": 1000.0,
+  "net_profit": 11280.0,
+  "profit_factor": 1.56,
+  "max_drawdown_percent": 12.60,
+  "min_margin_level": 750.0,
+  "total_trades": 228,
+  "win_rate_percent": 52.6,
+  "execution_constraints": {
+    "latency_ms": 120,
+    "commission_per_lot": 7.0,
+    "floating_spread": true
+  }
+}
