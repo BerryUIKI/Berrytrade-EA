@@ -2,7 +2,7 @@
 
 > **Lead Author**: Berry Wahlberg (`Berrytrade Quantitative Research, Singapore`)  
 > **Contact**: `research@berrytrade.org`  
-> **Format**: Academic Preprint for arXiv Quantitative Finance (`q-fin.TR` Trading & Market Microstructure, `q-fin.PM` Portfolio Management)  
+> **Format**: Quantitative Research Paper (PDF)  
 > **Target Style**: Nature / Science publication graphics (300 DPI) & rigorous mathematical derivations
 
 ---

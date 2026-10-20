@@ -30,7 +30,7 @@ Unlike traditional repositories that accumulate uncurated `.mq5` files without p
 - **Strict Risk Governance**: Mandatory hard Stop-Loss enforcement. High-risk mechanics (such as Martingale or Uncapped Grid) are strictly quarantined and flagged.
 - **Two-Tier Quality Funnel**: Community submissions enter `experimental/` for incubation, and graduate to `verified/` after passing standardized multi-year benchmark audits.
 - **Automated Security CI**: Automated scanning prevents malicious Win32 DLL calls, telemetry backdoors, and broken schemas.
-- **Academic Research Integration**: Every strategy is backed by an arXiv-format quantitative research paper authored by **Berry Wahlberg** (`Berrytrade Quantitative Research`) with Nature/Science-style diagnostic figures and full BibTeX bibliographies.
+- **Academic Research Integration**: Every strategy is backed by a quantitative research paper (PDF) authored by **Berry Wahlberg** (`Berrytrade Quantitative Research`) with Nature/Science-style diagnostic figures and full BibTeX bibliographies.
 
 ---
 
@@ -42,7 +42,7 @@ We maintain a strict separation between technical, agentic, and user-facing docu
 | :--- | :--- | :---: | :--- |
 | **AI Agent Governance** | Autonomous AI pair-programmers & dev agents | **English Only** | [**`AGENTS.md`**](AGENTS.md) |
 | **Developer Technical Docs** | Quant researchers, MQL5 developers, contributors | **English Only** | [`docs/developer/`](docs/developer/) |
-| **Research Papers & Preprints** | Academic readers, quant allocators | **LaTeX / arXiv English** | [`papers/`](papers/) |
+| **Research Papers** | Academic readers, quant allocators | **LaTeX / English Research Paper (PDF)** | [`papers/`](papers/) |
 | **User Wiki & Trader Guides** | Traders, end-users, operators | **Multi-Language (EN / 中文)** | [`wiki/`](wiki/) & GitHub Wiki |
 
 - 🤖 **Agent Governance**: [AI Agent Guidelines](AGENTS.md) &bull; [Agent Specs](docs/developer/agents.md)
@@ -52,7 +52,7 @@ We maintain a strict separation between technical, agentic, and user-facing docu
 
 ---
 
-## 📑 Quantitative Research Papers (arXiv Format)
+## 📑 Quantitative Research Papers (PDF)
 
 All strategies undergo continuous 3-year execution-constrained backtesting (`2023.01.01 -- 2025.12.31`) with 120ms simulated latency, floating spreads, and $7/lot commissions. Publications are signed by **Berry Wahlberg** (`Berrytrade Quantitative Research`):
 
@@ -135,7 +135,7 @@ Berrytrade-EA/
 │   ├── contribution-guidelines.md
 │   └── ea-ingestion-specification.md
 ├── wiki/                          # User-Facing Documentation (Multi-Language, Wiki-ready)
-├── papers/                        # arXiv Academic Research Papers (Berry Wahlberg)
+├── papers/                        # Academic Research Papers (PDF) (Berry Wahlberg)
 │   ├── synthesis/                 # Master synthesis paper & figures
 │   └── strategies/<Strategy>/     # Standalone strategy monographs & .bbl
 ├── strategies/                    # Self-contained EA packages

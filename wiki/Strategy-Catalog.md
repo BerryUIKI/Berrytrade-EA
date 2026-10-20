@@ -92,7 +92,7 @@ Classic trend-following system based on Richard Dennis and William Eckhardt's le
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/TurtleTrader)
   - [Presets Directory](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/TurtleTrader/presets)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/TurtleTrader/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/TurtleTrader/paper.pdf)
 
 ---
 
@@ -118,7 +118,7 @@ Exploits liquidity expansion at the European market open (Frankfurt 07:00 UTC an
   - **Minimum Recorded Margin Level**: **850.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/LondonBreakout)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/LondonBreakout/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/LondonBreakout/paper.pdf)
 
 ---
 
@@ -144,7 +144,7 @@ Identifies institutional price delivery imbalances via Fair Value Gaps (FVG) and
   - **Minimum Recorded Margin Level**: **750.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/SMC_FVG)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/SMC_FVG/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/SMC_FVG/paper.pdf)
 
 ---
 
@@ -170,7 +170,7 @@ Cointegrated statistical arbitrage pairs trading exploiting mean-reverting price
   - **Minimum Recorded Margin Level**: **620.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/StatArbPairs)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/StatArbPairs/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/StatArbPairs/paper.pdf)
 
 ---
 
@@ -195,7 +195,7 @@ State-space adaptive filtering estimating latent continuous price and velocity d
   - **Minimum Recorded Margin Level**: **820.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/KalmanFilterEA)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/KalmanFilterEA/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/KalmanFilterEA/paper.pdf)
 
 ---
 
@@ -220,7 +220,7 @@ Hidden Markov Model 2-state Gaussian mixture regime filter that dynamically swit
   - **Minimum Recorded Margin Level**: **890.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/HMMRegimeEA)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/HMMRegimeEA/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/HMMRegimeEA/paper.pdf)
 
 ---
 
@@ -245,7 +245,7 @@ Institutional microstructure Expert Advisor tracking order book Bid-Ask delta im
   - **Minimum Recorded Margin Level**: **840.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/OrderFlowImbalanceEA)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/OrderFlowImbalanceEA/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/OrderFlowImbalanceEA/paper.pdf)
 
 ---
 
@@ -270,7 +270,7 @@ Exploits volatility regime transitions using the Garman-Klass extreme-value vola
   - **Minimum Recorded Margin Level**: **780.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/VolBreakoutATR)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/VolBreakoutATR/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/VolBreakoutATR/paper.pdf)
 
 ---
 
@@ -295,7 +295,7 @@ Multi-currency basket cross-sectional relative strength momentum system ranking 
   - **Minimum Recorded Margin Level**: **860.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/CrossSectionalMomentum)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/CrossSectionalMomentum/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/CrossSectionalMomentum/paper.pdf)
 
 ---
 
@@ -321,7 +321,7 @@ Continuous-time Ornstein-Uhlenbeck stochastic drift filtration system calculatin
   - **Minimum Recorded Margin Level**: **880.0%**
 - **Quick Links**:
   - [Source Code](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/MeanRevertingOU)
-  - [Research Paper PDF](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/MeanRevertingOU/paper.pdf)
+  - [Research Paper (PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/MeanRevertingOU/paper.pdf)
 
 ---
 
