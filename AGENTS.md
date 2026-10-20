@@ -149,4 +149,8 @@ The current active research campaign follows this priority order:
 3. **`SMC_FVG`** (Smart Money Concepts / ICT Fair Value Gap, Liquidity Sweep & Order Blocks) &mdash; **[COMPLETED]**
 4. **`StatArbPairs`** (Cointegrated statistical arbitrage pairs trading, EURUSD vs GBPUSD) &mdash; **[COMPLETED]**
 5. **`KalmanFilterEA`** (State-space adaptive filtering, real-time drift estimation) &mdash; **[COMPLETED]**
-6. **`HMMRegimeEA`** (Hidden Markov Model Gaussian Mixture Volatility Regime Switching Filter) &mdash; **[CURRENT TASK]**
+6. **`HMMRegimeEA`** (Hidden Markov Model Gaussian Mixture Volatility Regime Switching Filter) &mdash; **[COMPLETED]**
+7. **`OrderFlowImbalanceEA`** (Microstructure order book Bid-Ask delta imbalance and tick volume absorption) &mdash; **[CURRENT TASK]**
+8. **`VolBreakoutATR`** (Parkinson / Garman-Klass extreme-value volatility breakout with expansion triggers) &mdash; **[QUEUED]**
+9. **`CrossSectionalMomentum`** (Multi-currency basket cross-sectional relative strength momentum) &mdash; **[QUEUED]**
+10. **`MeanRevertingOU`** (Continuous-time Ornstein-Uhlenbeck drift filtration with analytical half-life) &mdash; **[QUEUED]**
