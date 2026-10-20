@@ -152,8 +152,8 @@ The current active research campaign follows this priority order:
 6. **`HMMRegimeEA`** (Hidden Markov Model Gaussian Mixture Volatility Regime Switching Filter) &mdash; **[COMPLETED]**
 7. **`OrderFlowImbalanceEA`** (Microstructure order book Bid-Ask delta imbalance and tick volume absorption) &mdash; **[COMPLETED]**
 8. **`VolBreakoutATR`** (Parkinson / Garman-Klass extreme-value volatility breakout with expansion triggers) &mdash; **[COMPLETED]**
-9. **`CrossSectionalMomentum`** (Multi-currency basket cross-sectional relative strength momentum) &mdash; **[CURRENT TASK]**
-10. **`MeanRevertingOU`** (Continuous-time Ornstein-Uhlenbeck drift filtration with analytical half-life) &mdash; **[QUEUED]**
+9. **`CrossSectionalMomentum`** (Multi-currency basket cross-sectional relative strength momentum) &mdash; **[COMPLETED]**
+10. **`MeanRevertingOU`** (Continuous-time Ornstein-Uhlenbeck drift filtration with analytical half-life) &mdash; **[CURRENT TASK]**
 10. **`MeanRevertingOU`** (Continuous-time Ornstein-Uhlenbeck drift filtration with analytical half-life) &mdash; **[QUEUED]**
 9. **`CrossSectionalMomentum`** (Multi-currency basket cross-sectional relative strength momentum) &mdash; **[QUEUED]**
 10. **`MeanRevertingOU`** (Continuous-time Ornstein-Uhlenbeck drift filtration with analytical half-life) &mdash; **[QUEUED]**
