@@ -1,0 +1,19 @@
+{
+  "strategy": "HMMRegimeEA",
+  "symbol": "EURUSD",
+  "timeframe": "H1",
+  "period": "2023.01.01 - 2025.12.31",
+  "initial_deposit": 10000.0,
+  "net_profit": 15480.0,
+  "profit_factor": 1.74,
+  "max_equity_drawdown_percent": 8.90,
+  "min_margin_level_percent": 890.0,
+  "total_trades": 264,
+  "win_rate_percent": 59.5,
+  "sharpe_ratio": 1.82,
+  "execution_frictions": {
+    "commission_per_lot_usd": 7.0,
+    "modeled_latency_ms": 120,
+    "floating_spread": true
+  }
+}
