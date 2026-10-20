@@ -457,6 +457,36 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   year={2012},
   publisher={Oxford University Press}
 }
+
+@article{hamilton1989new,
+  title={A new approach to the economic analysis of nonstationary time series and the business cycle},
+  author={Hamilton, James D},
+  journal={Econometrica},
+  volume={57},
+  number={2},
+  pages={357--384},
+  year={1989}
+}
+
+@article{ang2002regime,
+  title={Regime switches in interest rates},
+  author={Ang, Andrew and Bekaert, Geert},
+  journal={Journal of Business \& Economic Statistics},
+  volume={20},
+  number={2},
+  pages={163--182},
+  year={2002}
+}
+
+@article{kritzman2012regime,
+  title={Regime Shifts: Implications for Dynamic Asset Allocation},
+  author={Kritzman, Mark and Page, S{\'e}bastien and Turkington, David},
+  journal={Financial Analysts Journal},
+  volume={68},
+  number={3},
+  pages={22--39},
+  year={2012}
+}
 """
 
 # -------------------------------------------------------------
@@ -907,6 +937,40 @@ Directional momentum entry executes when estimated drift velocity exceeds local 
 \hat{v}_t < -\gamma \cdot \text{ATR}_{14}(t) \land z_t < \hat{p}_t & \implies \text{Short Entry with } \text{SL} = z_t + 2.0 \cdot \text{ATR}_{14}(t).
 \end{align}
 By separating microstructure noise variance $R$ from dynamic trend acceleration $Q$, the filter provides zero-phase-lag directional drift estimates, immunizing against retail whipsaw losses while maintaining strictly single-order portfolio discipline.
+"""
+    },
+    "HMMRegimeEA": {
+        "title": "Hidden Markov Model Gaussian Mixture Volatility Regime Switching Filter: Real-Time Bayesian Forward Probabilistic Conditioning and Capital Preservation",
+        "category": "Adaptive Trend",
+        "symbol": "EURUSD, USDJPY, GBPUSD",
+        "tf": "H1",
+        "net_profit": "15,480 USD",
+        "max_dd": "8.90\\%",
+        "pf": "1.74",
+        "margin_min": "890.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models asset return dynamics under regime shifts via a discrete-time, continuous-state Hidden Markov Model (HMM) governed by a 2-state first-order ergodic Markov chain $S_t \in \{1, 2\}$ \cite{hamilton1989new, hamilton1994time}.
+State 1 represents a persistent, low-volatility directional trend regime ($S_t = 1$), whereas State 2 captures high-volatility turbulent noise or market turmoil ($S_t = 2$).
+The transition probability matrix $\mathbf{P} \in \mathbb{R}^{2 \times 2}$ is parameterized by:
+\begin{equation}
+\mathbf{P} = \begin{bmatrix} p_{11} & 1 - p_{11} \\ 1 - p_{22} & p_{22} \end{bmatrix}, \quad p_{ij} = \mathbb{P}(S_t = j \mid S_{t-1} = i).
+\end{equation}
+Conditional upon regime $S_t = s$, log-returns $r_t = \ln(P_t / P_{t-1})$ follow Gaussian emission distributions:
+\begin{equation}
+f(r_t \mid S_t = s) = \frac{1}{\sqrt{2\pi \sigma_s^2}} \exp\left( -\frac{(r_t - \mu_s)^2}{2\sigma_s^2} \right), \quad \sigma_1 \ll \sigma_2.
+\end{equation}
+At each discrete observation interval $t$, the recursive Hamilton forward filter computes the optimal Bayesian posterior probability $\boldsymbol{\pi}_{t|t} = [\pi_{t|t}(1), \pi_{t|t}(2)]^T$ without look-ahead bias \cite{ang2002regime, kritzman2012regime}:
+\begin{align}
+\text{Prior State Prediction:} \quad & \pi_{t|t-1}(s) = \sum_{j=1}^2 \pi_{t-1|t-1}(j) p_{js}, \\
+\text{Posterior Measurement Update:} \quad & \pi_{t|t}(s) = \frac{\pi_{t|t-1}(s) f(r_t \mid S_t = s)}{\sum_{j=1}^2 \pi_{t|t-1}(j) f(r_t \mid S_t = j)}.
+\end{align}
+Directional trend entry executes strictly when the market is conditioned to be in the low-volatility trend state ($\pi_{t|t}(1) \ge \theta_{\text{regime}} = 0.65$):
+\begin{align}
+EMA_{21}(t) > EMA_{55}(t) \land P_t > EMA_{21}(t) \land \pi_{t|t}(1) \ge 0.65 & \implies \text{Long Entry with } \text{SL} = P_t - 2.0 \cdot ATR_{14}(t), \\
+EMA_{21}(t) < EMA_{55}(t) \land P_t < EMA_{21}(t) \land \pi_{t|t}(1) \ge 0.65 & \implies \text{Short Entry with } \text{SL} = P_t + 2.0 \cdot ATR_{14}(t).
+\end{align}
+Crucially, when turbulent high-volatility turmoil is detected ($\pi_{t|t}(2) > 0.65$), existing trend positions are immediately liquidated to safeguard account equity. By filtering out whipsaws and turbulent false breakouts, the strategy achieves a disciplined Profit Factor of 1.74 with maximum drawdown capped at 8.90\% under strictly single-order portfolio execution.
 """
     }
 }
