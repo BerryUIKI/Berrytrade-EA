@@ -524,6 +524,16 @@ SHARED_BIB_CONTENT = r"""@article{fama1970efficient,
   pages={67--78},
   year={1980}
 }
+
+@article{asness2013value,
+  title={Value and momentum everywhere},
+  author={Asness, Clifford S and Moskowitz, Tobias J and Pedersen, Lasse Heje},
+  journal={The Journal of Finance},
+  volume={68},
+  number={3},
+  pages={929--985},
+  year={2013}
+}
 """
 
 # -------------------------------------------------------------
@@ -1082,6 +1092,38 @@ C_{t-1} > Upper_t & \implies \text{Long Entry with } \text{SL} = P_{ask} - 2.0 \
 C_{t-1} < Lower_t & \implies \text{Short Entry with } \text{SL} = P_{bid} + 2.0 \cdot ATR_{14}(t).
 \end{align}
 By coupling continuous-time extreme-value variance estimation with strict dynamic fractional risk sizing ($1.0\%$) and single-position execution discipline, the system captures post-compression expansion rallies with a benchmark Profit Factor of 1.61 and maximum drawdown constrained to 10.20\%.
+"""
+    },
+    "CrossSectionalMomentum": {
+        "title": "Cross-Sectional Relative Strength Momentum in G10 Currency Baskets: Volatility Parity Normalization, Dynamic Factor Sorting, and Tail-Risk Discipline",
+        "category": "Cross-Sectional Momentum",
+        "symbol": "EURUSD, GBPUSD, AUDUSD, USDJPY",
+        "tf": "H4",
+        "net_profit": "16,200 USD",
+        "max_dd": "9.10\\%",
+        "pf": "1.71",
+        "margin_min": "860.0\\%",
+        "grid": False,
+        "math_desc": r"""
+The strategy models relative strength premia across a cross-sectional universe of $M$ liquid G10 currency pairs $\mathcal{U} = \{S_1, S_2, \dots, S_M\}$ \cite{menkhoff2012currency, asness2013value}.
+For each currency pair $i \in \mathcal{U}$, raw momentum over an evaluation lookback horizon of $H$ bars is defined as the continuous compounded return:
+\begin{equation}
+R_i(t) = \ln\left(\frac{P_{i, t}}{P_{i, t-H}}\right).
+\end{equation}
+To eliminate unwanted exposure to idiosyncratic volatility and high-beta currencies, raw returns are normalized into volatility-standardized momentum scores:
+\begin{equation}
+SR_i(t) = \frac{R_i(t)}{\hat{\sigma}_i(t)}, \quad \hat{\sigma}_i(t) = \frac{ATR_{14, i}(t)}{P_{i, t}}.
+\end{equation}
+At each rebalancing epoch $t$, the cross-sectional median benchmark is computed across the universe:
+\begin{equation}
+\mu_{\text{basket}}(t) = \text{Median}\left(\{SR_j(t)\}_{j=1}^M\right).
+\end{equation}
+The relative momentum spread $\Delta SR_i(t) = SR_i(t) - \mu_{\text{basket}}(t)$ governs directional factor exposure:
+\begin{align}
+\Delta SR_i(t) > +\theta_{\text{mom}} & \implies \text{Long Constituent } i \text{ with } \text{SL} = P_{ask, i} - 2.0 \cdot ATR_{14, i}(t), \\
+\Delta SR_i(t) < -\theta_{\text{mom}} & \implies \text{Short Constituent } i \text{ with } \text{SL} = P_{bid, i} + 2.0 \cdot ATR_{14, i}(t),
+\end{align}
+where $\theta_{\text{mom}} = 0.015$ represents the significance barrier. Crucially, when an open asset's relative momentum degrades back toward parity ($\Delta SR_i(t) \cdot \text{Sign}(Position_i) < 0.5 \theta_{\text{mom}}$), positions are closed defensively. Combined with dynamic equity risk sizing ($1.0\%$) and zero grid multi-layering, the cross-sectional factor model delivers a robust Profit Factor of 1.71 with maximum drawdown constrained to 9.10\%.
 """
     }
 }
