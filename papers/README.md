@@ -17,7 +17,7 @@
 
 ---
 
-## 📊 Baseline Strategy Research Papers (Cross-Section of 14 EAs)
+## 📊 Comprehensive Strategy Research Papers (Cross-Section of 24 EAs)
 
 Every strategy in the repository possesses a dedicated, full-length standalone monograph containing mathematical formulations, discrete state filtration, 6 diagnostic microstructure figures, Deflated Sharpe Ratio (DSR) audit, and complete BibTeX references:
 
