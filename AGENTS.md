@@ -15,7 +15,7 @@ Every automated strategy in this repository must undergo:
 1. Strict MQL5 source code sanitation (zero native Win32 DLLs).
 2. Continuous 3-year execution-constrained backtesting (2023.01.01 to 2025.12.31) under realistic latency (120ms), floating spreads, and commissions ($7/lot).
 3. 6 publication-grade diagnostic figures (Nature/Science 300 DPI style).
-4. A dedicated, standalone academic research paper in LaTeX + BibTeX formatted for arXiv quantitative finance publication.
+4. A dedicated, standalone academic research paper in LaTeX + BibTeX formatted as a research paper (PDF).
 
 ---
 
@@ -102,7 +102,7 @@ When ingesting an open-source Expert Advisor from the Internet, the AI agent mus
    └── fig5: Rolling 30-Day Sharpe Ratio & Realized Volatility
    └── fig6: MFE vs MAE Trajectory Scatter
 
-[Stage 5: Standalone arXiv Research Monograph]
+[Stage 5: Standalone Research Paper (PDF) Monograph]
    └── Authored by Berry Wahlberg (Berrytrade Quantitative Research)
    └── Derive mathematical indicator difference/differential equations
    └── Conduct Bailey & Lopez de Prado Deflated Sharpe Ratio (DSR) audit

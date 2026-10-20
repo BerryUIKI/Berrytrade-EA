@@ -30,7 +30,7 @@
 - **严格的风控治理**：强制要求硬止损（Hard Stop-Loss）；对逆势加倍马丁格尔（Martingale）或无保护网格实行高风险警示与隔离。
 - **双层准入漏斗**：社区贡献策略初次提交进入 `experimental/`（孵化实验区），经过多年度统一基准回测与代码审计后晋升至 `verified/`（官方验证区）。
 - **自动化安全 CI**：内置安全扫描器，阻断恶意 Win32 DLL 导入、外泄后门与破损格式。
-- **学术级实证研究**：每个策略均配备由 **Berry Wahlberg** (`Berrytrade Quantitative Research`) 撰写的独立 arXiv 格式论文与 Nature 级高分辨率诊断图表。
+- **学术级实证研究**：每个策略均配备由 **Berry Wahlberg** (`Berrytrade Quantitative Research`) 撰写的独立研究论文（PDF）与 Nature 级高分辨率诊断图表。
 
 ---
 
@@ -42,22 +42,22 @@
 | :--- | :--- | :---: | :--- |
 | **AI Agent 治理与协同守则** | 自主代码智能体、AI 结对编程助手 | **仅限英文 (English Only)** | [**`AGENTS.md`**](AGENTS.md) |
 | **开发者技术文档** | 量化研究员、MQL5 开发者、代码贡献者 | **仅限英文 (English Only)** | [`docs/developer/`](docs/developer/) |
-| **量化学术论文与预印本** | 学术界同行、机构投资者、量化配置人 | **LaTeX / 英文 arXiv** | [`papers/`](papers/) |
+| **量化学术研究论文** | 学术界同行、机构投资者、量化配置人 | **LaTeX / 英文研究论文（PDF）** | [`papers/`](papers/) |
 | **用户知识库与使用指南** | 实盘/模拟盘交易者、普通终端用户 | **多语言支持 (中 / 英)** | [`wiki/`](wiki/) 与 GitHub Wiki |
 
 - 🤖 **Agent 智能体守则**：[AI Agent 规范 (AGENTS.md)](AGENTS.md) &bull; [Agent 规范细节](docs/developer/agents.md)
 - 🛠️ **开发者技术文档 (英文)**：[项目架构](docs/developer/architecture.md) &bull; [EA 入库与审核规范](docs/developer/ea-ingestion-specification.md) &bull; [贡献者指南](docs/developer/contribution-guidelines.md) &bull; [基准回测标准](docs/developer/benchmarking-standards.md)
-- 📑 **学术研究论文**：[横向汇总论文主干](papers/synthesis/main.pdf) &bull; [14 篇策略单行本论文索引](papers/README.md)
+- 📑 **学术研究论文**：[横向汇总论文主干](papers/synthesis/main.pdf) &bull; [策略单行本论文索引](papers/README.md)
 - 📖 **用户知识库 (支持中文)**：[新手上手指南](wiki/Getting-Started-zh.md) &bull; [资金风控守则](wiki/Risk-Management-zh.md) &bull; [策略选型手册](wiki/Strategy-Catalog-zh.md) &bull; [常见问题排错](wiki/Troubleshooting-and-FAQ-zh.md)
 
 ---
 
-## 📑 量化学术研究论文（arXiv 格式）
+## 📑 量化学术研究论文（PDF）
 
 本项目所有策略均经过由 **Berry Wahlberg** (`Berrytrade Quantitative Research`) 主持的 3 年期真实微观执行回测（2023--2025，120ms 网络延迟，实盘浮动点差与 $7/手佣金）及学术级评测：
 
 - 🏛️ **横向全景汇总论文**：[*The Anatomy of Grid Overlays and the Illusion of Alpha: An Empirical Case Study of Retail Expert Advisors on MetaTrader 5*](papers/synthesis/main.pdf)（[LaTeX 源码](papers/synthesis/main.tex)）
-- 📊 **策略独立测试报告论文**：全套 14 篇针对单个策略数学模型、微观结构诊断与尾部风险解构的独立论文汇总于 [**`papers/README.md`**](papers/README.md)。
+- 📊 **策略独立测试报告论文**：全套针对单个策略数学模型、微观结构诊断与尾部风险解构的独立研究论文汇总于 [**`papers/README.md`**](papers/README.md)。
 
 ---
 
@@ -135,7 +135,7 @@ Berrytrade-EA/
 │   ├── contribution-guidelines.md
 │   └── ea-ingestion-specification.md
 ├── wiki/                          # 用户多语言文档与知识库 (同步发布至 GitHub Wiki)
-├── papers/                        # arXiv 学术研究论文 (Berry Wahlberg 署名)
+├── papers/                        # 学术研究论文（PDF）(Berry Wahlberg 署名)
 │   ├── synthesis/                 # 横向全景论文源码与 10 幅全景图表
 │   └── strategies/<Strategy>/     # 独立策略学术单行本论文与参考文献 (.bbl)
 ├── strategies/                    # 模块化独立策略包

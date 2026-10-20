@@ -92,7 +92,7 @@
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/TurtleTrader)
   - [参数预设目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/TurtleTrader/presets)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/TurtleTrader/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/TurtleTrader/paper.pdf)
 
 ---
 
@@ -118,7 +118,7 @@
   - **最低记录保证金率**：**850.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/LondonBreakout)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/LondonBreakout/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/LondonBreakout/paper.pdf)
 
 ---
 
@@ -144,7 +144,7 @@
   - **最低记录保证金率**：**750.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/SMC_FVG)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/SMC_FVG/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/SMC_FVG/paper.pdf)
 
 ---
 
@@ -170,7 +170,7 @@
   - **最低记录保证金率**：**620.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/StatArbPairs)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/StatArbPairs/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/StatArbPairs/paper.pdf)
 
 ---
 
@@ -195,7 +195,7 @@
   - **最低记录保证金率**：**820.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/KalmanFilterEA)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/KalmanFilterEA/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/KalmanFilterEA/paper.pdf)
 
 ---
 
@@ -220,7 +220,7 @@
   - **最低记录保证金率**：**890.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/HMMRegimeEA)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/HMMRegimeEA/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/HMMRegimeEA/paper.pdf)
 
 ---
 
@@ -245,7 +245,7 @@
   - **最低记录保证金率**：**840.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/OrderFlowImbalanceEA)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/OrderFlowImbalanceEA/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/OrderFlowImbalanceEA/paper.pdf)
 
 ---
 
@@ -270,7 +270,7 @@
   - **最低记录保证金率**：**780.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/VolBreakoutATR)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/VolBreakoutATR/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/VolBreakoutATR/paper.pdf)
 
 ---
 
@@ -295,7 +295,7 @@
   - **最低记录保证金率**：**860.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/CrossSectionalMomentum)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/CrossSectionalMomentum/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/CrossSectionalMomentum/paper.pdf)
 
 ---
 
@@ -321,7 +321,7 @@
   - **最低记录保证金率**：**880.0%**
 - **相关资源链接**：
   - [源码目录](https://github.com/BerryUIKI/Berrytrade-EA/tree/main/strategies/experimental/MeanRevertingOU)
-  - [学术研究论文 (arXiv PDF)](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/MeanRevertingOU/paper.pdf)
+  - [研究论文（PDF）](https://github.com/BerryUIKI/Berrytrade-EA/blob/main/papers/strategies/MeanRevertingOU/paper.pdf)
 
 ---
 
