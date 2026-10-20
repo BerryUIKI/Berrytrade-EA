@@ -1,0 +1,18 @@
+; Default Parameter Preset for HMMRegimeEA
+; Symbol: EURUSD, Timeframe: H1, Risk: 1.0%
+InpProbStayRegime1=0.95
+InpProbStayRegime2=0.90
+InpSigmaRegime1=0.0035
+InpSigmaRegime2=0.0120
+InpRegimeConfidence=0.65
+InpEMAFastPeriod=21
+InpEMASlowPeriod=55
+InpATRPeriod=14
+InpRiskPercent=1.0
+InpStopLossATRMult=2.0
+InpTakeProfitATRMult=3.5
+InpMagicNumber=106001
+InpSlippagePoints=20
+InpExitOnTurmoil=1
+InpCloseFriday=1
+InpFridayCloseHour=21
