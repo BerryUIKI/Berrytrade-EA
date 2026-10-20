@@ -1,0 +1,24 @@
+{
+  "strategy": "MeanRevertingOU",
+  "symbol": "EURUSD",
+  "timeframe": "H1",
+  "period": "2023.01.01 - 2025.12.31",
+  "initial_deposit": 10000.0,
+  "net_profit": 14850.0,
+  "profit_factor": 1.67,
+  "max_equity_drawdown_percent": 8.8,
+  "min_margin_level_percent": 880.0,
+  "total_trades": 396,
+  "win_rate_percent": 60.1,
+  "execution_constraints": {
+    "latency_ms": 120,
+    "commission_per_lot": 7.0,
+    "spread": "floating"
+  },
+  "risk_management": {
+    "dynamic_risk_percent": 1.0,
+    "hard_stop_loss": true,
+    "grid_overlay": false,
+    "martingale": false
+  }
+}

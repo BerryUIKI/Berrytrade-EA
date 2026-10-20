@@ -1,0 +1,35 @@
+{
+  "name": "MeanRevertingOU",
+  "version": "1.0.0",
+  "author": "Berry Wahlberg (Berrytrade Quantitative Research)",
+  "category": "mean_reversion",
+  "tier": "experimental",
+  "risk_level": "Medium",
+  "description": "Continuous-Time Ornstein-Uhlenbeck Mean Reversion: Real-Time Analytical Drift & Half-Life Filtration with Structural Divergence Hard Stop-Loss.",
+  "supported_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "AUDUSD"
+  ],
+  "recommended_timeframe": "H1",
+  "min_deposit_usd": 1000,
+  "has_stop_loss": true,
+  "uses_martingale": false,
+  "uses_grid": false,
+  "open_source_provenance": {
+    "license": "MIT",
+    "origin": "Continuous-Time Stochastic Process Literature (Uhlenbeck-Ornstein 1930, Avellaneda-Lee 2010)",
+    "author": "Berry Wahlberg",
+    "repository": "Berrytrade-EA"
+  },
+  "benchmark_metrics": {
+    "test_period": "2023.01.01 - 2025.12.31",
+    "latency_ms": 120,
+    "commission_per_lot_usd": 7.0,
+    "profit_factor": 1.67,
+    "max_equity_drawdown_percent": 8.8,
+    "min_margin_level_percent": 880.0,
+    "net_profit_usd": 14850.0,
+    "win_rate_percent": 60.1
+  }
+}

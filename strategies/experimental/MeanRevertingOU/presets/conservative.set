@@ -1,0 +1,16 @@
+; MeanRevertingOU Conservative Parameter Preset
+; Lower risk exposure with higher statistical significance threshold
+InpRiskPercent=0.5
+InpFixedLotSize=0.0
+InpSlippagePoints=10
+InpMagicNumber=110002
+InpEstimationBars=80
+InpEntryZScore=2.3
+InpExitZScore=0.10
+InpMinHalfLifeBars=3.0
+InpMaxHalfLifeBars=25.0
+InpATRPeriod=14
+InpStopLossATRMult=2.0
+InpTakeProfitATRMult=4.0
+InpUseTrailingStop=true
+InpTrailingATRMult=1.8
